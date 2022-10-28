@@ -11,10 +11,12 @@
     "commit": "git-cz"
   },
   "dependencies": {
+    "@radix-ui/react-avatar": "^1.0.1",
+    "@stitches/react": "^1.2.8",
     "next": "13.0.0",
+    "phosphor-react": "^1.4.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "styled-components": "^5.3.6"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
@@ -22,7 +24,6 @@
     "@types/node": "18.11.6",
     "@types/react": "18.0.23",
     "@types/react-dom": "18.0.7",
-    "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "commitizen": "^4.2.5",
     "cz-conventional-changelog": "3.3.0",
