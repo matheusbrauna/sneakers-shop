@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+@layer base {
+  html,
+  body {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-gray-100;
+  }
+}
+
+@layer components {
+  .main-height {
+    height: calc(100vh - 80px);
+  }
+}

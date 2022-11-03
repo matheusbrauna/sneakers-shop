@@ -1,7 +1,5 @@
 import { Head, Html, Main, NextScript } from 'next/document'
 
-import { getCssText } from '../../stitches.config'
-
 export default function MyDocument() {
   return (
     <Html lang="pt-BR">
@@ -13,11 +11,6 @@ export default function MyDocument() {
           rel="preconnect"
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
-        />
-
-        <style
-          id="stitches"
-          dangerouslySetInnerHTML={{ __html: getCssText() }}
         />
 
         <link
