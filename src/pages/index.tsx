@@ -1,44 +1,73 @@
-import { NextPage } from 'next'
+import { GetStaticProps, NextPage } from 'next'
 import Image from 'next/image'
-import { ArrowRight } from 'phosphor-react'
+import { ArrowRight, Star } from 'phosphor-react'
+import { stripe } from '../services/stripe'
 
-type HomeProps = NextPage
+type HomeProps = NextPage & {
+  sneaker: {
+    title: string
+    description: string
+    imageUrl: string
+  }
+}
 
-export default function Home({}: HomeProps) {
+export default function Home({ sneaker }: HomeProps) {
   return (
     <main>
       <div className="container flex gap-24 pt-16 main-height">
-        <div className="relative rounded-lg overflow-hidden w-[416px] h-[400px] object-cover">
-          <Image src="/sneaker.png" alt="" fill />
+        <div className="relative rounded-lg overflow-hidden object-center w-[416px] h-[400px] object-cover">
+          <Image src={sneaker.imageUrl} alt="" fill quality={100} />
         </div>
 
         <div className="flex-1">
-          <span className="text-xl font-medium text-blue-500">
-            Marca do tênis
-          </span>
-
           <h1 className="my-5 text-5xl font-bold text-gray-900">
-            Nome completo do tênis
+            {sneaker.title}
           </h1>
 
-          <span className="text-base text-gray-900">Masculino</span>
-
-          <p className="mt-6 mb-12 text-2xl leading-relaxed text-gray-900">
-            Esses tênis de perfil baixo são o seu companheiro de roupa casual
-            perfeito. Apresentando uma sola exterior de borracha durável. Eles
-            irão suportar tudo o que o tempo pode oferecer.
+          <p className="mt-6 mb-6 text-2xl leading-relaxed text-gray-900">
+            {sneaker.description}
           </p>
 
-          <div className="flex gap-6">
+          <div className="flex items-center gap-2">
+            <Star size={32} weight="fill" className="text-yellow-500" />
+            <Star size={32} weight="fill" className="text-yellow-500" />
+            <Star size={32} weight="fill" className="text-yellow-500" />
+            <Star size={32} weight="fill" className="text-yellow-500" />
+            <Star size={32} weight="fill" className="text-yellow-500" />
+
+            <span className="text-xs font-bold">(1 avaliação)</span>
+          </div>
+
+          <div className="flex gap-6 mt-16">
             <button className="flex items-center h-16 gap-4 px-6 font-bold text-blue-500 border-2 border-blue-300 rounded-lg bg-blue-50">
-              Texto do botão <ArrowRight size={24} />
+              Ver mais <ArrowRight size={24} />
             </button>
             <button className="flex items-center h-16 gap-4 px-6 font-bold text-gray-100 bg-blue-500 border-2 border-blue-500 rounded-lg">
-              Texto do botão
+              Comprar agora
             </button>
           </div>
         </div>
       </div>
     </main>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const response = await stripe.products.retrieve('prod_MjxadwOBSlUJa4')
+
+  const sneaker = {
+    title: response.name,
+    description: response.description,
+    imageUrl: response.images[0],
+  }
+
+  console.log(response)
+
+  return {
+    props: {
+      sneaker,
+    },
+
+    revalidate: 60 * 60 * 24 * 15, // 15 days
+  }
 }
