@@ -11,10 +11,34 @@
   body {
     @apply bg-gray-100;
   }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.4rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #fbfdff;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 2rem;
+    background: #0091ff;
+  }
 }
 
 @layer components {
   .main-height {
     height: calc(100vh - 80px);
+    padding-top: calc(80px + 60px);
   }
 }

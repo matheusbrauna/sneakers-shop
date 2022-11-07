@@ -5,12 +5,29 @@ import { clsx } from 'clsx'
 
 type ActiveLinkProps = LinkProps & {
   children: ReactNode
+  shouldMatchExactHref?: boolean
 }
 
-export function ActiveLink({ children, href, ...props }: ActiveLinkProps) {
+export function ActiveLink({
+  shouldMatchExactHref = false,
+  children,
+  href,
+  as,
+  ...props
+}: ActiveLinkProps) {
   const { asPath } = useRouter()
+  let isActive = false
 
-  const isActive = asPath === href
+  if (shouldMatchExactHref && (asPath === href || asPath === as)) {
+    isActive = true
+  }
+
+  if (
+    !shouldMatchExactHref &&
+    (asPath.startsWith(String(href)) || asPath.startsWith(String(as)))
+  ) {
+    isActive = true
+  }
 
   return (
     <Link

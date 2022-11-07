@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { ArrowRight, Star } from 'phosphor-react'
 
 interface SneakerProps {
@@ -16,7 +17,13 @@ export function Sneaker({ sneakerData }: SneakerProps) {
   return (
     <div className="max-w-[280px]">
       <div className="relative object-cover w-full overflow-hidden rounded-lg h-[280px]">
-        <Image src={sneakerData.imageUrl} alt="" fill />
+        <Image
+          src={sneakerData.imageUrl}
+          alt=""
+          fill
+          placeholder="blur"
+          blurDataURL={sneakerData.imageUrl}
+        />
       </div>
 
       <h2 className="mt-3 text-2xl font-bold text-gray-900">
@@ -49,9 +56,13 @@ export function Sneaker({ sneakerData }: SneakerProps) {
         {sneakerData.description}
       </p>
 
-      <button className="flex items-center justify-between w-full h-16 gap-4 px-6 font-bold text-gray-100 bg-blue-500 border-2 border-blue-500 rounded-lg">
+      <Link
+        href={`/products/${sneakerData.id}`}
+        passHref
+        className="flex items-center justify-between w-full h-16 gap-4 px-6 font-bold text-gray-100 bg-blue-500 border-2 border-blue-500 rounded-lg"
+      >
         Comprar agora <ArrowRight size={24} />
-      </button>
+      </Link>
     </div>
   )
 }
