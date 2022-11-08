@@ -1,5 +1,7 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import Head from 'next/head'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { ShoppingCart, Star } from 'phosphor-react'
 import { MouseEvent } from 'react'
 import Stripe from 'stripe'
@@ -12,6 +14,7 @@ type ProductProps = NextPage & {
 
 export default function Product({ product }: ProductProps) {
   const { addItemToCart, checkIfItemAlreadyExists } = useCart()
+  const { isFallback } = useRouter()
 
   function handleAddToCart(
     e: MouseEvent<HTMLButtonElement>,
@@ -21,60 +24,75 @@ export default function Product({ product }: ProductProps) {
     addItemToCart(product)
   }
 
+  if (isFallback) return <p>carregando</p>
+
+  const productAlreadyInCart = checkIfItemAlreadyExists(product.id)
+
   return (
-    <main>
-      <div className="container flex items-center gap-16 main-height">
-        <div className="relative rounded-lg overflow-hidden object-center w-[26rem] h-[25rem] object-cover">
-          <Image
-            src={product.imageUrl}
-            alt=""
-            fill
-            quality={100}
-            placeholder="blur"
-            blurDataURL={product.imageUrl}
-          />
-        </div>
-
-        <div className="flex-1">
-          <h1 className="my-5 text-5xl font-bold text-gray-900">
-            {product.name}
-          </h1>
-
-          <div className="flex items-center gap-2">
-            <Star size={24} weight="fill" className="text-yellow-500" />
-            <Star size={24} weight="fill" className="text-yellow-500" />
-            <Star size={24} weight="fill" className="text-yellow-500" />
-            <Star size={24} weight="fill" className="text-yellow-500" />
-            <Star size={24} weight="fill" className="text-yellow-500" />
-
-            <span className="text-xs font-bold">(1 avaliação)</span>
+    <>
+      <Head>
+        <title>{product.name} | Sneakers Shop</title>
+      </Head>
+      <main>
+        <div className="container flex items-center gap-16 main-height">
+          <div className="relative rounded-lg overflow-hidden object-center w-[26rem] h-[25rem] object-cover">
+            <Image
+              src={product.imageUrl}
+              alt=""
+              fill
+              quality={100}
+              placeholder="blur"
+              blurDataURL={product.imageUrl}
+            />
           </div>
 
-          <p className="mt-6 mb-6 text-2xl leading-relaxed text-gray-900">
-            {product.description}
-          </p>
+          <div className="flex-1">
+            <h1 className="my-5 text-5xl font-bold text-gray-900">
+              {product.name}
+            </h1>
 
-          <p className="text-4xl font-bold text-gray-900">
-            {product.promotionPrice}
-          </p>
+            <div className="flex items-center gap-2">
+              <Star size={24} weight="fill" className="text-yellow-500" />
+              <Star size={24} weight="fill" className="text-yellow-500" />
+              <Star size={24} weight="fill" className="text-yellow-500" />
+              <Star size={24} weight="fill" className="text-yellow-500" />
+              <Star size={24} weight="fill" className="text-yellow-500" />
 
-          <p className="mt-2 text-lg font-bold text-gray-700 line-through">
-            {product.defaultPrice}
-          </p>
+              <span className="text-xs font-bold">(1 avaliação)</span>
+            </div>
 
-          <div className="flex gap-6 mt-6">
-            <button
-              type="button"
-              disabled={checkIfItemAlreadyExists(product.id)}
-              onClick={(e) => handleAddToCart(e, product)}
-              className="flex items-center h-16 gap-4 px-6 font-bold text-gray-100 transition-colors bg-blue-500 border-2 border-blue-500 rounded-lg hover:bg-blue-700 active:bg-blue-900 disabled:opacity-50 disabled:hover:bg-blue-500 disabled:cursor-not-allowed"
-            >
-              Adicionar ao carrinho <ShoppingCart size={24} />
-            </button>
+            <p className="mt-6 mb-6 text-2xl leading-relaxed text-gray-900">
+              {product.description}
+            </p>
+
+            <p className="text-4xl font-bold text-gray-900">
+              {product.promotionPrice}
+            </p>
+
+            <p className="mt-2 text-lg font-bold text-gray-700 line-through">
+              {product.defaultPrice}
+            </p>
+
+            <div className="flex gap-6 mt-6">
+              <button
+                type="button"
+                disabled={checkIfItemAlreadyExists(product.id)}
+                onClick={(e) => handleAddToCart(e, product)}
+                className="flex items-center h-16 gap-4 px-6 font-bold text-gray-100 transition-colors bg-blue-500 border-2 border-blue-500 rounded-lg hover:bg-blue-700 active:bg-blue-900 disabled:opacity-50 disabled:hover:bg-blue-500 disabled:cursor-not-allowed"
+              >
+                {productAlreadyInCart ? (
+                  'Produto já está no carrinho'
+                ) : (
+                  <>
+                    Adicionar ao carrinho <ShoppingCart size={24} />
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   )
 }
 
@@ -116,6 +134,7 @@ export const getStaticProps: GetStaticProps<any, { slug: string }> = async ({
         }).format(price.unit_amount! / 100),
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         numberPrice: price.unit_amount! / 100,
+        defaultPriceId: price.id,
       },
     },
     revalidate: 60 * 60 * 1, // 1 hour

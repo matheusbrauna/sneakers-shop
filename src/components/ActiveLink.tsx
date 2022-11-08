@@ -35,7 +35,8 @@ export function ActiveLink({
         'h-full font-medium flex items-center border-b-[3px] text-xl text-gray-900',
         {
           'border-blue-300 font-bold': isActive,
-          'border-transparent text-gray-700': !isActive,
+          'border-transparent text-gray-700 hover:text-gray-900 transition-colors':
+            !isActive,
         }
       )}
       href={href}

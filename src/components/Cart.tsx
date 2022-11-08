@@ -1,9 +1,14 @@
 import * as Dialog from '@radix-ui/react-dialog'
+import axios from 'axios'
 import Image from 'next/image'
 import { Minus, ShoppingCart, X } from 'phosphor-react'
+import { useState } from 'react'
 import { useCart } from '../contexts/CartContext'
 
 export function Cart() {
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
+    useState(false)
+
   const { cartItems, removeItemFromCart, cartTotal } = useCart()
 
   const cartItemsQuantity = cartItems.length
@@ -12,6 +17,23 @@ export function Cart() {
     style: 'currency',
     currency: 'BRL',
   }).format(cartTotal)
+
+  async function handleRedirectToCheckout() {
+    try {
+      setIsCreatingCheckoutSession(true)
+
+      const response = await axios.post('/api/checkout', {
+        products: cartItems,
+      })
+
+      const { checkoutUrl } = response.data
+
+      window.location.href = checkoutUrl
+    } catch (err) {
+      setIsCreatingCheckoutSession(false)
+      alert('Error ao redirecionar ao checkout')
+    }
+  }
 
   return (
     <Dialog.Root>
@@ -79,7 +101,11 @@ export function Cart() {
                 <span className="font-bold">{formattedCartTotal}</span>
               </p>
 
-              <button className="gap-4 px-6 mt-6 font-bold text-gray-100 transition-colors bg-blue-500 border-2 border-blue-500 rounded-lg h-14 just w-60 hover:bg-blue-700 active:bg-blue-900">
+              <button
+                disabled={isCreatingCheckoutSession || cartItemsQuantity <= 0}
+                onClick={handleRedirectToCheckout}
+                className="gap-4 px-6 mt-6 font-bold text-gray-100 transition-colors bg-blue-500 border-2 border-blue-500 rounded-lg h-14 just w-60 hover:bg-blue-700 active:bg-blue-900"
+              >
                 Finalizar compra
               </button>
             </footer>

@@ -3,6 +3,7 @@ import { Sneaker } from '../../components/Sneaker'
 import { stripe } from '../../services/stripe'
 import Stripe from 'stripe'
 import { IProduct } from '../../contexts/CartContext'
+import Head from 'next/head'
 
 type ProductsProps = NextPage & {
   sneakers: IProduct[]
@@ -10,19 +11,24 @@ type ProductsProps = NextPage & {
 
 export default function Products({ sneakers }: ProductsProps) {
   return (
-    <main>
-      <div className="container items-center main-height">
-        <h1 className="text-5xl font-bold text-center text-gray-900">
-          Confira nossos modelos disponíveis
-        </h1>
+    <>
+      <Head>
+        <title>Produtos | Sneakers Shop</title>
+      </Head>
+      <main>
+        <div className="container items-center main-height">
+          <h1 className="text-5xl font-bold text-center text-gray-900">
+            Confira nossos modelos disponíveis
+          </h1>
 
-        <section className="grid grid-cols-4 pb-16 mt-16 gap-14">
-          {sneakers.map((sneaker) => (
-            <Sneaker key={sneaker.id} sneaker={sneaker} />
-          ))}
-        </section>
-      </div>
-    </main>
+          <section className="grid grid-cols-4 pb-16 mt-16 gap-14">
+            {sneakers.map((sneaker) => (
+              <Sneaker key={sneaker.id} sneaker={sneaker} />
+            ))}
+          </section>
+        </div>
+      </main>
+    </>
   )
 }
 
@@ -51,6 +57,7 @@ export const getStaticProps: GetStaticProps = async () => {
       }).format(price.unit_amount! / 100),
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       numberPrice: price.unit_amount! / 100,
+      defaultPriceId: price.id,
     }
   })
 
