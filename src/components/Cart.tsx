@@ -1,15 +1,16 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import axios from 'axios'
-import Image from 'next/image'
-import { Minus, ShoppingCart, X } from 'phosphor-react'
+import { ShoppingCart, X } from 'phosphor-react'
 import { useState } from 'react'
 import { useCart } from '../contexts/CartContext'
+import { Button } from './Button'
+import { CartSneaker } from './CartSneaker'
 
 export function Cart() {
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
     useState(false)
 
-  const { cartItems, removeItemFromCart, cartTotal } = useCart()
+  const { cartItems, cartTotal } = useCart()
 
   const cartItemsQuantity = cartItems.length
 
@@ -64,50 +65,24 @@ export function Cart() {
               {cartItemsQuantity < 1 && (
                 <p>Parece que o seu carrinho está vazio!</p>
               )}
-              {cartItems.map((item) => (
-                <div key={item.id} className="flex gap-2">
-                  <div className="relative w-20 h-16 overflow-hidden rounded">
-                    <Image
-                      src={item.imageUrl}
-                      alt=""
-                      fill
-                      quality={100}
-                      className="object-cover object-center"
-                    />
-                  </div>
-
-                  <div className="relative">
-                    <h2 className="text-base font-medium text-blue-500">
-                      {item.name}
-                    </h2>
-
-                    <p className="text-lg font-bold">{item.promotionPrice}</p>
-
-                    <button className="absolute top-0 -right-10">
-                      <Minus
-                        size={24}
-                        weight="bold"
-                        onClick={() => removeItemFromCart(item.id)}
-                      />
-                    </button>
-                  </div>
-                </div>
+              {cartItems.map((sneaker) => (
+                <CartSneaker key={sneaker.id} sneaker={sneaker} />
               ))}
             </main>
 
             <footer className="mt-auto">
-              <p className="text-xl text-gray-900">
+              <p className="mb-6 text-xl text-gray-900">
                 Total a pagar:{' '}
-                <span className="font-bold">{formattedCartTotal}</span>
+                <span className="font-bold ">{formattedCartTotal}</span>
               </p>
 
-              <button
+              <Button
+                type="button"
                 disabled={isCreatingCheckoutSession || cartItemsQuantity <= 0}
                 onClick={handleRedirectToCheckout}
-                className="gap-4 px-6 mt-6 font-bold text-gray-100 transition-colors bg-blue-500 border-2 border-blue-500 rounded-lg h-14 just w-60 hover:bg-blue-700 active:bg-blue-900"
               >
                 Finalizar compra
-              </button>
+              </Button>
             </footer>
           </section>
         </Dialog.Content>

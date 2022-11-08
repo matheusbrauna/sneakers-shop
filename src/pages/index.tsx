@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'phosphor-react'
+import { Button } from '../components/Button'
 
 type HomeProps = NextPage
 
@@ -25,12 +26,11 @@ export default function Home({}: HomeProps) {
             </p>
 
             <div className="flex gap-6">
-              <Link
-                href="/products"
-                className="flex items-center justify-between h-16 gap-4 px-6 font-bold text-blue-500 transition border-2 border-blue-300 rounded-lg just w-60 bg-blue-50 hover:bg-blue-100 active:border-blue-500"
-              >
-                Ver modelos <ArrowRight size={24} />
-              </Link>
+              <Button asChild variant="outlined">
+                <Link href="/products">
+                  Ver modelos <ArrowRight size={24} />
+                </Link>
+              </Button>
             </div>
           </div>
 

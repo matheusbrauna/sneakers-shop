@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { ShoppingCart, Star } from 'phosphor-react'
 import { MouseEvent } from 'react'
 import Stripe from 'stripe'
+import { Button } from '../../components/Button'
 import { IProduct, useCart } from '../../contexts/CartContext'
 import { stripe } from '../../services/stripe'
 
@@ -38,7 +39,7 @@ export default function Product({ product }: ProductProps) {
           <div className="relative rounded-lg overflow-hidden object-center w-[26rem] h-[25rem] object-cover">
             <Image
               src={product.imageUrl}
-              alt=""
+              alt={product.name}
               fill
               quality={100}
               placeholder="blur"
@@ -74,11 +75,10 @@ export default function Product({ product }: ProductProps) {
             </p>
 
             <div className="flex gap-6 mt-6">
-              <button
+              <Button
                 type="button"
                 disabled={checkIfItemAlreadyExists(product.id)}
                 onClick={(e) => handleAddToCart(e, product)}
-                className="flex items-center h-16 gap-4 px-6 font-bold text-gray-100 transition-colors bg-blue-500 border-2 border-blue-500 rounded-lg hover:bg-blue-700 active:bg-blue-900 disabled:opacity-50 disabled:hover:bg-blue-500 disabled:cursor-not-allowed"
               >
                 {productAlreadyInCart ? (
                   'Produto já está no carrinho'
@@ -87,7 +87,7 @@ export default function Product({ product }: ProductProps) {
                     Adicionar ao carrinho <ShoppingCart size={24} />
                   </>
                 )}
-              </button>
+              </Button>
             </div>
           </div>
         </div>

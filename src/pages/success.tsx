@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import Stripe from 'stripe'
+import { Button } from '../components/Button'
 import { stripe } from '../services/stripe'
 
 type SuccessProps = NextPage & {
@@ -34,6 +35,8 @@ export default function Success({
                   alt=""
                   fill
                   className="object-cover object-center"
+                  placeholder="blur"
+                  blurDataURL={image}
                 />
               </div>
             ))}
@@ -47,12 +50,9 @@ export default function Success({
             com sucesso!
           </p>
 
-          <Link
-            href="/products"
-            className="flex items-center justify-center h-16 gap-4 px-6 font-bold text-gray-100 transition-colors bg-blue-500 border-2 border-blue-500 rounded-lg hover:bg-blue-700 active:bg-blue-900"
-          >
-            Quero comprar mais!
-          </Link>
+          <Button asChild>
+            <Link href="/products">Quero comprar mais!</Link>
+          </Button>
         </div>
       </main>
     </>

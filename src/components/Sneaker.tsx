@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Star } from 'phosphor-react'
 import { IProduct } from '../contexts/CartContext'
+import { Button } from './Button'
 
 type SneakerProps = {
   sneaker: IProduct
@@ -13,7 +14,7 @@ export function Sneaker({ sneaker }: SneakerProps) {
       <div className="relative object-cover w-full overflow-hidden rounded-lg h-[280px]">
         <Image
           src={sneaker.imageUrl}
-          alt=""
+          alt={sneaker.name}
           fill
           placeholder="blur"
           blurDataURL={sneaker.imageUrl}
@@ -48,13 +49,11 @@ export function Sneaker({ sneaker }: SneakerProps) {
         {sneaker.description}
       </p>
 
-      <Link
-        href={`/products/${sneaker.id}`}
-        passHref
-        className="flex items-center justify-between w-full h-16 gap-4 px-6 font-bold text-gray-100 bg-blue-500 border-2 border-blue-500 rounded-lg"
-      >
-        Comprar agora <ArrowRight size={24} />
-      </Link>
+      <Button asChild>
+        <Link href={`/products/${sneaker.id}`}>
+          Comprar agora <ArrowRight size={24} />
+        </Link>
+      </Button>
     </div>
   )
 }
