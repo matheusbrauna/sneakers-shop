@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ShoppingCart } from 'phosphor-react'
+import { Cart } from '../Cart'
 import { HeaderNavigation } from './HeaderNavigation'
 
 export function Header() {
@@ -14,7 +14,7 @@ export function Header() {
           <HeaderNavigation />
         </div>
 
-        <ShoppingCart size={32} className="text-gray-900" weight="bold" />
+        <Cart />
       </div>
     </header>
   )

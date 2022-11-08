@@ -25,6 +25,7 @@ module.exports = {
       },
 
       transparent: 'transparent',
+      overlay: 'rgba(0, 0, 0, 0.44)',
     },
 
     screens: {
