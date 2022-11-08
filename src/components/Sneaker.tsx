@@ -1,34 +1,26 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Star } from 'phosphor-react'
+import { IProduct } from '../contexts/CartContext'
 
-interface SneakerProps {
-  sneakerData: {
-    id: string
-    title: string
-    description: string
-    imageUrl: string
-    defaultPrice: string
-    promotionPrice: string
-  }
+type SneakerProps = {
+  sneaker: IProduct
 }
 
-export function Sneaker({ sneakerData }: SneakerProps) {
+export function Sneaker({ sneaker }: SneakerProps) {
   return (
     <div className="max-w-[280px]">
       <div className="relative object-cover w-full overflow-hidden rounded-lg h-[280px]">
         <Image
-          src={sneakerData.imageUrl}
+          src={sneaker.imageUrl}
           alt=""
           fill
           placeholder="blur"
-          blurDataURL={sneakerData.imageUrl}
+          blurDataURL={sneaker.imageUrl}
         />
       </div>
 
-      <h2 className="mt-3 text-2xl font-bold text-gray-900">
-        {sneakerData.title}
-      </h2>
+      <h2 className="mt-3 text-2xl font-bold text-gray-900">{sneaker.name}</h2>
 
       <div className="flex items-center gap-2 mt-2">
         <div className="flex">
@@ -43,21 +35,21 @@ export function Sneaker({ sneakerData }: SneakerProps) {
       </div>
 
       <span className="mt-2 text-xs font-bold text-gray-700 line-through">
-        {sneakerData.defaultPrice}
+        {sneaker.defaultPrice}
       </span>
 
       <div className="flex items-center justify-between">
         <span className="text-lg font-bold text-gray-900">
-          {sneakerData.promotionPrice}
+          {sneaker.promotionPrice}
         </span>
       </div>
 
       <p className="mt-2 mb-4 overflow-hidden text-base font-bold text-gray-700 whitespace-nowrap text-ellipsis">
-        {sneakerData.description}
+        {sneaker.description}
       </p>
 
       <Link
-        href={`/products/${sneakerData.id}`}
+        href={`/products/${sneaker.id}`}
         passHref
         className="flex items-center justify-between w-full h-16 gap-4 px-6 font-bold text-gray-100 bg-blue-500 border-2 border-blue-500 rounded-lg"
       >

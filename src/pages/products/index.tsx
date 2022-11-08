@@ -2,16 +2,10 @@ import { GetStaticProps, NextPage } from 'next'
 import { Sneaker } from '../../components/Sneaker'
 import { stripe } from '../../services/stripe'
 import Stripe from 'stripe'
+import { IProduct } from '../../contexts/CartContext'
 
 type ProductsProps = NextPage & {
-  sneakers: {
-    id: string
-    title: string
-    description: string
-    imageUrl: string
-    defaultPrice: string
-    promotionPrice: string
-  }[]
+  sneakers: IProduct[]
 }
 
 export default function Products({ sneakers }: ProductsProps) {
@@ -24,7 +18,7 @@ export default function Products({ sneakers }: ProductsProps) {
 
         <section className="grid grid-cols-4 pb-16 mt-16 gap-14">
           {sneakers.map((sneaker) => (
-            <Sneaker key={sneaker.id} sneakerData={sneaker} />
+            <Sneaker key={sneaker.id} sneaker={sneaker} />
           ))}
         </section>
       </div>
@@ -42,7 +36,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
     return {
       id: sneaker.id,
-      title: sneaker.name,
+      name: sneaker.name,
       imageUrl: sneaker.images[0],
       description: sneaker.description?.split('', 100),
       defaultPrice: new Intl.NumberFormat('pt-BR', {
@@ -55,6 +49,8 @@ export const getStaticProps: GetStaticProps = async () => {
         currency: 'BRL',
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       }).format(price.unit_amount! / 100),
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      numberPrice: price.unit_amount! / 100,
     }
   })
 

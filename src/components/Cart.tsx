@@ -1,12 +1,27 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import Image from 'next/image'
 import { Minus, ShoppingCart, X } from 'phosphor-react'
+import { useCart } from '../contexts/CartContext'
 
 export function Cart() {
+  const { cartItems, removeItemFromCart, cartTotal } = useCart()
+
+  const cartItemsQuantity = cartItems.length
+
+  const formattedCartTotal = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(cartTotal)
+
   return (
     <Dialog.Root>
-      <Dialog.Trigger asChild className="cursor-pointer">
-        <ShoppingCart size={32} />
+      <Dialog.Trigger asChild className="relative cursor-pointer">
+        <div>
+          <ShoppingCart size={32} />
+          <span className="absolute flex items-center justify-center w-5 h-5 text-sm font-bold text-gray-100 bg-blue-500 rounded-full -top-2 -right-2">
+            {cartItemsQuantity}
+          </span>
+        </div>
       </Dialog.Trigger>
 
       <Dialog.Portal>
@@ -23,35 +38,45 @@ export function Cart() {
           </Dialog.Close>
 
           <section className="grid justify-between h-full">
-            <main className="mt-6">
-              <div className="flex gap-2">
-                <div className="relative w-20 h-16 overflow-hidden rounded">
-                  <Image
-                    src="/hero.jpg"
-                    alt=""
-                    fill
-                    quality={100}
-                    className="object-cover object-center"
-                  />
+            <main className="flex flex-col gap-4 mt-6">
+              {cartItemsQuantity < 1 && (
+                <p>Parece que o seu carrinho está vazio!</p>
+              )}
+              {cartItems.map((item) => (
+                <div key={item.id} className="flex gap-2">
+                  <div className="relative w-20 h-16 overflow-hidden rounded">
+                    <Image
+                      src={item.imageUrl}
+                      alt=""
+                      fill
+                      quality={100}
+                      className="object-cover object-center"
+                    />
+                  </div>
+
+                  <div className="relative">
+                    <h2 className="text-base font-medium text-blue-500">
+                      {item.name}
+                    </h2>
+
+                    <p className="text-lg font-bold">{item.promotionPrice}</p>
+
+                    <button className="absolute top-0 -right-10">
+                      <Minus
+                        size={24}
+                        weight="bold"
+                        onClick={() => removeItemFromCart(item.id)}
+                      />
+                    </button>
+                  </div>
                 </div>
-
-                <div className="relative">
-                  <h2 className="text-base font-medium text-blue-500">
-                    Sneaker edição limitada de outono
-                  </h2>
-
-                  <p className="text-lg font-bold">R$ 199,90</p>
-
-                  <button className="absolute top-0 -right-10">
-                    <Minus size={24} weight="bold" />
-                  </button>
-                </div>
-              </div>
+              ))}
             </main>
 
             <footer className="mt-auto">
               <p className="text-xl text-gray-900">
-                Total a pagar: <span className="font-bold">R$ 199,90</span>
+                Total a pagar:{' '}
+                <span className="font-bold">{formattedCartTotal}</span>
               </p>
 
               <button className="gap-4 px-6 mt-6 font-bold text-gray-100 transition-colors bg-blue-500 border-2 border-blue-500 rounded-lg h-14 just w-60 hover:bg-blue-700 active:bg-blue-900">

@@ -1,21 +1,26 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import Image from 'next/image'
 import { ShoppingCart, Star } from 'phosphor-react'
+import { MouseEvent } from 'react'
 import Stripe from 'stripe'
+import { IProduct, useCart } from '../../contexts/CartContext'
 import { stripe } from '../../services/stripe'
 
 type ProductProps = NextPage & {
-  product: {
-    id: string
-    imageUrl: string
-    name: string
-    description: string
-    defaultPrice: string
-    promotionPrice: string
-  }
+  product: IProduct
 }
 
 export default function Product({ product }: ProductProps) {
+  const { addItemToCart, checkIfItemAlreadyExists } = useCart()
+
+  function handleAddToCart(
+    e: MouseEvent<HTMLButtonElement>,
+    product: IProduct
+  ) {
+    e.preventDefault()
+    addItemToCart(product)
+  }
+
   return (
     <main>
       <div className="container flex items-center gap-16 main-height">
@@ -58,7 +63,12 @@ export default function Product({ product }: ProductProps) {
           </p>
 
           <div className="flex gap-6 mt-6">
-            <button className="flex items-center h-16 gap-4 px-6 font-bold text-gray-100 transition-colors bg-blue-500 border-2 border-blue-500 rounded-lg hover:bg-blue-700 active:bg-blue-900">
+            <button
+              type="button"
+              disabled={checkIfItemAlreadyExists(product.id)}
+              onClick={(e) => handleAddToCart(e, product)}
+              className="flex items-center h-16 gap-4 px-6 font-bold text-gray-100 transition-colors bg-blue-500 border-2 border-blue-500 rounded-lg hover:bg-blue-700 active:bg-blue-900 disabled:opacity-50 disabled:hover:bg-blue-500 disabled:cursor-not-allowed"
+            >
               Adicionar ao carrinho <ShoppingCart size={24} />
             </button>
           </div>
@@ -104,6 +114,8 @@ export const getStaticProps: GetStaticProps<any, { slug: string }> = async ({
           currency: 'BRL',
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         }).format(price.unit_amount! / 100),
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        numberPrice: price.unit_amount! / 100,
       },
     },
     revalidate: 60 * 60 * 1, // 1 hour
