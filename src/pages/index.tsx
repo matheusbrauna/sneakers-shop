@@ -13,8 +13,8 @@ export default function Home({}: HomeProps) {
       <Head>
         <title>Home | Sneakers Shop</title>
       </Head>
-      <main>
-        <div className="container flex flex-col gap-24 lg:flex-row main-height">
+      <main className="main-height">
+        <div className="container flex flex-col gap-24 lg:h-full pb-14 lg:flex-row">
           <div className="self-center flex-1">
             <h1 className="text-3xl font-bold text-blue-500 md:text-5xl">
               Sneakers Shop
@@ -36,7 +36,7 @@ export default function Home({}: HomeProps) {
             </div>
           </div>
 
-          <div className="relative flex-1 object-cover object-center h-auto min-h-[300px] overflow-hidden rounded-lg">
+          <div className="relative flex-1 object-cover object-center h-auto min-h-[330px] overflow-hidden rounded-lg">
             <Image src="/hero.jpg" alt="" fill quality={100} />
           </div>
         </div>

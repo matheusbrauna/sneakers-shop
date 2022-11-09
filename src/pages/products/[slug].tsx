@@ -34,8 +34,8 @@ export default function Product({ product }: ProductProps) {
       <Head>
         <title>{product.name} | Sneakers Shop</title>
       </Head>
-      <main>
-        <div className="container flex flex-col items-center gap-16 lg:flex-row main-height">
+      <main className="main-height">
+        <div className="container flex flex-col items-center gap-16 lg:flex-row lg:h-full pb-14">
           <div className="relative rounded-lg overflow-hidden object-center w-[26rem] min-h-[25rem] object-cover">
             <Image
               src={product.imageUrl}

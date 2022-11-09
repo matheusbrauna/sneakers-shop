@@ -19,7 +19,7 @@ export default function Contact({}: ContactProps) {
               Entre em contato com a gente
             </h1>
 
-            <ul className="grid gap-4 mt-12 place-items-center">
+            <ul className="grid gap-4 mt-12 place-items-center md:place-items-start">
               <li className="flex items-center justify-center gap-2 font-bold text-gray-900 md:justify-start">
                 <MapPin size={24} className="text-blue-500" weight="bold" /> R.
                 Amauri Souza, 346
