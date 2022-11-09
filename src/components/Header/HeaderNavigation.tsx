@@ -2,7 +2,7 @@ import { ActiveLink } from '../ActiveLink'
 
 export function HeaderNavigation() {
   return (
-    <nav className="grid h-full grid-cols-4 gap-8 place-items-center">
+    <nav className="hidden h-full gap-8 lg:grid-cols-4 lg:grid lg:place-items-center">
       <ActiveLink shouldMatchExactHref href="/">
         Home
       </ActiveLink>

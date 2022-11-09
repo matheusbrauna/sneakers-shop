@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Cart } from '../Cart'
+import { MenuMobile } from '../MenuMobile'
 import { HeaderNavigation } from './HeaderNavigation'
 
 export function Header() {
@@ -14,7 +15,10 @@ export function Header() {
           <HeaderNavigation />
         </div>
 
-        <Cart />
+        <div className="flex gap-4">
+          <Cart />
+          <MenuMobile />
+        </div>
       </div>
     </header>
   )

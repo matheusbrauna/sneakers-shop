@@ -6,10 +6,12 @@ import { clsx } from 'clsx'
 type ActiveLinkProps = LinkProps & {
   children: ReactNode
   shouldMatchExactHref?: boolean
+  isMobileVersion?: boolean
 }
 
 export function ActiveLink({
   shouldMatchExactHref = false,
+  isMobileVersion = false,
   children,
   href,
   as,
@@ -37,6 +39,7 @@ export function ActiveLink({
           'border-blue-300 font-bold': isActive,
           'border-transparent text-gray-700 hover:text-gray-900 transition-colors':
             !isActive,
+          'text-gray-900': isMobileVersion,
         }
       )}
       href={href}

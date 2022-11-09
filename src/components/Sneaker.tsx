@@ -21,7 +21,9 @@ export function Sneaker({ sneaker }: SneakerProps) {
         />
       </div>
 
-      <h2 className="mt-3 text-2xl font-bold text-gray-900">{sneaker.name}</h2>
+      <h2 className="mt-3 text-xl font-bold text-gray-900 lg:text-2xl">
+        {sneaker.name}
+      </h2>
 
       <div className="flex items-center gap-2 mt-2">
         <div className="flex">
@@ -45,7 +47,7 @@ export function Sneaker({ sneaker }: SneakerProps) {
         </span>
       </div>
 
-      <p className="mt-2 mb-4 overflow-hidden text-base font-bold text-gray-700 whitespace-nowrap text-ellipsis">
+      <p className="mt-2 mb-4 overflow-hidden text-sm font-bold text-gray-700 lg:text-base whitespace-nowrap text-ellipsis">
         {sneaker.description}
       </p>
 

@@ -35,8 +35,8 @@ export default function Product({ product }: ProductProps) {
         <title>{product.name} | Sneakers Shop</title>
       </Head>
       <main>
-        <div className="container flex items-center gap-16 main-height">
-          <div className="relative rounded-lg overflow-hidden object-center w-[26rem] h-[25rem] object-cover">
+        <div className="container flex flex-col items-center gap-16 lg:flex-row main-height">
+          <div className="relative rounded-lg overflow-hidden object-center w-[26rem] min-h-[25rem] object-cover">
             <Image
               src={product.imageUrl}
               alt={product.name}
@@ -48,7 +48,7 @@ export default function Product({ product }: ProductProps) {
           </div>
 
           <div className="flex-1">
-            <h1 className="my-5 text-5xl font-bold text-gray-900">
+            <h1 className="my-5 text-3xl font-bold text-gray-900 md:text-5xl">
               {product.name}
             </h1>
 
@@ -62,11 +62,11 @@ export default function Product({ product }: ProductProps) {
               <span className="text-xs font-bold">(1 avaliação)</span>
             </div>
 
-            <p className="mt-6 mb-6 text-2xl leading-relaxed text-gray-900">
+            <p className="mt-6 mb-6 text-xl leading-relaxed text-gray-900 md:text-2xl">
               {product.description}
             </p>
 
-            <p className="text-4xl font-bold text-gray-900">
+            <p className="text-2xl font-bold text-gray-900 md:text-4xl">
               {product.promotionPrice}
             </p>
 

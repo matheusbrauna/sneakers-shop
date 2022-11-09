@@ -38,7 +38,7 @@ export function Cart() {
 
   return (
     <Dialog.Root>
-      <Dialog.Trigger asChild className="relative cursor-pointer">
+      <Dialog.Trigger asChild className="relative cursor-pointer lg:block">
         <div>
           <ShoppingCart size={32} />
           <span className="absolute flex items-center justify-center w-5 h-5 text-sm font-bold text-gray-100 bg-blue-500 rounded-full -top-2 -right-2">
@@ -49,12 +49,12 @@ export function Cart() {
 
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-20 bg-overlay" />
-        <Dialog.Content className="fixed top-0 bottom-0 right-0 z-20 bg-gray-300 w-[30rem] shadow-lg p-12 pt-20">
-          <Dialog.Title className="text-4xl font-bold text-gray-900">
+        <Dialog.Content className="fixed top-0 bottom-0 right-0 z-20 bg-gray-300 w-full md:w-[30rem] shadow-lg p-12 pt-20">
+          <Dialog.Title className="text-2xl font-bold text-gray-900 md:text-4xl">
             Carrinho de compras
           </Dialog.Title>
           <Dialog.Close
-            className="absolute text-gray-900 cursor-pointer right-7 top-7"
+            className="absolute text-gray-900 cursor-pointer top-7 right-7"
             asChild
           >
             <X size={24} weight="bold" />
@@ -71,7 +71,7 @@ export function Cart() {
             </main>
 
             <footer className="mt-auto">
-              <p className="mb-6 text-xl text-gray-900">
+              <p className="mb-6 text-lg text-gray-900 md:text-xl">
                 Total a pagar:{' '}
                 <span className="font-bold ">{formattedCartTotal}</span>
               </p>

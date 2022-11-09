@@ -14,11 +14,13 @@ export default function Home({}: HomeProps) {
         <title>Home | Sneakers Shop</title>
       </Head>
       <main>
-        <div className="container flex gap-24 main-height">
+        <div className="container flex flex-col gap-24 lg:flex-row main-height">
           <div className="self-center flex-1">
-            <h1 className="text-5xl font-bold text-blue-500">Sneakers Shop</h1>
+            <h1 className="text-3xl font-bold text-blue-500 md:text-5xl">
+              Sneakers Shop
+            </h1>
 
-            <p className="my-6 text-2xl leading-relaxed text-gray-900">
+            <p className="my-6 text-lg leading-relaxed text-gray-900 md:text-2xl">
               Todo mundo precisa de um par de sneakers, afinal eles nunca são
               demais. Quer estar elegante e confortável onde quer que esteja e
               pagando um preço justo por isso? Então, não deixe de conferir
@@ -34,7 +36,7 @@ export default function Home({}: HomeProps) {
             </div>
           </div>
 
-          <div className="relative flex-1 object-cover object-center h-auto overflow-hidden rounded-lg">
+          <div className="relative flex-1 object-cover object-center h-auto min-h-[300px] overflow-hidden rounded-lg">
             <Image src="/hero.jpg" alt="" fill quality={100} />
           </div>
         </div>
