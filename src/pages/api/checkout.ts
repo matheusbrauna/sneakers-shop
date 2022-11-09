@@ -16,8 +16,11 @@ export default async function checkout(
     return res.status(400).json({ error: 'Products not found' })
   }
 
-  const cancelUrl = `${process.env.NEXT_URL}`
-  const successUrl = `${process.env.NEXT_URL}/success?session_id={CHECKOUT_SESSION_ID}`
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const cancelUrl = `${process.env.NEXT_URL!}`
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const successUrl = `${process.env
+    .NEXT_URL!}/success?session_id={CHECKOUT_SESSION_ID}`
 
   const checkoutSession = await stripe.checkout.sessions.create({
     cancel_url: cancelUrl,
