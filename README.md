@@ -18,7 +18,7 @@
 
 # Sobre
 
-<p>Mini-ecommerce de uma loja de Tênis. Trata-se de um projeto fictício que tem como objetivo fixar conhecimentos em Next.js, Tailwindcss, ContextAPI.</p>
+<p>Mini-ecommerce de uma loja de Tênis com Next.js. O projeto usa uma API provida pelo Stripe para alimentar o site com os produtos e também realizar pagamentos. Além de utilizar as funcionalidades de SSR (Server Side Rendering) e SSG (Static Site Generation) do Next para indexação das páginas.</p>
 
 <br>
 
