@@ -18,7 +18,7 @@
 
 # Sobre
 
-<p>Mini-ecommerce de uma loja de Tênis com Next.js. O projeto usa uma API provida pelo Stripe para alimentar o site com os produtos e também realizar pagamentos. Além de utilizar as funcionalidades de SSR (Server Side Rendering) e SSG (Static Site Generation) do Next para indexação das páginas.</p>
+<p>Mini-ecommerce de uma loja de Tênis com Next.js. O projeto usa uma API provida pelo Stripe para alimentar o site com os produtos e realizar pagamentos. Também utiliza as funcionalidades de SSR (Server Side Rendering) e SSG (Static Site Generation) do Next para indexação das páginas. Além de ser totalmente responsivo usando as facilidades que o Tailwindcss proporciona.</p>
 
 <br>
 
