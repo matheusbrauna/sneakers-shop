@@ -1,15 +1,16 @@
-import { GetStaticProps, NextPage } from 'next'
-import { Sneaker } from '../../components/Sneaker'
-import { stripe } from '../../services/stripe'
-import Stripe from 'stripe'
-import { IProduct } from '../../contexts/CartContext'
+import { NextPage } from 'next'
 import Head from 'next/head'
+import { useQuery } from 'react-query'
+import { Sneaker } from '../../components/Sneaker'
+import { getSneakers } from '../../templates/Home/http/getSneakers'
 
-type ProductsProps = NextPage & {
-  sneakers: IProduct[]
-}
+type ProductsProps = NextPage
 
-export default function Products({ sneakers }: ProductsProps) {
+export default function Products({}: ProductsProps) {
+  const { data } = useQuery('get-products', getSneakers)
+
+  console.log(data)
+
   return (
     <>
       <Head>
@@ -22,7 +23,7 @@ export default function Products({ sneakers }: ProductsProps) {
           </h1>
 
           <section className="grid grid-cols-1 pb-16 mt-16 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-14 place-items-center">
-            {sneakers.map((sneaker) => (
+            {data?.map((sneaker) => (
               <Sneaker key={sneaker.id} sneaker={sneaker} />
             ))}
           </section>
@@ -30,41 +31,4 @@ export default function Products({ sneakers }: ProductsProps) {
       </main>
     </>
   )
-}
-
-export const getStaticProps: GetStaticProps = async () => {
-  const response = await stripe.products.list({
-    expand: ['data.default_price'],
-  })
-
-  const sneakers = response.data.map((sneaker) => {
-    const price = sneaker.default_price as Stripe.Price
-
-    return {
-      id: sneaker.id,
-      name: sneaker.name,
-      imageUrl: sneaker.images[0],
-      description: sneaker.description?.split('', 100),
-      defaultPrice: new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      }).format((price.unit_amount! * 1.5) / 100),
-      promotionPrice: new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      }).format(price.unit_amount! / 100),
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      numberPrice: price.unit_amount! / 100,
-      defaultPriceId: price.id,
-    }
-  })
-
-  return {
-    props: {
-      sneakers,
-    },
-    revalidate: 60 * 60 * 2, // 2 hours
-  }
 }
