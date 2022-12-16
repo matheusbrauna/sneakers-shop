@@ -36,7 +36,7 @@ interface SneakersData {
   }[]
 }
 
-export async function getSneakers() {
+export async function useSneakers() {
   const { data } = await api.get<SneakersData>('/sneakers?populate=*')
 
   const sneakers = data.data.map((sneaker) => ({

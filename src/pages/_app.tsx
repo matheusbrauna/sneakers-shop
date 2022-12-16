@@ -4,6 +4,7 @@ import { Header } from '../components/Header'
 import { CartProvider } from '../contexts/CartContext'
 import { QueryClientProvider } from 'react-query'
 import { queryClient } from '../services/queryClient'
+import { Footer } from '../components/Footer'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -11,6 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <CartProvider>
         <Header />
         <Component {...pageProps} />
+        <Footer />
       </CartProvider>
     </QueryClientProvider>
   )

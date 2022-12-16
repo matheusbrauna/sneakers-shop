@@ -1,25 +1,45 @@
 import Link from 'next/link'
-import { Cart } from '../Cart'
-import { MenuMobile } from '../MenuMobile'
-import { HeaderNavigation } from './HeaderNavigation'
+import { ShoppingCart } from 'phosphor-react'
 
 export function Header() {
   return (
-    <header className="fixed z-10 w-full h-20 bg-gray-100 border-b border-blue-200">
-      <div className="container flex items-center justify-between h-full">
-        <div className="flex items-center h-full gap-16">
-          <Link href="/">
-            <h1 className="text-4xl font-black uppercase">Sneakers</h1>
-          </Link>
-
-          <HeaderNavigation />
-        </div>
-
-        <div className="flex gap-4">
-          <Cart />
-          <MenuMobile />
-        </div>
+    <header className="">
+      <div className="grid bg-black h-9 place-items-center">
+        <p className="text-xs leading-5 text-white">
+          Oportunidade de frete grátis para pedidos de R$ 100,00 ou mais
+        </p>
       </div>
+
+      <nav className="h-[70px] grid place-items-center">
+        <div className="container flex justify-between">
+          <div className="flex items-center gap-8">
+            <h1 className="text-3xl font-black uppercase">Sneakers Shop</h1>
+
+            <Link
+              href="/products/men"
+              className="text-sm font-bold leading-5 text-black uppercase"
+            >
+              Produtos
+            </Link>
+            <Link
+              href="/products/women"
+              className="text-sm font-bold leading-5 text-black uppercase"
+            >
+              Em alta
+            </Link>
+            <Link
+              href="/products/children"
+              className="text-sm font-bold leading-5 text-black uppercase"
+            >
+              Lançamentos
+            </Link>
+          </div>
+
+          <div className="flex items-center gap-6">
+            <ShoppingCart size={24} />
+          </div>
+        </div>
+      </nav>
     </header>
   )
 }

@@ -2,14 +2,12 @@ import { NextPage } from 'next'
 import Head from 'next/head'
 import { useQuery } from 'react-query'
 import { Sneaker } from '../../components/Sneaker'
-import { getSneakers } from '../../templates/Home/http/getSneakers'
+import { useSneakers } from '../../templates/Home/hooks/useSneakers'
 
 type ProductsProps = NextPage
 
 export default function Products({}: ProductsProps) {
-  const { data } = useQuery('get-products', getSneakers)
-
-  console.log(data)
+  const { data } = useQuery('get-products', useSneakers)
 
   return (
     <>
