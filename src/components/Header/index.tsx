@@ -13,22 +13,23 @@ export function Header() {
       <nav className="h-[70px] grid place-items-center">
         <div className="container flex justify-between">
           <div className="flex items-center gap-8">
-            <h1 className="text-3xl font-black uppercase">Sneakers Shop</h1>
-
+            <Link href="/">
+              <h1 className="text-3xl font-black uppercase">Sneakers Shop</h1>
+            </Link>
             <Link
-              href="/products/men"
+              href="/products"
               className="text-sm font-bold leading-5 text-black uppercase"
             >
               Produtos
             </Link>
             <Link
-              href="/products/women"
+              href="trending"
               className="text-sm font-bold leading-5 text-black uppercase"
             >
               Em alta
             </Link>
             <Link
-              href="/products/children"
+              href="featured"
               className="text-sm font-bold leading-5 text-black uppercase"
             >
               Lançamentos
