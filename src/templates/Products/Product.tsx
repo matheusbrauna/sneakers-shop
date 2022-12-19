@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 
 import imageUrl from '../../assets/sneaker1.png'
+import { BlackButton } from '../../components/Buttons/BlackButton'
 
 export function Product() {
   return (
@@ -33,9 +34,7 @@ export function Product() {
             </p>
 
             <div className="flex gap-6 mt-6">
-              <button className="h-12 px-4 py-2 text-sm font-bold leading-5 text-white uppercase bg-black justify-self-center w-max">
-                Comprar agora
-              </button>
+              <BlackButton href="/">Comprar agora</BlackButton>
             </div>
           </div>
         </div>

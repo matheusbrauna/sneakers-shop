@@ -1,7 +1,7 @@
 import sneakerImg from '../assets/sneaker1.png'
 import Image from 'next/image'
 import { Star } from 'phosphor-react'
-import Link from 'next/link'
+import { BlackButton } from './Buttons/BlackButton'
 
 type SneakerProps = {
   sneaker?: {
@@ -41,12 +41,7 @@ export function Sneaker({}: SneakerProps) {
           <p className="text-base font-bold text-neutral-900">R$ 1.000,00</p>
         </div>
 
-        <Link
-          href="/products/1"
-          className="h-10 px-5 text-sm font-bold leading-10 bg-neutral-900 text-neutral-50"
-        >
-          Ver produto
-        </Link>
+        <BlackButton href="/products/1">Ver produto</BlackButton>
       </div>
     </div>
   )
