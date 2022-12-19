@@ -37,8 +37,11 @@
 }
 
 @layer components {
-  .main-height {
-    height: calc(100vh - 80px);
-    padding-top: calc(80px + 60px);
+  .headerPadding {
+    padding-top: calc(6.25rem + 4rem);
+  }
+
+  .headerPadding {
+    padding-top: calc(6.25rem + 4rem);
   }
 }

@@ -1,44 +1,30 @@
 import Link from 'next/link'
 import { ShoppingCart } from 'phosphor-react'
+import { ActiveLink } from './ActiveLink'
 
 export function Header() {
   return (
-    <header className="fixed z-10 w-full bg-gray-100">
-      <div className="grid bg-black h-9 place-items-center">
-        <p className="text-xs leading-5 text-white">
+    <header className="fixed top-0 left-0 z-10 w-full bg-neutral-100">
+      <div className="bg-neutral-900 h-9">
+        <p className="text-xs leading-9 text-center text-neutral-50">
           Oportunidade de frete grátis para pedidos de R$ 100,00 ou mais
         </p>
       </div>
-
-      <nav className="h-[70px] grid place-items-center">
-        <div className="container flex justify-between">
+      <nav className="h-16">
+        <div className="container flex justify-between h-16">
           <div className="flex items-center gap-8">
             <Link href="/">
-              <h1 className="text-3xl font-black uppercase">Sneakers Shop</h1>
+              <h1 className="text-3xl font-black uppercase text-neutral-900">
+                Sneakers Shop
+              </h1>
             </Link>
-            <Link
-              href="/products"
-              className="text-sm font-bold leading-5 text-black uppercase"
-            >
-              Produtos
-            </Link>
-            <Link
-              href="trending"
-              className="text-sm font-bold leading-5 text-black uppercase"
-            >
-              Em alta
-            </Link>
-            <Link
-              href="featured"
-              className="text-sm font-bold leading-5 text-black uppercase"
-            >
-              Lançamentos
-            </Link>
+            <ActiveLink href="/products">Produtos</ActiveLink>
+            <ActiveLink href="/trending">Em alta</ActiveLink>
+            <ActiveLink href="/featured">Lançamentos</ActiveLink>
           </div>
-
-          <div className="flex items-center gap-6">
+          <button className="flex items-center justify-center">
             <ShoppingCart size={24} />
-          </div>
+          </button>
         </div>
       </nav>
     </header>
