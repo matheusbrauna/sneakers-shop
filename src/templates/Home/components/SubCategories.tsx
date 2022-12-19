@@ -1,16 +1,10 @@
 import Image from 'next/image'
 
-import tafBg from '../../../assets/tafbg.png'
-
 import bg1 from '../../../assets/bg1.png'
 
 export function SubCategories() {
   return (
     <div className="py-16">
-      <div className="relative w-full">
-        <Image src={tafBg} width={999999999} height={736} alt="" />
-      </div>
-
       <div>
         <div className="container">
           <div className="flex justify-center mt-10">
@@ -21,6 +15,10 @@ export function SubCategories() {
 
               <button className="h-12 px-5 text-2xl font-bold leading-8 text-black">
                 Mulheres
+              </button>
+
+              <button className="h-12 px-5 text-2xl font-bold leading-8 text-black">
+                Crianças
               </button>
             </div>
           </div>

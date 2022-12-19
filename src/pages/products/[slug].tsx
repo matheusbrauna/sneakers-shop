@@ -18,9 +18,7 @@ export default function Product({}: ProductProps) {
       </Head>
       <main className="main-height">
         <div className="container flex flex-col items-center gap-16 lg:flex-row lg:h-full pb-14">
-          <div className="relative rounded-lg overflow-hidden object-center w-[26rem] min-h-[25rem] object-cover">
-            <Image src={imageUrl} alt="" fill quality={100} />
-          </div>
+          <Image src={imageUrl} alt="" quality={100} width={443} height={426} />
 
           <div className="flex-1">
             <h1 className="my-5 text-3xl font-bold text-gray-900 md:text-4xl">

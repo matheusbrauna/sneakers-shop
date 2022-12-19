@@ -22,7 +22,7 @@ export function Categories() {
           />
 
           <h4 className="absolute text-2xl text-white uppercase whitespace-nowrap top-2/4 left-2/4 -translate-x-2/4">
-            Novas chegadas
+            Lançamentos
           </h4>
         </div>
 
@@ -36,7 +36,7 @@ export function Categories() {
           />
 
           <h4 className="absolute text-2xl text-white uppercase whitespace-nowrap top-2/4 left-2/4 -translate-x-2/4">
-            Produtos mais vendidos
+            Em alta
           </h4>
         </div>
       </div>

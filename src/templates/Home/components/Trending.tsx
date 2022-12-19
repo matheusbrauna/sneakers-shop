@@ -8,7 +8,7 @@ export function Trending() {
     <div className="py-16">
       <div className="container">
         <div className="flex justify-between">
-          <h4 className="text-2xl font-bold leading-8">Novas chegadas</h4>
+          <h4 className="text-2xl font-bold leading-8">Lançamentos</h4>
 
           <div className="flex gap-5">
             <ArrowCircleLeft size={40} weight="fill" />
