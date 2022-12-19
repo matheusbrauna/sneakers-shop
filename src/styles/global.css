@@ -44,4 +44,8 @@
   .headerPadding {
     padding-top: calc(6.25rem + 4rem);
   }
+
+  .tabs-trigger[data-state='active'] {
+    @apply text-neutral-50 bg-neutral-900;
+  }
 }

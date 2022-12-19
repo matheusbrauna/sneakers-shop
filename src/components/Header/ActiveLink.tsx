@@ -15,8 +15,8 @@ export function ActiveLink({ children, href, ...rest }: ActiveLinkProps) {
   return (
     <Link
       className={clsx('h-16 uppercase text-sm font-bold leading-[4rem] ', {
-        'text-neutral-900 border-b-2 border-gray-600': isCurrentPath,
-        'text-neutral-700': !isCurrentPath,
+        'text-neutral-900 border-b-2 border-neutral-700': isCurrentPath,
+        'text-neutral-500': !isCurrentPath,
       })}
       href={href}
       {...rest}

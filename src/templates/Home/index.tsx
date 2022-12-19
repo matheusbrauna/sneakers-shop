@@ -1,10 +1,5 @@
 import Head from 'next/head'
-
-import { Banners } from './containers/Banners'
-import { Categories } from './containers/Categories'
-import { Hero } from './containers/Hero'
-import { Social } from './containers/Social'
-import { Trending } from './containers/Trending'
+import { Hero, Banners, Social, Trending } from './containers'
 
 export function Home() {
   return (
@@ -14,7 +9,6 @@ export function Home() {
       </Head>
       <main>
         <Hero />
-        <Categories />
         <Trending />
         <Banners />
         <Social />

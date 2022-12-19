@@ -1,37 +1,44 @@
 import Head from 'next/head'
+import { useState } from 'react'
 import { Sneaker } from '../components/Sneaker'
+import {
+  TabRoot,
+  TabList,
+  TabTrigger,
+  TabContent,
+} from './Products/components/CategoryTabs'
 
 export function Trending() {
+  const [tab, setTab] = useState('men')
+
+  console.log(tab)
+
   return (
     <>
       <Head>
-        <title>Produtos | Sneakers Shop</title>
+        <title>Em alta | Sneakers Shop</title>
       </Head>
-      <main className="headerPadding">
-        <div className="fixed left-0 flex flex-col ">
-          <button className="h-12 px-5 text-xl font-bold leading-8 text-white bg-black">
-            Homens
-          </button>
 
-          <button className="h-12 px-5 text-xl font-bold leading-8 text-black">
-            Mulheres
-          </button>
+      <main className="relative pb-8 headerPadding">
+        <TabRoot value={tab} onValueChange={(value) => setTab(value)}>
+          <TabList>
+            <TabTrigger value="men">Homens</TabTrigger>
+            <TabTrigger value="women">Mulheres</TabTrigger>
+            <TabTrigger value="children">Crianças</TabTrigger>
+          </TabList>
 
-          <button className="h-12 px-5 text-xl font-bold leading-8 text-black">
-            Crianças
-          </button>
-        </div>
-
-        <div className="grid grid-cols-1 gap-8 pr-4 ml-40 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          <Sneaker />
-          <Sneaker />
-          <Sneaker />
-          <Sneaker />
-          <Sneaker />
-          <Sneaker />
-          <Sneaker />
-          <Sneaker />
-        </div>
+          <TabContent value={tab}>
+            <Sneaker />
+            <Sneaker />
+            <Sneaker />
+            <Sneaker />
+            <Sneaker />
+            <Sneaker />
+            <Sneaker />
+            <Sneaker />
+            <Sneaker />
+          </TabContent>
+        </TabRoot>
       </main>
     </>
   )
