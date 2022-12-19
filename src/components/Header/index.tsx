@@ -3,7 +3,7 @@ import { ShoppingCart } from 'phosphor-react'
 
 export function Header() {
   return (
-    <header className="">
+    <header className="fixed z-10 w-full bg-gray-100">
       <div className="grid bg-black h-9 place-items-center">
         <p className="text-xs leading-5 text-white">
           Oportunidade de frete grátis para pedidos de R$ 100,00 ou mais

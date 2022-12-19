@@ -1,30 +1,46 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { useQuery } from 'react-query'
-import { Sneaker } from '../../components/Sneaker'
 import { useSneakers } from '../../templates/Home/hooks/useSneakers'
+
+import { Sneaker } from '../../components/Sneaker'
 
 type ProductsProps = NextPage
 
 export default function Products({}: ProductsProps) {
-  const { data } = useQuery('get-products', useSneakers)
+  const {} = useQuery('get-products', useSneakers)
 
   return (
     <>
       <Head>
         <title>Produtos | Sneakers Shop</title>
       </Head>
-      <main>
-        <div className="container items-center main-height">
-          <h1 className="text-3xl font-bold text-center text-gray-900 lg:text-5xl">
-            Confira nossos modelos disponíveis
-          </h1>
+      <main className="pt-[206px]">
+        <div className="flex items-stretch gap-16 pb-8">
+          <div className="fixed flex flex-col justify-start gap-8">
+            <button className="h-12 px-5 text-xl font-bold leading-8 text-white bg-black">
+              Homens
+            </button>
 
-          <section className="grid grid-cols-1 pb-16 mt-16 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-14 place-items-center">
-            {data?.map((sneaker) => (
-              <Sneaker key={sneaker.id} sneaker={sneaker} />
-            ))}
-          </section>
+            <button className="h-12 px-5 text-xl font-bold leading-8 text-black">
+              Mulheres
+            </button>
+
+            <button className="h-12 px-5 text-xl font-bold leading-8 text-black">
+              Crianças
+            </button>
+          </div>
+
+          <div className="ml-[208px] grid flex-1 grid-cols-4 gap-5">
+            <Sneaker />
+            <Sneaker />
+            <Sneaker />
+            <Sneaker />
+            <Sneaker />
+            <Sneaker />
+            <Sneaker />
+            <Sneaker />
+          </div>
         </div>
       </main>
     </>
