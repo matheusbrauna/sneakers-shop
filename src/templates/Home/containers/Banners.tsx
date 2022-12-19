@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
 import bg1 from '../../../assets/bg1.png'
+import { WhiteButton } from '../../../components/Buttons/WhiteButton'
 
 export function Banners() {
   return (
@@ -16,9 +17,9 @@ export function Banners() {
             industry.
           </p>
 
-          <button className="h-12 px-4 mt-10 text-sm font-bold leading-5 uppercase bg-neutral-100 text-neutral-900 justify-self-center">
+          <WhiteButton href="/trending" scopedStyle="mt-10">
             Comece a comprar
-          </button>
+          </WhiteButton>
         </div>
 
         <Image

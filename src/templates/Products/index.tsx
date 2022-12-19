@@ -7,7 +7,7 @@ export function Products() {
       <Head>
         <title>Produtos | Sneakers Shop</title>
       </Head>
-      <main className="headerPadding">
+      <main className="relative pb-8 headerPadding">
         <div className="fixed left-0 flex flex-col ">
           <button className="h-12 px-5 text-xl font-bold leading-8 text-white bg-black">
             Homens
