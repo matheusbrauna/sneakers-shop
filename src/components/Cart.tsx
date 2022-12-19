@@ -3,7 +3,6 @@ import axios from 'axios'
 import { ShoppingCart, X } from 'phosphor-react'
 import { useState } from 'react'
 import { useCart } from '../contexts/CartContext'
-import { Button } from './Button'
 import { CartSneaker } from './CartSneaker'
 
 export function Cart() {
@@ -76,13 +75,13 @@ export function Cart() {
                 <span className="font-bold ">{formattedCartTotal}</span>
               </p>
 
-              <Button
+              <button
                 type="button"
                 disabled={isCreatingCheckoutSession || cartItemsQuantity <= 0}
                 onClick={handleRedirectToCheckout}
               >
                 Finalizar compra
-              </Button>
+              </button>
             </footer>
           </section>
         </Dialog.Content>
