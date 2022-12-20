@@ -1,10 +1,20 @@
 import Head from 'next/head'
 import Image from 'next/image'
 
-import imageUrl from '../../assets/sneaker1.png'
 import { BlackButton } from '../../components/Buttons/BlackButton'
+import { useGetSneakerQuery } from '../../graphql/generated'
 
-export function Product() {
+interface ProductProps {
+  slug: string
+}
+
+export function Product({ slug }: ProductProps) {
+  const [{ data }] = useGetSneakerQuery({
+    variables: {
+      slug,
+    },
+  })
+
   return (
     <>
       <Head>
@@ -12,25 +22,29 @@ export function Product() {
       </Head>
       <main className="grid h-screen place-content-center">
         <div className="container flex items-center justify-center gap-16">
-          <Image src={imageUrl} alt="" quality={100} width={443} height={426} />
+          <Image
+            src={data?.sneaker?.image.url ?? ''}
+            alt=""
+            quality={100}
+            width={443}
+            height={426}
+          />
 
           <div className="flex-1">
             <h1 className="my-5 text-3xl font-bold text-gray-900 md:text-4xl">
-              Nike Blazer Young 2022
+              {data?.sneaker?.name}
             </h1>
 
             <p className="mt-6 mb-6 text-base leading-relaxed text-gray-900 md:text-xl">
-              Esses tênis de perfil baixo são o seu companheiro de roupa casual
-              perfeito. Apresentando uma sola exterior de borracha durável. Eles
-              irão suportar tudo o que o tempo pode oferecer.
+              {data?.sneaker?.description}
             </p>
 
             <p className="text-xl font-bold text-gray-900 md:text-2xl">
-              R$ 199,90
+              {data?.sneaker?.price}
             </p>
 
             <p className="mt-2 text-base font-bold text-gray-900 line-through opacity-50">
-              R$ 250,00
+              {data?.sneaker?.price}
             </p>
 
             <div className="flex gap-6 mt-6">
