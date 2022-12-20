@@ -1,0 +1,13 @@
+query GetSneaker($slug: String!) {
+    sneaker(where: { slug: $slug }) {
+      id
+      name
+      description
+      price
+      isNew
+      slug
+     image {
+      url
+    }
+  }
+}
