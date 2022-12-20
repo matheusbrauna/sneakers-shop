@@ -1,0 +1,17 @@
+query GetSneakersByCategory($where: String = "Men") {
+  category(where: { name: $where }) {
+    id
+    name
+    sneakers {
+      id
+      name
+      description
+      price
+      isNew
+      slug
+      image {
+        url
+      }
+    }
+  }
+}
