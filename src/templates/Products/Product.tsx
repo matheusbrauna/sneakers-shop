@@ -10,8 +10,8 @@ export function Product() {
       <Head>
         <title> produto | Sneakers Shop</title>
       </Head>
-      <main className="main-height">
-        <div className="container flex flex-col items-center gap-16 lg:flex-row lg:h-full pb-14">
+      <main className="grid h-screen place-content-center">
+        <div className="container flex items-center justify-center gap-16">
           <Image src={imageUrl} alt="" quality={100} width={443} height={426} />
 
           <div className="flex-1">

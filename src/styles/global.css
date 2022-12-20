@@ -41,8 +41,8 @@
     padding-top: calc(6.25rem + 4rem);
   }
 
-  .headerPadding {
-    padding-top: calc(6.25rem + 4rem);
+  .mainHeight {
+    height: calc(100vh - 6.25rem);
   }
 
   .tabs-trigger[data-state='active'] {
