@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import { Sneaker } from '../components/Sneaker'
-import { useGetSneakersByCategoryQuery } from '../graphql/generated'
+import { useGetSneakersByIsTrendingQuery } from '../graphql/generated'
 import {
   TabRoot,
   TabList,
@@ -12,9 +12,10 @@ import {
 export function Trending() {
   const [tab, setTab] = useState('Men')
 
-  const [{ data }] = useGetSneakersByCategoryQuery({
+  const [{ data }] = useGetSneakersByIsTrendingQuery({
     variables: {
-      where: tab,
+      category: tab,
+      isTrending: true,
     },
   })
 

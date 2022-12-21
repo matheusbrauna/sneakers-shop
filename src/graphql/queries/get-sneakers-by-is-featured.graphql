@@ -1,7 +1,7 @@
-query GetSneakersByCategory($category: String) {
-  category(where: { name: $category }) {
+query GetSneakersByIsFeatured($category: String, $isFeatured: Boolean = true) {
+  category(where: {name: $category}) {
     name
-    sneakers {
+    sneakers(where: {isFeatured: $isFeatured}) {
       id
       name
       description

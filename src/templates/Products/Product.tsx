@@ -31,7 +31,7 @@ export function Product({ slug }: ProductProps) {
           />
 
           <div className="flex-1">
-            <h1 className="my-5 text-3xl font-bold text-gray-900 md:text-4xl">
+            <h1 className="my-5 text-3xl font-bold text-gray-900 uppercase md:text-4xl">
               {data?.sneaker?.name}
             </h1>
 
@@ -40,11 +40,17 @@ export function Product({ slug }: ProductProps) {
             </p>
 
             <p className="text-xl font-bold text-gray-900 md:text-2xl">
-              {data?.sneaker?.price}
+              {new Intl.NumberFormat('pt-br', {
+                style: 'currency',
+                currency: 'BRL',
+              }).format(data?.sneaker?.price ?? 0)}
             </p>
 
             <p className="mt-2 text-base font-bold text-gray-900 line-through opacity-50">
-              {data?.sneaker?.price}
+              {new Intl.NumberFormat('pt-br', {
+                style: 'currency',
+                currency: 'BRL',
+              }).format(data?.sneaker?.price ?? 0)}
             </p>
 
             <div className="flex gap-6 mt-6">
