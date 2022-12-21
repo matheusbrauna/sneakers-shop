@@ -14,7 +14,7 @@ export function Products() {
 
   const [{ data }] = useGetSneakersByCategoryQuery({
     variables: {
-      where: tab,
+      category: tab,
     },
   })
 

@@ -1,7 +1,7 @@
-query GetSneakersByCategory($category: String) {
-  category(where: { name: $category }) {
+query GetSneakersByIsTrending($category: String, $isTrending: Boolean = true) {
+  category(where: {name: $category}) {
     name
-    sneakers {
+    sneakers(where: {isTrending: $isTrending}) {
       id
       name
       description

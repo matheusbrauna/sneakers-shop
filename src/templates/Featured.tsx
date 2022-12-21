@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import { Sneaker } from '../components/Sneaker'
-import { useGetSneakersByCategoryQuery } from '../graphql/generated'
+import { useGetSneakersByIsFeaturedQuery } from '../graphql/generated'
 import {
   TabRoot,
   TabList,
@@ -12,9 +12,10 @@ import {
 export function Featured() {
   const [tab, setTab] = useState('Men')
 
-  const [{ data }] = useGetSneakersByCategoryQuery({
+  const [{ data }] = useGetSneakersByIsFeaturedQuery({
     variables: {
-      where: tab,
+      category: tab,
+      isFeatured: true,
     },
   })
 

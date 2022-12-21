@@ -5,14 +5,16 @@ import { BlackButton } from './Buttons/BlackButton'
 type SneakerProps = {
   sneaker: {
     id: string
-    slug: string
     name: string
     description: string
     price: number
-    isNew: boolean
+    slug: string
     image: {
       url: string
     }
+    brand?: {
+      name: string
+    } | null
   }
 }
 
@@ -24,9 +26,16 @@ export function Sneaker({ sneaker }: SneakerProps) {
         alt={sneaker.name}
         width={373}
         height={373}
+        quality={100}
       />
 
-      <h2 className="text-base font-bold text-neutral-900">{sneaker.name}</h2>
+      <span className="mt-2 text-xs font-bold text-neutral-600">
+        {sneaker.brand?.name}
+      </span>
+
+      <h2 className="text-base font-bold uppercase text-neutral-900">
+        {sneaker.name}
+      </h2>
 
       <div className="flex gap-1">
         <Star size={16} weight="fill" className="text-yellow-500" />
@@ -39,11 +48,17 @@ export function Sneaker({ sneaker }: SneakerProps) {
       <div className="flex items-center justify-between mt-2">
         <div>
           <p className="text-xs font-bold line-through text-neutral-500">
-            {sneaker.price}
+            {new Intl.NumberFormat('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+            }).format(sneaker.price)}
           </p>
 
           <p className="text-base font-bold text-neutral-900">
-            {sneaker.price}
+            {new Intl.NumberFormat('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+            }).format(sneaker.price)}
           </p>
         </div>
 
