@@ -5884,12 +5884,12 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
-export type GetSneakerQueryVariables = Exact<{
+export type GetSneakerBySlugQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
 
-export type GetSneakerQuery = { __typename?: 'Query', sneaker?: { __typename?: 'Sneaker', id: string, name: string, description: string, price: number, isFeatured: boolean, slug: string, image: { __typename?: 'Asset', url: string } } | null };
+export type GetSneakerBySlugQuery = { __typename?: 'Query', sneaker?: { __typename?: 'Sneaker', id: string, name: string, description: string, price: number, isFeatured: boolean, slug: string, image: { __typename?: 'Asset', url: string } } | null };
 
 export type GetSneakersByCategoryQueryVariables = Exact<{
   category?: InputMaybe<Scalars['String']>;
@@ -5914,9 +5914,14 @@ export type GetSneakersByIsTrendingQueryVariables = Exact<{
 
 export type GetSneakersByIsTrendingQuery = { __typename?: 'Query', category?: { __typename?: 'Category', name: string, sneakers: Array<{ __typename?: 'Sneaker', id: string, name: string, description: string, price: number, slug: string, image: { __typename?: 'Asset', url: string }, brand?: { __typename?: 'Brand', name: string } | null }> } | null };
 
+export type GetSneakersQueryVariables = Exact<{ [key: string]: never; }>;
 
-export const GetSneakerDocument = gql`
-    query GetSneaker($slug: String!) {
+
+export type GetSneakersQuery = { __typename?: 'Query', sneakers: Array<{ __typename?: 'Sneaker', id: string, name: string, price: number, slug: string, image: { __typename?: 'Asset', url: string }, category?: { __typename?: 'Category', name: string } | null }> };
+
+
+export const GetSneakerBySlugDocument = gql`
+    query GetSneakerBySlug($slug: String!) {
   sneaker(where: {slug: $slug}) {
     id
     name
@@ -5931,8 +5936,8 @@ export const GetSneakerDocument = gql`
 }
     `;
 
-export function useGetSneakerQuery(options: Omit<Urql.UseQueryArgs<GetSneakerQueryVariables>, 'query'>) {
-  return Urql.useQuery<GetSneakerQuery, GetSneakerQueryVariables>({ query: GetSneakerDocument, ...options });
+export function useGetSneakerBySlugQuery(options: Omit<Urql.UseQueryArgs<GetSneakerBySlugQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetSneakerBySlugQuery, GetSneakerBySlugQueryVariables>({ query: GetSneakerBySlugDocument, ...options });
 };
 export const GetSneakersByCategoryDocument = gql`
     query GetSneakersByCategory($category: String) {
@@ -6011,4 +6016,26 @@ export const GetSneakersByIsTrendingDocument = gql`
 
 export function useGetSneakersByIsTrendingQuery(options?: Omit<Urql.UseQueryArgs<GetSneakersByIsTrendingQueryVariables>, 'query'>) {
   return Urql.useQuery<GetSneakersByIsTrendingQuery, GetSneakersByIsTrendingQueryVariables>({ query: GetSneakersByIsTrendingDocument, ...options });
+};
+export const GetSneakersDocument = gql`
+    query GetSneakers {
+  sneakers {
+    id
+    name
+    price
+    slug
+    image {
+      url
+    }
+    category {
+      ... on Category {
+        name
+      }
+    }
+  }
+}
+    `;
+
+export function useGetSneakersQuery(options?: Omit<Urql.UseQueryArgs<GetSneakersQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetSneakersQuery, GetSneakersQueryVariables>({ query: GetSneakersDocument, ...options });
 };

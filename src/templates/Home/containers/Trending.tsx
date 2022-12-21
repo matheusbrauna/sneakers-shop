@@ -1,9 +1,15 @@
-import { ArrowCircleLeft, ArrowCircleRight } from 'phosphor-react'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
-import bg1 from '../../../assets/bg1.png'
 import { HomeSneakerCard } from '../components/HomeSneakerCard'
 
+import { useGetSneakersQuery } from '../../../graphql/generated'
+
+import 'swiper/css'
+import { Autoplay } from 'swiper'
+
 export function Trending() {
+  const [{ data }] = useGetSneakersQuery()
+
   return (
     <section className="py-8">
       <div className="container">
@@ -11,46 +17,35 @@ export function Trending() {
           <h3 className="text-2xl font-bold leading-8 text-neutral-900">
             Destaques
           </h3>
-
-          <div className="flex gap-5">
-            <ArrowCircleLeft size={40} weight="fill" />
-            <ArrowCircleRight size={40} weight="fill" />
-          </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-6 mt-10">
-          <HomeSneakerCard
-            src={bg1}
-            alt=""
-            title="Nike Blazer Young 2022"
-            category="Sapatos casuais"
-            price="R$ 1.250,00"
-          />
-
-          <HomeSneakerCard
-            src={bg1}
-            alt=""
-            title="Nike Blazer Young 2022"
-            category="Sapatos casuais"
-            price="R$ 1.250,00"
-          />
-
-          <HomeSneakerCard
-            src={bg1}
-            alt=""
-            title="Nike Blazer Young 2022"
-            category="Sapatos casuais"
-            price="R$ 1.250,00"
-          />
-
-          <HomeSneakerCard
-            src={bg1}
-            alt=""
-            title="Nike Blazer Young 2022"
-            category="Sapatos casuais"
-            price="R$ 1.250,00"
-          />
-        </div>
+        <Swiper
+          className="mt-10"
+          spaceBetween={24}
+          loop={true}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
+          modules={[Autoplay]}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 40,
+            },
+          }}
+        >
+          {data?.sneakers.map((sneaker) => (
+            <SwiperSlide key={sneaker.id}>
+              <HomeSneakerCard sneaker={sneaker} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </section>
   )

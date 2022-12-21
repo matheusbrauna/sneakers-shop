@@ -2,14 +2,14 @@ import Head from 'next/head'
 import Image from 'next/image'
 
 import { BlackButton } from '../../components/Buttons/BlackButton'
-import { useGetSneakerQuery } from '../../graphql/generated'
+import { useGetSneakerBySlugQuery } from '../../graphql/generated'
 
 interface ProductProps {
   slug: string
 }
 
 export function Product({ slug }: ProductProps) {
-  const [{ data }] = useGetSneakerQuery({
+  const [{ data }] = useGetSneakerBySlugQuery({
     variables: {
       slug,
     },

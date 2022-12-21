@@ -1,4 +1,4 @@
-query GetSneaker($slug: String!) {
+query GetSneakerBySlug($slug: String!) {
     sneaker(where: { slug: $slug }) {
       id
       name
