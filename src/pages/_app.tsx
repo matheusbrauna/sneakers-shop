@@ -2,7 +2,6 @@ import '../styles/global.css'
 import type { AppProps } from 'next/app'
 import { Header } from '../components/Header'
 import { CartProvider } from '../contexts/CartContext'
-import { Footer } from '../components/Footer'
 import { Provider } from 'urql'
 import { client, ssrCache } from '../services/urql'
 
@@ -16,7 +15,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <CartProvider>
         <Header />
         <Component {...pageProps} />
-        <Footer />
       </CartProvider>
     </Provider>
   )

@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import { Sneaker } from '../components/Sneaker'
+import { Spinner } from '../components/Spinner/index.'
 import { useGetSneakersByIsFeaturedQuery } from '../graphql/generated'
 import {
   TabRoot,
@@ -12,7 +13,7 @@ import {
 export function Featured() {
   const [tab, setTab] = useState('Men')
 
-  const [{ data }] = useGetSneakersByIsFeaturedQuery({
+  const [{ data, fetching }] = useGetSneakersByIsFeaturedQuery({
     variables: {
       category: tab,
       isFeatured: true,
@@ -24,7 +25,7 @@ export function Featured() {
       <Head>
         <title>Lançamentos | Sneakers Shop</title>
       </Head>
-      <main className="relative pb-8 headerPadding">
+      <main className="relative grid pb-8 headerPadding place-items-center">
         <TabRoot value={tab} onValueChange={(value) => setTab(value)}>
           <TabList>
             <TabTrigger value="Men">Homens</TabTrigger>
@@ -32,11 +33,15 @@ export function Featured() {
             <TabTrigger value="Children">Crianças</TabTrigger>
           </TabList>
 
-          <TabContent value={tab}>
-            {data?.category?.sneakers?.map((sneaker) => (
-              <Sneaker key={sneaker.id} sneaker={sneaker} />
-            ))}
-          </TabContent>
+          {fetching && <Spinner />}
+
+          {!fetching && (
+            <TabContent value={tab}>
+              {data?.category?.sneakers?.map((sneaker) => (
+                <Sneaker key={sneaker.id} sneaker={sneaker} />
+              ))}
+            </TabContent>
+          )}
         </TabRoot>
       </main>
     </>
