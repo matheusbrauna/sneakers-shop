@@ -7,7 +7,7 @@ export function Banners() {
   return (
     <section className="py-8">
       <div className="container grid grid-cols-2">
-        <div className="grid text-center transition-opacity bg-red-400 place-content-center hover:opacity-90">
+        <div className="grid text-center transition-opacity bg-neutral-900 place-content-center">
           <h2 className="text-3xl font-bold leading-9 uppercase text-neutral-50">
             Jordan 1 Low
           </h2>
