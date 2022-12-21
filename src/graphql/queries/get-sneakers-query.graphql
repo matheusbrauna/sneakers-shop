@@ -1,0 +1,16 @@
+query GetSneakers {
+  sneakers {
+    id
+    name
+    price
+    slug
+    image {
+      url
+    }
+    category {
+      ... on Category {
+        name
+      }
+    }
+  }
+}
