@@ -1,0 +1,6 @@
+mutation CreateOrder($product: Json!, $stripeId: String!) {
+  createOrder(data: { stripeId: $stripeId, product: $product }) {
+    product
+    stripeId
+  }
+}

@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import { Minus } from 'phosphor-react'
-import { IProduct, useCart } from '../contexts/CartContext'
+import { useCart } from '../contexts/CartContext'
+import { Sneaker } from '../graphql/generated'
 
 interface CartSneakerProps {
-  sneaker: IProduct
+  sneaker: Sneaker
 }
 
 export function CartSneaker({ sneaker }: CartSneakerProps) {
@@ -13,20 +14,20 @@ export function CartSneaker({ sneaker }: CartSneakerProps) {
     <div key={sneaker.id} className="flex gap-2">
       <div className="relative w-20 h-16 overflow-hidden rounded">
         <Image
-          src={sneaker.imageUrl}
+          src={sneaker.image.url}
           alt={sneaker.name}
           fill
           quality={100}
           className="object-cover object-center"
           placeholder="blur"
-          blurDataURL={sneaker.imageUrl}
+          blurDataURL={sneaker.image.url}
         />
       </div>
 
       <div className="relative">
         <h2 className="text-base font-medium text-blue-500">{sneaker.name}</h2>
 
-        <p className="text-lg font-bold">{sneaker.promotionPrice}</p>
+        <p className="text-lg font-bold">{sneaker.price}</p>
 
         <button className="absolute top-0 -right-10">
           <Minus

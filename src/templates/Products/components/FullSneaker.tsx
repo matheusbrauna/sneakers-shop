@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { BlackButton } from '../../../components/Buttons/BlackButton'
+import { useCart } from '../../../contexts/CartContext'
 
 interface FullSneakerProps {
   sneaker?: {
@@ -16,6 +16,10 @@ interface FullSneakerProps {
 }
 
 export function FullSneaker({ sneaker }: FullSneakerProps) {
+  const { addItemToCart, checkIfItemAlreadyExists } = useCart()
+
+  const itemAlreadyInCart = checkIfItemAlreadyExists(sneaker?.id ?? '')
+
   return (
     <div className="flex flex-col items-center justify-center gap-16 lg:flex-row">
       <Image
@@ -50,7 +54,14 @@ export function FullSneaker({ sneaker }: FullSneakerProps) {
         </p>
 
         <div className="flex gap-6 mt-6">
-          <BlackButton href="/">Comprar agora</BlackButton>
+          <button
+            disabled={itemAlreadyInCart}
+            onClick={() => addItemToCart(sneaker!)}
+          >
+            {itemAlreadyInCart
+              ? 'Produto já está no carrinho'
+              : 'Colocar na sacola'}
+          </button>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ShoppingCart } from 'phosphor-react'
+import { Cart } from '../Cart'
 import { ActiveLink } from './ActiveLink'
 
 export function Header() {
@@ -22,9 +22,7 @@ export function Header() {
             <ActiveLink href="/trending">Em alta</ActiveLink>
             <ActiveLink href="/featured">Lançamentos</ActiveLink>
           </div>
-          <button className="flex items-center justify-center">
-            <ShoppingCart size={24} />
-          </button>
+          <Cart />
         </div>
       </nav>
     </header>

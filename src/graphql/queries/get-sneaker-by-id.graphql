@@ -1,0 +1,13 @@
+query GetSneakerById($id: ID!) {
+    sneaker(where: { id: $id }) {
+    id
+    name
+    description
+    price
+    isFeatured
+    slug
+    image {
+      url
+    }
+  }
+}

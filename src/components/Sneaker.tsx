@@ -3,7 +3,7 @@ import { Star } from 'phosphor-react'
 import { BlackButton } from './Buttons/BlackButton'
 
 type SneakerProps = {
-  sneaker: {
+  sneaker?: {
     id: string
     name: string
     description: string
@@ -22,19 +22,19 @@ export function Sneaker({ sneaker }: SneakerProps) {
   return (
     <div className="grid gap-2 justify-self-center place-content-center">
       <Image
-        src={sneaker.image.url}
-        alt={sneaker.name}
+        src={sneaker?.image.url ?? ''}
+        alt={sneaker?.name ?? ''}
         width={373}
         height={373}
         quality={100}
       />
 
       <span className="mt-2 text-xs font-bold text-neutral-600">
-        {sneaker.brand?.name}
+        {sneaker?.brand?.name}
       </span>
 
       <h2 className="text-base font-bold uppercase text-neutral-900">
-        {sneaker.name}
+        {sneaker?.name}
       </h2>
 
       <div className="flex gap-1">
@@ -51,18 +51,18 @@ export function Sneaker({ sneaker }: SneakerProps) {
             {new Intl.NumberFormat('pt-br', {
               style: 'currency',
               currency: 'BRL',
-            }).format(sneaker.price)}
+            }).format(sneaker?.price ?? 0)}
           </p>
 
           <p className="text-base font-bold text-neutral-900">
             {new Intl.NumberFormat('pt-br', {
               style: 'currency',
               currency: 'BRL',
-            }).format(sneaker.price)}
+            }).format(sneaker?.price ?? 0)}
           </p>
         </div>
 
-        <BlackButton href={`/products/${sneaker.slug}`}>
+        <BlackButton href={`/products/${sneaker?.slug}`}>
           Ver produto
         </BlackButton>
       </div>
