@@ -23,10 +23,6 @@ export default async function Checkout(
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       line_items: products.map((product) => ({
-        adjustable_quantity: {
-          enabled: true,
-          minimum: 1,
-        },
         quantity: 1,
         price_data: {
           currency: 'brl',

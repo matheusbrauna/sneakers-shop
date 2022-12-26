@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import { Minus } from 'phosphor-react'
-import { useCart } from '../contexts/CartContext'
-import { Sneaker } from '../graphql/generated'
+import { Sneaker, useCart } from '../contexts/CartContext'
 
 interface CartSneakerProps {
   sneaker: Sneaker

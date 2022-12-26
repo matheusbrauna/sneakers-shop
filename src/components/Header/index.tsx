@@ -11,7 +11,7 @@ export function Header() {
         </p>
       </div>
       <nav className="h-16">
-        <div className="container flex justify-between h-16">
+        <div className="container flex items-center justify-between h-16">
           <div className="flex items-center gap-8">
             <Link href="/">
               <h1 className="text-3xl font-black uppercase text-neutral-900">

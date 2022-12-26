@@ -13,7 +13,7 @@ import {
 export function Trending() {
   const [tab, setTab] = useState('Men')
 
-  const [{ data, fetching }] = useGetSneakersByIsTrendingQuery({
+  const [{ data }] = useGetSneakersByIsTrendingQuery({
     variables: {
       category: tab,
       isTrending: true,
@@ -33,9 +33,9 @@ export function Trending() {
             <TabTrigger value="Children">Crianças</TabTrigger>
           </TabList>
 
-          {fetching && <Spinner />}
+          {!data?.category?.sneakers && <Spinner />}
 
-          {!fetching && (
+          {data?.category?.sneakers && (
             <TabContent value={tab}>
               {data?.category?.sneakers?.map((sneaker) => (
                 <Sneaker key={sneaker.id} sneaker={sneaker} />

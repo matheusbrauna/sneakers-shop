@@ -1,7 +1,8 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 import bg1 from '../../../assets/danilo-capece-NoVnXXmDNi0-unsplash.jpg'
-import { WhiteButton } from '../../../components/Buttons/WhiteButton'
+import { Button } from '../../../components/Buttons/Button'
 
 export function Banners() {
   return (
@@ -17,14 +18,14 @@ export function Banners() {
             industry.
           </p>
 
-          <WhiteButton href="/trending" scopedStyle="mt-10">
-            Comece a comprar
-          </WhiteButton>
+          <Link href="/trending" className="mt-10">
+            <Button>Comece a comprar</Button>
+          </Link>
         </div>
 
         <Image
           src={bg1}
-          alt=""
+          alt="Tênis Nike Jordan 1 Low"
           width={756}
           height={596}
           className="object-cover object-center"

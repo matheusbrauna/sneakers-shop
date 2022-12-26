@@ -13,7 +13,7 @@ import {
 export function Featured() {
   const [tab, setTab] = useState('Men')
 
-  const [{ data, fetching }] = useGetSneakersByIsFeaturedQuery({
+  const [{ data }] = useGetSneakersByIsFeaturedQuery({
     variables: {
       category: tab,
       isFeatured: true,
@@ -33,9 +33,9 @@ export function Featured() {
             <TabTrigger value="Children">Crianças</TabTrigger>
           </TabList>
 
-          {fetching && <Spinner />}
+          {!data?.category?.sneakers && <Spinner />}
 
-          {!fetching && (
+          {data?.category?.sneakers && (
             <TabContent value={tab}>
               {data?.category?.sneakers?.map((sneaker) => (
                 <Sneaker key={sneaker.id} sneaker={sneaker} />

@@ -13,7 +13,7 @@ interface ProductProps {
 export function Product({ slug }: ProductProps) {
   const router = useRouter()
 
-  const [{ data, fetching }] = useGetSneakerBySlugQuery({
+  const [{ data }] = useGetSneakerBySlugQuery({
     variables: {
       slug,
     },
@@ -26,9 +26,9 @@ export function Product({ slug }: ProductProps) {
       </Head>
       <main>
         <div className="container flex items-center justify-center gap-8 pb-16 headerPadding lg:mainHeight">
-          {fetching && <Spinner />}
+          {!data?.sneaker && <Spinner />}
 
-          {!fetching && (
+          {data?.sneaker && (
             <>
               <button
                 className="self-start"

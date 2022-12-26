@@ -6,8 +6,13 @@ query GetSneakerBySlug($slug: String!) {
       price
       isFeatured
       slug
-     image {
-      url
+      image {
+        url
+      }
+      brand {
+      ... on Brand {
+        name
+      }
     }
   }
 }

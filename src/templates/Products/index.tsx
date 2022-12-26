@@ -13,7 +13,7 @@ import {
 export function Products() {
   const [tab, setTab] = useState('Men')
 
-  const [{ data, fetching }] = useGetSneakersByCategoryQuery({
+  const [{ data }] = useGetSneakersByCategoryQuery({
     variables: {
       category: tab,
     },
@@ -32,11 +32,11 @@ export function Products() {
             <TabTrigger value="Children">Crianças</TabTrigger>
           </TabList>
 
-          {fetching && <Spinner />}
+          {!data?.category?.sneakers && <Spinner />}
 
-          {!fetching && (
+          {data?.category?.sneakers && (
             <TabContent value={tab}>
-              {data?.category?.sneakers?.map((sneaker) => (
+              {data.category.sneakers.map((sneaker) => (
                 <Sneaker key={sneaker.id} sneaker={sneaker} />
               ))}
             </TabContent>

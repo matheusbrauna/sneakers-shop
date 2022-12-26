@@ -1,40 +1,30 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { Star } from 'phosphor-react'
-import { BlackButton } from './Buttons/BlackButton'
+import { Sneaker } from '../contexts/CartContext'
+import { Button } from './Buttons/Button'
 
 type SneakerProps = {
-  sneaker?: {
-    id: string
-    name: string
-    description: string
-    price: number
-    slug: string
-    image: {
-      url: string
-    }
-    brand?: {
-      name: string
-    } | null
-  }
+  sneaker: Sneaker
 }
 
 export function Sneaker({ sneaker }: SneakerProps) {
   return (
     <div className="grid gap-2 justify-self-center place-content-center">
       <Image
-        src={sneaker?.image.url ?? ''}
-        alt={sneaker?.name ?? ''}
+        src={sneaker.image.url}
+        alt={sneaker.name}
         width={373}
         height={373}
         quality={100}
       />
 
       <span className="mt-2 text-xs font-bold text-neutral-600">
-        {sneaker?.brand?.name}
+        {sneaker.brand?.name}
       </span>
 
       <h2 className="text-base font-bold uppercase text-neutral-900">
-        {sneaker?.name}
+        {sneaker.name}
       </h2>
 
       <div className="flex gap-1">
@@ -51,20 +41,20 @@ export function Sneaker({ sneaker }: SneakerProps) {
             {new Intl.NumberFormat('pt-br', {
               style: 'currency',
               currency: 'BRL',
-            }).format(sneaker?.price ?? 0)}
+            }).format(sneaker.price)}
           </p>
 
           <p className="text-base font-bold text-neutral-900">
             {new Intl.NumberFormat('pt-br', {
               style: 'currency',
               currency: 'BRL',
-            }).format(sneaker?.price ?? 0)}
+            }).format(sneaker.price)}
           </p>
         </div>
 
-        <BlackButton href={`/products/${sneaker?.slug}`}>
-          Ver produto
-        </BlackButton>
+        <Link href={`/products/${sneaker.slug}`}>
+          <Button variant="black">Ver produto</Button>
+        </Link>
       </div>
     </div>
   )

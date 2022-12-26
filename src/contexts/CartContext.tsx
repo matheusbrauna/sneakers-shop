@@ -1,14 +1,23 @@
-import { ReactNode, createContext, useState, useContext } from 'react'
+import {
+  ReactNode,
+  createContext,
+  useState,
+  useContext,
+  useCallback,
+  useMemo,
+} from 'react'
 
-type Sneaker = {
+export type Sneaker = {
   id: string
   name: string
   description: string
   price: number
-  isFeatured: boolean
   slug: string
   image: {
     url: string
+  }
+  brand?: {
+    name: string
   } | null
 }
 
@@ -29,22 +38,24 @@ const CartContext = createContext({} as CartContextData)
 export function CartProvider({ children }: CartProviderProps) {
   const [cartItems, setCartItems] = useState<Sneaker[]>([])
 
-  const cartTotal = cartItems?.reduce(
-    (total, product) => total + product.price,
-    0
-  )
+  const cartTotal = useMemo(() => {
+    return cartItems.reduce((total, product) => total + product.price, 0)
+  }, [cartItems])
 
-  function addItemToCart(product: Sneaker) {
+  const addItemToCart = useCallback((product: Sneaker) => {
     setCartItems((state) => [...state, product])
-  }
+  }, [])
 
-  function removeItemFromCart(productId: string) {
+  const removeItemFromCart = useCallback((productId: string) => {
     setCartItems((state) => state.filter((product) => product.id !== productId))
-  }
+  }, [])
 
-  function checkIfItemAlreadyExists(productId: string) {
-    return cartItems.some((product) => product.id === productId)
-  }
+  const checkIfItemAlreadyExists = useCallback(
+    (productId: string) => {
+      return cartItems.some((product) => product.id === productId)
+    },
+    [cartItems]
+  )
 
   return (
     <CartContext.Provider

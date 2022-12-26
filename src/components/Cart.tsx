@@ -39,19 +39,19 @@ export function Cart() {
       <Dialog.Trigger asChild className="relative cursor-pointer">
         <div>
           <ShoppingCart size={32} />
-          <span className="absolute flex items-center justify-center w-5 h-5 text-sm font-bold text-gray-100 bg-blue-500 rounded-full -top-2 -right-2">
+          <span className="absolute flex items-center justify-center w-5 h-5 text-sm font-bold bg-blue-500 rounded-full text-neutral-100 -top-2 -right-2">
             {cartItemsQuantity}
           </span>
         </div>
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-20 bg-overlay" />
-        <Dialog.Content className="fixed top-0 bottom-0 right-0 z-20 bg-gray-300 w-[30rem] shadow-lg p-12 pt-20">
-          <Dialog.Title className="text-4xl font-bold text-gray-900">
+        <Dialog.Overlay className="fixed inset-0 z-20 bg-black bg-opacity-20" />
+        <Dialog.Content className="fixed top-0 bottom-0 right-0 z-20 bg-neutral-200 w-[30rem] shadow-lg p-12 pt-20">
+          <Dialog.Title className="text-4xl font-bold text-neutral-900">
             Carrinho de compras
           </Dialog.Title>
           <Dialog.Close
-            className="absolute text-gray-900 cursor-pointer right-7 top-7"
+            className="absolute cursor-pointer text-neutral-900 right-7 top-7"
             asChild
           >
             <X size={24} weight="bold" />
@@ -89,7 +89,7 @@ export function Cart() {
               ))}
             </main>
             <footer className="mt-auto">
-              <p className="text-xl text-gray-900">
+              <p className="text-xl text-neutral-900">
                 Total a pagar:{' '}
                 <span className="font-bold">{formattedCartTotal}</span>
               </p>
@@ -97,7 +97,7 @@ export function Cart() {
               <button
                 disabled={isCreatingCheckoutSession || cartItemsQuantity <= 0}
                 onClick={handleCheckout}
-                className="gap-4 px-6 mt-6 font-bold text-gray-100 transition-colors bg-blue-500 border-2 border-blue-500 rounded-lg h-14 just w-60 hover:bg-blue-700 active:bg-blue-900"
+                className="gap-4 px-6 mt-6 font-bold transition-colors bg-blue-500 border-2 border-blue-500 rounded-lg text-neutral-100 h-14 just w-60 hover:bg-blue-700 active:bg-blue-900"
               >
                 Finalizar compra
               </button>
