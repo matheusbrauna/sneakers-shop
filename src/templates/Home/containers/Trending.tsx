@@ -2,13 +2,13 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { HomeSneakerCard } from '../components/HomeSneakerCard'
 
-import { useGetSneakersQuery } from '../../../graphql/generated'
-
 import 'swiper/css'
 import { Autoplay } from 'swiper'
+import { useGetSneakers } from '../../hooks/useGetSneakers'
+import { Spinner } from '../../../components/Spinner'
 
 export function Trending() {
-  const [{ data }] = useGetSneakersQuery()
+  const { sneakers } = useGetSneakers()
 
   return (
     <section className="py-8">
@@ -40,11 +40,14 @@ export function Trending() {
             },
           }}
         >
-          {data?.sneakers.map((sneaker) => (
-            <SwiperSlide key={sneaker.id}>
-              <HomeSneakerCard sneaker={sneaker} />
-            </SwiperSlide>
-          ))}
+          {!sneakers && <Spinner />}
+
+          {sneakers &&
+            sneakers.map((sneaker) => (
+              <SwiperSlide key={sneaker.id}>
+                <HomeSneakerCard sneaker={sneaker} />
+              </SwiperSlide>
+            ))}
         </Swiper>
       </div>
     </section>

@@ -1,5 +1,5 @@
-query GetSneakersByCategory($category: String) {
-  category(where: { name: $category }) {
+query GetSneakersByCategory($tab: String) {
+  category(where: { name: $tab }) {
     name
     sneakers {
       id

@@ -18,7 +18,10 @@ export type Sneaker = {
   }
   brand?: {
     name: string
-  } | null
+  }
+  category?: {
+    name: string
+  }
 }
 
 interface CartContextData {

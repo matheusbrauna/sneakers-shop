@@ -1,19 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { Sneaker } from '../../../contexts/CartContext'
 
 interface HomeSneakerCardProps {
-  sneaker: {
-    id: string
-    name: string
-    price: number
-    slug: string
-    image: {
-      url: string
-    }
-    category?: {
-      name: string
-    } | null
-  }
+  sneaker: Sneaker
 }
 
 export function HomeSneakerCard({ sneaker }: HomeSneakerCardProps) {

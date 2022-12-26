@@ -1,14 +1,16 @@
 query GetSneakers {
-  sneakers {
-    id
-    name
-    price
-    slug
-    image {
-      url
-    }
-    category {
-      ... on Category {
+    sneakers {
+      id
+      name
+      description
+      price
+      isFeatured
+      slug
+      image {
+        url
+      }
+      brand {
+      ... on Brand {
         name
       }
     }

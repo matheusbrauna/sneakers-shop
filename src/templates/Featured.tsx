@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import { Sneaker } from '../components/Sneaker'
-import { Spinner } from '../components/Spinner/index.'
-import { useGetSneakersByIsFeaturedQuery } from '../graphql/generated'
+import { Spinner } from '../components/Spinner'
+import { useGetSneakersByIsFeatured } from './hooks'
 import {
   TabRoot,
   TabList,
@@ -13,11 +13,8 @@ import {
 export function Featured() {
   const [tab, setTab] = useState('Men')
 
-  const [{ data }] = useGetSneakersByIsFeaturedQuery({
-    variables: {
-      category: tab,
-      isFeatured: true,
-    },
+  const { sneakers } = useGetSneakersByIsFeatured({
+    tab,
   })
 
   return (
@@ -33,11 +30,11 @@ export function Featured() {
             <TabTrigger value="Children">Crianças</TabTrigger>
           </TabList>
 
-          {!data?.category?.sneakers && <Spinner />}
+          {!sneakers && <Spinner />}
 
-          {data?.category?.sneakers && (
+          {sneakers && (
             <TabContent value={tab}>
-              {data?.category?.sneakers?.map((sneaker) => (
+              {sneakers.map((sneaker) => (
                 <Sneaker key={sneaker.id} sneaker={sneaker} />
               ))}
             </TabContent>
