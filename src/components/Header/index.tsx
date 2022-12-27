@@ -1,5 +1,6 @@
-import Link from 'next/link'
 import { Cart } from '../Cart'
+import { Logo } from '../Logo'
+import { MenuMobile } from '../MenuMobile'
 import { ActiveLink } from './ActiveLink'
 
 export function Header() {
@@ -13,16 +14,19 @@ export function Header() {
       <nav className="h-16">
         <div className="container flex items-center justify-between h-16">
           <div className="flex items-center gap-8">
-            <Link href="/">
-              <h1 className="text-3xl font-black uppercase text-neutral-900">
-                Sneakers Shop
-              </h1>
-            </Link>
-            <ActiveLink href="/products">Produtos</ActiveLink>
-            <ActiveLink href="/trending">Em alta</ActiveLink>
-            <ActiveLink href="/featured">Lançamentos</ActiveLink>
+            <Logo />
+
+            <div className="items-center hidden gap-8 md:flex">
+              <ActiveLink href="/products">Produtos</ActiveLink>
+              <ActiveLink href="/trending">Em alta</ActiveLink>
+              <ActiveLink href="/featured">Lançamentos</ActiveLink>
+            </div>
           </div>
-          <Cart />
+
+          <div className="flex gap-4">
+            <Cart />
+            <MenuMobile />
+          </div>
         </div>
       </nav>
     </header>

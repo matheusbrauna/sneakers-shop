@@ -22,7 +22,7 @@ export function Products() {
       <Head>
         <title>Produtos | Sneakers Shop</title>
       </Head>
-      <main className="relative grid pb-8 headerPadding place-items-center">
+      <main className="paddingToHeader">
         <TabRoot value={tab} onValueChange={(value) => setTab(value)}>
           <TabList>
             <TabTrigger value="Men">Homens</TabTrigger>

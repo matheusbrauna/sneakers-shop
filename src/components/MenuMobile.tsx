@@ -1,43 +1,33 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import Link from 'next/link'
 import { List, X } from 'phosphor-react'
+import { Logo } from './Logo'
 
 export function MenuMobile() {
   return (
     <Dialog.Root>
-      <Dialog.Trigger asChild className="relative cursor-pointer lg:hidden">
+      <Dialog.Trigger asChild className="relative cursor-pointer md:hidden">
         <List
           size={32}
-          className="absolute top-0 right-0 flex items-center justify-center font-bold text-blue-500"
+          className="absolute top-0 right-0 flex items-center justify-center font-bold text-neutral-900"
         />
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-30 bg-overlay" />
-        <Dialog.Content className="fixed inset-0 z-30 w-full h-full bg-gray-300 shadow-lg">
-          <header className="h-20">
-            <div className="container relative flex items-center justify-between h-full">
-              <Link href="/">
-                <h1 className="text-4xl font-black uppercase">Sneakers</h1>
-              </Link>
+        <Dialog.Content className="fixed inset-0 z-30 w-full h-full shadow-lg bg-neutral-200">
+          <div className="flex flex-col items-center h-full gap-16 py-9">
+            <header className="container relative flex items-center justify-between h-16">
+              <Logo />
 
-              <Dialog.Close className="text-blue-500 cursor-pointer" asChild>
-                <X size={32} weight="bold" />
+              <Dialog.Close className="cursor-pointer text-neutral-900" asChild>
+                <X size={32} />
               </Dialog.Close>
-            </div>
-          </header>
+            </header>
 
-          <main className="h-full">
-            <div className="container flex flex-col items-center h-full gap-10 pt-16">
-              <Dialog.Close asChild>
-                <Link href="/" className="text-3xl font-bold text-gray-900">
-                  Home
-                </Link>
-              </Dialog.Close>
-
+            <main className="container flex flex-col items-center gap-8">
               <Dialog.Close asChild>
                 <Link
                   href="/products"
-                  className="text-3xl font-bold text-gray-900"
+                  className="text-2xl font-bold text-neutral-900"
                 >
                   Produtos
                 </Link>
@@ -45,14 +35,23 @@ export function MenuMobile() {
 
               <Dialog.Close asChild>
                 <Link
-                  href="/contact"
-                  className="text-3xl font-bold text-gray-900"
+                  href="/trending"
+                  className="text-2xl font-bold text-neutral-900"
                 >
-                  Contato
+                  Em alta
                 </Link>
               </Dialog.Close>
-            </div>
-          </main>
+
+              <Dialog.Close asChild>
+                <Link
+                  href="/featured"
+                  className="text-2xl font-bold text-neutral-900"
+                >
+                  Lançamentos
+                </Link>
+              </Dialog.Close>
+            </main>
+          </div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

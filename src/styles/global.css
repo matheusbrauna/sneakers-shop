@@ -37,15 +37,11 @@
 }
 
 @layer components {
-  .headerPadding {
-    padding-top: calc(6.25rem + 4rem);
-  }
-
-  .mainHeight {
-    height: calc(100vh - 6.25rem);
-  }
-
   .tabs-trigger[data-state='active'] {
     @apply text-neutral-50 bg-neutral-900;
+  }
+
+  .paddingToHeader {
+    @apply h-screen pt-[6.25rem];
   }
 }

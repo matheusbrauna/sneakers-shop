@@ -32,15 +32,15 @@ export function FullSneaker({ sneaker }: FullSneakerProps) {
       />
 
       <div className="flex-1">
-        <span className="block mb-2 text-sm font-bold uppercase text-neutral-500">
+        <span className="block mb-2 text-xs font-bold uppercase sm:text-sm text-neutral-500">
           {sneaker.brand?.name}
         </span>
 
-        <h1 className="mb-5 text-3xl font-bold uppercase text-neutral-900 md:text-4xl">
+        <h1 className="mb-5 text-xl font-bold uppercase sm:text-2xl text-neutral-900 md:text-4xl">
           {sneaker.name}
         </h1>
 
-        <p className="mt-6 mb-6 text-base leading-relaxed text-neutral-900 md:text-xl">
+        <p className="mt-6 mb-6 text-sm leading-relaxed sm:text-base text-neutral-900 md:text-xl">
           {sneaker.description}
         </p>
 

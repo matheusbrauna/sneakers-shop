@@ -22,8 +22,8 @@ export function Product({ slug }: ProductProps) {
       <Head>
         <title> produto | Sneakers Shop</title>
       </Head>
-      <main>
-        <div className="container flex items-center justify-center gap-8 pb-16 headerPadding lg:mainHeight">
+      <main className="relative paddingToHeader">
+        <div className="container flex flex-col items-center justify-center gap-8 py-16 sm:flex-row">
           {!sneaker && <Spinner />}
 
           {sneaker && (

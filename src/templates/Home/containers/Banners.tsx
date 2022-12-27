@@ -7,13 +7,13 @@ import { Button } from '../../../components/Buttons/Button'
 export function Banners() {
   return (
     <section className="py-8">
-      <div className="container grid grid-cols-2">
-        <div className="grid text-center transition-opacity bg-neutral-900 place-content-center">
-          <h2 className="text-3xl font-bold leading-9 uppercase text-neutral-50">
+      <div className="container flex flex-col sm:grid sm:grid-cols-2">
+        <div className="flex flex-col justify-center px-4 py-16 text-center transition-opacity bg-neutral-900">
+          <h2 className="text-2xl font-bold leading-9 uppercase sm:text-3xl text-neutral-50">
             Jordan 1 Low
           </h2>
 
-          <p className="mt-3 text-sm leading-5 text-neutral-50">
+          <p className="mt-3 text-xs leading-5 md:text-sm text-neutral-50">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry.
           </p>
