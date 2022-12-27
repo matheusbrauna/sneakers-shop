@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Minus } from 'phosphor-react'
 import { Sneaker, useCart } from '../contexts/CartContext'
+import { formatPrice } from '../functions/formatPrice'
 
 interface CartSneakerProps {
   sneaker: Sneaker
@@ -9,24 +10,23 @@ interface CartSneakerProps {
 export function CartSneaker({ sneaker }: CartSneakerProps) {
   const { removeItemFromCart } = useCart()
 
+  const formattedPrice = formatPrice({ price: sneaker.price })
+
   return (
     <div key={sneaker.id} className="flex gap-2">
-      <div className="relative w-20 h-16 overflow-hidden rounded">
-        <Image
-          src={sneaker.image.url}
-          alt={sneaker.name}
-          fill
-          quality={100}
-          className="object-cover object-center"
-          placeholder="blur"
-          blurDataURL={sneaker.image.url}
-        />
-      </div>
+      <Image
+        width={80}
+        height={80}
+        src={sneaker.image.url}
+        alt={sneaker.name}
+        quality={100}
+        placeholder="empty"
+      />
 
       <div className="relative">
         <h2 className="text-base font-medium text-blue-500">{sneaker.name}</h2>
 
-        <p className="text-lg font-bold">{sneaker.price}</p>
+        <p className="text-lg font-bold">{formattedPrice}</p>
 
         <button className="absolute top-0 -right-10">
           <Minus

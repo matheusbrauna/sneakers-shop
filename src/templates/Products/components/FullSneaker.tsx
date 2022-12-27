@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { BlackButton } from '../../../components/Buttons/BlackButton'
 import { Sneaker, useCart } from '../../../contexts/CartContext'
+import { formatPrice } from '../../../functions/formatPrice'
 
 interface FullSneakerProps {
   sneaker: Sneaker
@@ -11,6 +12,8 @@ export function FullSneaker({ sneaker }: FullSneakerProps) {
 
   const itemAlreadyInCart = checkIfItemAlreadyExists(sneaker.id)
 
+  const formattedPrice = formatPrice({ price: sneaker.price })
+
   return (
     <div className="flex flex-col items-center justify-center gap-16 lg:flex-row">
       <Image
@@ -19,6 +22,7 @@ export function FullSneaker({ sneaker }: FullSneakerProps) {
         quality={100}
         width={443}
         height={426}
+        placeholder="empty"
       />
 
       <div className="flex-1">
@@ -35,17 +39,11 @@ export function FullSneaker({ sneaker }: FullSneakerProps) {
         </p>
 
         <p className="text-xl font-bold text-neutral-900 md:text-2xl">
-          {new Intl.NumberFormat('pt-br', {
-            style: 'currency',
-            currency: 'BRL',
-          }).format(sneaker.price)}
+          {formattedPrice}
         </p>
 
         <p className="mt-2 text-base font-bold line-through opacity-50 text-neutral-900">
-          {new Intl.NumberFormat('pt-br', {
-            style: 'currency',
-            currency: 'BRL',
-          }).format(sneaker.price)}
+          {formattedPrice}
         </p>
 
         <div className="flex gap-6 mt-6">

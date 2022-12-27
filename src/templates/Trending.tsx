@@ -20,7 +20,7 @@ export function Trending() {
   return (
     <>
       <Head>
-        <title>Trending | Sneakers Shop</title>
+        <title>Em alta | Sneakers Shop</title>
       </Head>
       <main className="relative grid pb-8 headerPadding place-items-center">
         <TabRoot value={tab} onValueChange={(value) => setTab(value)}>

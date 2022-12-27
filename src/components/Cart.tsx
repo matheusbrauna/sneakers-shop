@@ -1,21 +1,22 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import Image from 'next/image'
-import { Minus, ShoppingCart, X } from 'phosphor-react'
+import { ShoppingCart, X } from 'phosphor-react'
 import { useState } from 'react'
 import { useCart } from '../contexts/CartContext'
+import { formatPrice } from '../functions/formatPrice'
 import { api } from '../services/api'
+import { CartSneaker } from './CartSneaker'
 
 export function Cart() {
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
     useState(false)
 
-  const { cartItems, removeItemFromCart, cartTotal } = useCart()
+  const { cartItems, cartTotal } = useCart()
 
   const cartItemsQuantity = cartItems.length
-  const formattedCartTotal = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  }).format(cartTotal)
+
+  const formattedCartTotal = formatPrice({
+    price: cartTotal,
+  })
 
   async function handleCheckout() {
     try {
@@ -61,31 +62,8 @@ export function Cart() {
               {cartItemsQuantity < 1 && (
                 <p>Parece que o seu carrinho está vazio!</p>
               )}
-              {cartItems.map((item) => (
-                <div key={item.id} className="flex gap-2">
-                  <div className="relative w-20 h-16 overflow-hidden rounded">
-                    <Image
-                      src={item.image?.url ?? ''}
-                      alt=""
-                      fill
-                      quality={100}
-                      className="object-cover object-center"
-                    />
-                  </div>
-                  <div className="relative">
-                    <h2 className="text-base font-medium text-blue-500">
-                      {item.name}
-                    </h2>
-                    <p className="text-lg font-bold">{item.price}</p>
-                    <button className="absolute top-0 -right-10">
-                      <Minus
-                        size={24}
-                        weight="bold"
-                        onClick={() => removeItemFromCart(item.id)}
-                      />
-                    </button>
-                  </div>
-                </div>
+              {cartItems.map((sneaker) => (
+                <CartSneaker key={sneaker.id} sneaker={sneaker} />
               ))}
             </main>
             <footer className="mt-auto">

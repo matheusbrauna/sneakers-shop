@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Star } from 'phosphor-react'
 import { Sneaker } from '../contexts/CartContext'
+import { formatPrice } from '../functions/formatPrice'
 import { Button } from './Buttons/Button'
 
 type SneakerProps = {
@@ -9,6 +10,8 @@ type SneakerProps = {
 }
 
 export function Sneaker({ sneaker }: SneakerProps) {
+  const formattedPrice = formatPrice({ price: sneaker.price })
+
   return (
     <div className="grid gap-2 justify-self-center place-content-center">
       <Image
@@ -17,6 +20,7 @@ export function Sneaker({ sneaker }: SneakerProps) {
         width={373}
         height={373}
         quality={100}
+        placeholder="empty"
       />
 
       <span className="mt-2 text-xs font-bold text-neutral-600">
@@ -38,17 +42,11 @@ export function Sneaker({ sneaker }: SneakerProps) {
       <div className="flex items-center justify-between mt-2">
         <div>
           <p className="text-xs font-bold line-through text-neutral-500">
-            {new Intl.NumberFormat('pt-br', {
-              style: 'currency',
-              currency: 'BRL',
-            }).format(sneaker.price)}
+            {formattedPrice}
           </p>
 
           <p className="text-base font-bold text-neutral-900">
-            {new Intl.NumberFormat('pt-br', {
-              style: 'currency',
-              currency: 'BRL',
-            }).format(sneaker.price)}
+            {formattedPrice}
           </p>
         </div>
 
