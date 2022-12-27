@@ -12,9 +12,11 @@ type SneakerProps = {
 
 export function Sneaker({ sneaker }: SneakerProps) {
   const formattedPrice = formatPrice({ price: sneaker.price })
+
   const formattedPromotionPrice = promotionPrice({
     price: sneaker.price,
     discount: 30,
+    format: true,
   })
 
   return (

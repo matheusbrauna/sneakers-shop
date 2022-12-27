@@ -1,12 +1,19 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Sneaker } from '../../../contexts/CartContext'
+import { promotionPrice } from '../../../functions/promotionPrice'
 
 interface HomeSneakerCardProps {
   sneaker: Sneaker
 }
 
 export function HomeSneakerCard({ sneaker }: HomeSneakerCardProps) {
+  const formattedPrice = promotionPrice({
+    price: sneaker.price,
+    discount: 30,
+    format: true,
+  })
+
   return (
     <Link
       href={`/products/${sneaker.slug}`}
@@ -32,10 +39,7 @@ export function HomeSneakerCard({ sneaker }: HomeSneakerCardProps) {
         </div>
 
         <p className="text-sm font-bold leading-5 text-neutral-900">
-          {new Intl.NumberFormat('pt-br', {
-            style: 'currency',
-            currency: 'BRL',
-          }).format(sneaker.price)}
+          {formattedPrice}
         </p>
       </div>
     </Link>

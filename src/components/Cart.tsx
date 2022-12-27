@@ -14,9 +14,7 @@ export function Cart() {
 
   const cartItemsQuantity = cartItems.length
 
-  const formattedCartTotal = formatPrice({
-    price: cartTotal,
-  })
+  const formattedCartTotal = formatPrice({ price: cartTotal })
 
   async function handleCheckout() {
     try {

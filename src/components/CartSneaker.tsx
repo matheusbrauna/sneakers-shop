@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Minus } from 'phosphor-react'
 import { Sneaker, useCart } from '../contexts/CartContext'
-import { formatPrice } from '../functions/formatPrice'
+import { promotionPrice } from '../functions/promotionPrice'
 
 interface CartSneakerProps {
   sneaker: Sneaker
@@ -10,7 +10,11 @@ interface CartSneakerProps {
 export function CartSneaker({ sneaker }: CartSneakerProps) {
   const { removeItemFromCart } = useCart()
 
-  const formattedPrice = formatPrice({ price: sneaker.price })
+  const formattedPrice = promotionPrice({
+    price: sneaker.price,
+    discount: 30,
+    format: true,
+  })
 
   return (
     <div key={sneaker.id} className="flex gap-2">

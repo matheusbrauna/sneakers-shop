@@ -17,6 +17,7 @@ export function FullSneaker({ sneaker }: FullSneakerProps) {
   const formattedPromotionPrice = promotionPrice({
     price: sneaker.price,
     discount: 30,
+    format: true,
   })
 
   return (
