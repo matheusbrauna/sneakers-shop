@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { BlackButton } from '../../../components/Buttons/BlackButton'
 import { Sneaker, useCart } from '../../../contexts/CartContext'
 import { formatPrice } from '../../../functions/formatPrice'
+import { promotionPrice } from '../../../functions/promotionPrice'
 
 interface FullSneakerProps {
   sneaker: Sneaker
@@ -13,6 +14,10 @@ export function FullSneaker({ sneaker }: FullSneakerProps) {
   const itemAlreadyInCart = checkIfItemAlreadyExists(sneaker.id)
 
   const formattedPrice = formatPrice({ price: sneaker.price })
+  const formattedPromotionPrice = promotionPrice({
+    price: sneaker.price,
+    discount: 30,
+  })
 
   return (
     <div className="flex flex-col items-center justify-center gap-16 lg:flex-row">
@@ -39,7 +44,7 @@ export function FullSneaker({ sneaker }: FullSneakerProps) {
         </p>
 
         <p className="text-xl font-bold text-neutral-900 md:text-2xl">
-          {formattedPrice}
+          {formattedPromotionPrice}
         </p>
 
         <p className="mt-2 text-base font-bold line-through opacity-50 text-neutral-900">

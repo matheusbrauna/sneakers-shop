@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Star } from 'phosphor-react'
 import { Sneaker } from '../contexts/CartContext'
 import { formatPrice } from '../functions/formatPrice'
+import { promotionPrice } from '../functions/promotionPrice'
 import { Button } from './Buttons/Button'
 
 type SneakerProps = {
@@ -11,6 +12,10 @@ type SneakerProps = {
 
 export function Sneaker({ sneaker }: SneakerProps) {
   const formattedPrice = formatPrice({ price: sneaker.price })
+  const formattedPromotionPrice = promotionPrice({
+    price: sneaker.price,
+    discount: 30,
+  })
 
   return (
     <div className="grid gap-2 justify-self-center place-content-center">
@@ -46,7 +51,7 @@ export function Sneaker({ sneaker }: SneakerProps) {
           </p>
 
           <p className="text-base font-bold text-neutral-900">
-            {formattedPrice}
+            {formattedPromotionPrice}
           </p>
         </div>
 
