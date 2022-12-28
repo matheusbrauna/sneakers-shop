@@ -15,7 +15,7 @@ export function promotionPrice({
 
   const subtractionValue = priceInPercent * discount
 
-  const priceFormatted = price - subtractionValue
+  const priceFormatted = price + subtractionValue
 
   if (format === true) return formatPrice({ price: priceFormatted })
 

@@ -45,11 +45,11 @@ export function FullSneaker({ sneaker }: FullSneakerProps) {
         </p>
 
         <p className="text-xl font-bold text-neutral-900 md:text-2xl">
-          {formattedPromotionPrice}
+          {formattedPrice}
         </p>
 
         <p className="mt-2 text-base font-bold line-through opacity-50 text-neutral-900">
-          {formattedPrice}
+          {formattedPromotionPrice}
         </p>
 
         <div className="flex gap-6 mt-6">

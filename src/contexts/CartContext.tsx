@@ -6,7 +6,6 @@ import {
   useCallback,
   useMemo,
 } from 'react'
-import { promotionPrice } from '../functions/promotionPrice'
 
 export type Sneaker = {
   id: string
@@ -43,17 +42,7 @@ export function CartProvider({ children }: CartProviderProps) {
   const [cartItems, setCartItems] = useState<Sneaker[]>([])
 
   const cartTotal = useMemo(() => {
-    return cartItems.reduce(
-      (total, product) =>
-        total +
-        Number(
-          promotionPrice({
-            price: product.price,
-            discount: 30,
-          })
-        ),
-      0
-    )
+    return cartItems.reduce((total, product) => total + product.price, 0)
   }, [cartItems])
 
   const addItemToCart = useCallback((product: Sneaker) => {

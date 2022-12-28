@@ -1,17 +1,15 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Sneaker } from '../../../contexts/CartContext'
-import { promotionPrice } from '../../../functions/promotionPrice'
+import { formatPrice } from '../../../functions/formatPrice'
 
 interface HomeSneakerCardProps {
   sneaker: Sneaker
 }
 
 export function HomeSneakerCard({ sneaker }: HomeSneakerCardProps) {
-  const formattedPrice = promotionPrice({
+  const formattedPrice = formatPrice({
     price: sneaker.price,
-    discount: 30,
-    format: true,
   })
 
   return (

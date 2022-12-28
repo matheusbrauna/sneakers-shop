@@ -49,11 +49,11 @@ export function Sneaker({ sneaker }: SneakerProps) {
       <div className="flex items-center justify-between mt-2">
         <div>
           <p className="text-xs font-bold line-through text-neutral-500">
-            {formattedPrice}
+            {formattedPromotionPrice}
           </p>
 
           <p className="text-base font-bold text-neutral-900">
-            {formattedPromotionPrice}
+            {formattedPrice}
           </p>
         </div>
 
