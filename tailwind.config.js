@@ -13,7 +13,8 @@ module.exports = {
       },
 
       backgroundImage: {
-        'hero-img': "url('../assets/hero-img.png')",
+        'hero-img': 'url("../assets/hero-img.png")',
+        'social-img': 'url("../assets/socialbg.png")',
         skeleton:
           'linear-gradient(90deg, hsla(240, 2%, 26%, 1) 0%, hsla(240, 2%, 50%, 1) 50%, hsla(0, 0%, 87%, 1) 100%)',
       },

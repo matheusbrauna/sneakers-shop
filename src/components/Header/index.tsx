@@ -6,8 +6,8 @@ import { ActiveLink } from './ActiveLink'
 export function Header() {
   return (
     <header className="fixed top-0 left-0 z-10 w-full bg-neutral-100">
-      <div className="bg-neutral-900 h-9">
-        <p className="text-xs leading-9 text-center text-neutral-50">
+      <div className="grid bg-neutral-900 h-9 place-content-center">
+        <p className="text-xs text-center text-neutral-50">
           Oportunidade de frete grátis para pedidos de R$ 100,00 ou mais
         </p>
       </div>
