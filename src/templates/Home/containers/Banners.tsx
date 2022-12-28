@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import bg1 from '../../../assets/danilo-capece-NoVnXXmDNi0-unsplash.jpg'
-import { Button } from '../../../components/Buttons/Button'
+import { Button } from '../../../components/Button'
 
 export function Banners() {
   return (

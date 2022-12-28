@@ -4,7 +4,7 @@ import { Star } from 'phosphor-react'
 import { Sneaker } from '../contexts/CartContext'
 import { formatPrice } from '../functions/formatPrice'
 import { promotionPrice } from '../functions/promotionPrice'
-import { Button } from './Buttons/Button'
+import { Button } from './Button'
 
 type SneakerProps = {
   sneaker: Sneaker

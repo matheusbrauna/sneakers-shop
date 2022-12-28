@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Hero, Banners, Social, Trending } from './containers'
+import { Hero, Banners, Footer, Trending } from './containers'
 
 export function Home() {
   return (
@@ -11,7 +11,7 @@ export function Home() {
         <Hero />
         <Trending />
         <Banners />
-        <Social />
+        <Footer />
       </main>
     </>
   )

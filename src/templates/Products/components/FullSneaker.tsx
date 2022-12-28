@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { BlackButton } from '../../../components/Buttons/BlackButton'
+import { Button } from '../../../components/Button'
 import { Sneaker, useCart } from '../../../contexts/CartContext'
 import { formatPrice } from '../../../functions/formatPrice'
 import { promotionPrice } from '../../../functions/promotionPrice'
@@ -53,14 +53,15 @@ export function FullSneaker({ sneaker }: FullSneakerProps) {
         </p>
 
         <div className="flex gap-6 mt-6">
-          <BlackButton
+          <Button
+            variant="black"
             disabled={itemAlreadyInCart}
             onClick={() => addItemToCart(sneaker)}
           >
             {itemAlreadyInCart
               ? 'Produto já está no carrinho'
               : 'Adicionar ao carrinho'}
-          </BlackButton>
+          </Button>
         </div>
       </div>
     </div>

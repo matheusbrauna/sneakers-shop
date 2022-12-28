@@ -9,30 +9,7 @@
   }
 
   body {
-    @apply bg-neutral-100;
-  }
-
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  input[type='number'] {
-    -moz-appearance: textfield;
-  }
-
-  ::-webkit-scrollbar {
-    width: 0.4rem;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #fbfdff;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    border-radius: 2rem;
-    background: #0091ff;
+    @apply bg-neutral-100 scrollbar-thin scrollbar-thumb-neutral-800 scrollbar-track-transparent;
   }
 }
 

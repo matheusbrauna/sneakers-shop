@@ -27,12 +27,16 @@ export function CartSneaker({ sneaker }: CartSneakerProps) {
         placeholder="empty"
       />
 
-      <div className="relative">
-        <h2 className="text-base font-medium text-blue-500">{sneaker.name}</h2>
+      <div className="flex items-start gap-5">
+        <div className="flex flex-col">
+          <h2 className="text-base font-medium text-neutral-500">
+            {sneaker.name}
+          </h2>
 
-        <p className="text-lg font-bold">{formattedPrice}</p>
+          <p className="text-lg font-bold">{formattedPrice}</p>
+        </div>
 
-        <button className="absolute top-0 -right-10">
+        <button>
           <Minus
             size={24}
             weight="bold"

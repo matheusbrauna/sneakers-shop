@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Button } from '../../../components/Buttons/Button'
+import { Button } from '../../../components/Button'
 
 export function Hero() {
   return (

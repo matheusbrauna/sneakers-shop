@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useCart } from '../contexts/CartContext'
 import { formatPrice } from '../functions/formatPrice'
 import { api } from '../services/api'
-import { Button } from './Buttons/Button'
+import { Button } from './Button'
 import { CartSneaker } from './CartSneaker'
 
 export function Cart() {
@@ -68,7 +68,7 @@ export function Cart() {
                 ))}
               </div>
 
-              <div className="flex items-center gap-4 mt-auto">
+              <div className="flex flex-col items-center justify-between gap-4 mt-auto sm:flex-row">
                 <p className="text-xl text-neutral-900">
                   Total a pagar:{' '}
                   <span className="font-bold">{formattedCartTotal}</span>

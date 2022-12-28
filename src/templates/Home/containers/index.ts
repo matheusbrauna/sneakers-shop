@@ -1,4 +1,4 @@
 export { Banners } from './Banners'
 export { Hero } from './Hero'
-export { Social } from './Social'
+export { Footer } from './Footer'
 export { Trending } from './Trending'
