@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { Hero, Banners, Footer, Trending } from './containers'
 
-export function Home() {
+export default function Home() {
   return (
     <>
       <Head>

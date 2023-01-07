@@ -1,16 +1,15 @@
+import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { ArrowLeft } from 'phosphor-react'
-import { Spinner } from '../../components/Spinner/index'
-
-import { useGetSneakersBySlug } from '../hooks/useGetSneakerBySlug'
+import { Spinner, ArrowLeft } from 'phosphor-react'
+import { useGetSneakersBySlug } from '../../hooks/useGetSneakerBySlug'
 import { FullSneaker } from './components/FullSneaker'
 
-interface ProductProps {
+type ProductProps = NextPage & {
   slug: string
 }
 
-export function Product({ slug }: ProductProps) {
+export default function ProductPage({ slug }: ProductProps) {
   const router = useRouter()
 
   const { sneaker } = useGetSneakersBySlug({
@@ -42,4 +41,14 @@ export function Product({ slug }: ProductProps) {
       </main>
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const slug = params?.slug
+
+  return {
+    props: {
+      slug,
+    },
+  }
 }

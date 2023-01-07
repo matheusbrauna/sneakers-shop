@@ -1,16 +1,19 @@
+import { NextPage } from 'next'
 import Head from 'next/head'
+import { Spinner } from 'phosphor-react'
 import { useState } from 'react'
 import { Sneaker } from '../components/Sneaker'
-import { Spinner } from '../components/Spinner'
-import { useGetSneakersByIsTrending } from './hooks'
+import { useGetSneakersByIsTrending } from '../hooks'
 import {
   TabRoot,
   TabList,
   TabTrigger,
   TabContent,
-} from './Products/components/CategoryTabs'
+} from './products/components/CategoryTabs'
 
-export function Trending() {
+type TrendingProps = NextPage
+
+export default function TrendingPage({}: TrendingProps) {
   const [tab, setTab] = useState('Men')
 
   const { sneakers } = useGetSneakersByIsTrending({

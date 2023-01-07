@@ -1,5 +1,5 @@
-import { Sneaker } from '../../contexts/CartContext'
-import { useGetSneakersByIsTrendingQuery } from '../../graphql/generated'
+import { Sneaker } from '../contexts/CartContext'
+import { useGetSneakersByIsTrendingQuery } from '../graphql/generated'
 
 interface IRequest {
   tab: string

@@ -1,26 +1,29 @@
+import { NextPage } from 'next'
 import Head from 'next/head'
+import { Spinner } from 'phosphor-react'
 import { useState } from 'react'
-import { Sneaker } from '../../components/Sneaker'
-import { Spinner } from '../../components/Spinner'
-import { useGetSneakersByCategory } from '../hooks'
+import { Sneaker } from '../components/Sneaker'
+import { useGetSneakersByIsFeatured } from '../hooks'
 import {
   TabRoot,
   TabList,
   TabTrigger,
   TabContent,
-} from './components/CategoryTabs'
+} from './products/components/CategoryTabs'
 
-export function Products() {
+type FeaturedProps = NextPage
+
+export default function FeaturedPage({}: FeaturedProps) {
   const [tab, setTab] = useState('Men')
 
-  const { sneakers } = useGetSneakersByCategory({
+  const { sneakers } = useGetSneakersByIsFeatured({
     tab,
   })
 
   return (
     <>
       <Head>
-        <title>Produtos | Sneakers Shop</title>
+        <title>Lançamentos | Sneakers Shop</title>
       </Head>
       <main className="paddingToHeader">
         <TabRoot value={tab} onValueChange={(value) => setTab(value)}>

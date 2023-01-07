@@ -1,5 +1,5 @@
-import { Sneaker } from '../../contexts/CartContext'
-import { useGetSneakersByIsFeaturedQuery } from '../../graphql/generated'
+import { Sneaker } from '../contexts/CartContext'
+import { useGetSneakersByIsFeaturedQuery } from '../graphql/generated'
 
 interface IRequest {
   tab: string

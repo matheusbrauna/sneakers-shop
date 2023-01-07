@@ -1,5 +1,5 @@
-import { Sneaker } from '../../contexts/CartContext'
-import { useGetSneakerBySlugQuery } from '../../graphql/generated'
+import { Sneaker } from '../contexts/CartContext'
+import { useGetSneakerBySlugQuery } from '../graphql/generated'
 
 interface IRequest {
   slug: string

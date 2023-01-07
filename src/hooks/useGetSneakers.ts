@@ -1,5 +1,5 @@
-import { Sneaker } from '../../contexts/CartContext'
-import { useGetSneakersQuery } from '../../graphql/generated'
+import { Sneaker } from '../contexts/CartContext'
+import { useGetSneakersQuery } from '../graphql/generated'
 
 interface IResponse {
   sneakers?: Sneaker[]

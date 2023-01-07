@@ -4,8 +4,8 @@ import { HomeSneakerCard } from '../components/HomeSneakerCard'
 
 import 'swiper/css'
 import { Autoplay } from 'swiper'
-import { useGetSneakers } from '../../hooks/useGetSneakers'
 import { Spinner } from '../../../components/Spinner'
+import { useGetSneakers } from '../../../hooks/useGetSneakers'
 
 export function Trending() {
   const { sneakers } = useGetSneakers()
