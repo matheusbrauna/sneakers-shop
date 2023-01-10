@@ -1,9 +1,11 @@
-import { NextPage } from 'next'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { Spinner } from 'phosphor-react'
 import { useState } from 'react'
 import { Sneaker } from '../../components/Sneaker'
+import { GetSneakersByCategoryDocument } from '../../graphql/generated'
 import { useGetSneakersByCategory } from '../../hooks'
+import { client, ssrCache } from '../../services/urql'
 import {
   TabRoot,
   TabList,
@@ -11,11 +13,8 @@ import {
   TabContent,
 } from './components/CategoryTabs'
 
-type ProductsProps = NextPage
-
-export default function ProductsPage({}: ProductsProps) {
+export default function ProductsPage() {
   const [tab, setTab] = useState('Men')
-
   const { sneakers } = useGetSneakersByCategory({
     tab,
   })
@@ -32,9 +31,7 @@ export default function ProductsPage({}: ProductsProps) {
             <TabTrigger value="Women">Mulheres</TabTrigger>
             <TabTrigger value="Children">Crianças</TabTrigger>
           </TabList>
-
           {!sneakers && <Spinner />}
-
           {sneakers && (
             <TabContent value={tab}>
               {sneakers.map((sneaker) => (
@@ -46,4 +43,13 @@ export default function ProductsPage({}: ProductsProps) {
       </main>
     </>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  await client.query(GetSneakersByCategoryDocument, { tab: 'Men' }).toPromise()
+
+  return {
+    props: { urqlState: ssrCache.extractData() },
+    revalidate: 60 * 60 * 24 * 7,
+  }
 }

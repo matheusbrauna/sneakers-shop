@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import { Button } from '../../../components/Button'
 import { Sneaker, useCart } from '../../../contexts/CartContext'
-import { formatPrice } from '../../../functions/formatPrice'
-import { promotionPrice } from '../../../functions/promotionPrice'
+import { formatPrice } from '../../../utils/formatPrice'
+import { promotionPrice } from '../../../utils/promotionPrice'
 
 interface FullSneakerProps {
   sneaker: Sneaker

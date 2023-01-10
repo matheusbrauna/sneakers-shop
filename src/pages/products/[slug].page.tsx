@@ -1,4 +1,4 @@
-import { GetServerSideProps, NextPage } from 'next'
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { Spinner, ArrowLeft } from 'phosphor-react'
@@ -11,7 +11,6 @@ type ProductProps = NextPage & {
 
 export default function ProductPage({ slug }: ProductProps) {
   const router = useRouter()
-
   const { sneaker } = useGetSneakersBySlug({
     slug,
   })
@@ -19,12 +18,11 @@ export default function ProductPage({ slug }: ProductProps) {
   return (
     <>
       <Head>
-        <title> produto | Sneakers Shop</title>
+        <title>{sneaker?.name} | Sneakers Shop</title>
       </Head>
       <main className="relative paddingToHeader">
         <div className="container flex flex-col items-center justify-center gap-8 py-16 sm:flex-row">
           {!sneaker && <Spinner />}
-
           {sneaker && (
             <>
               <button
@@ -43,12 +41,20 @@ export default function ProductPage({ slug }: ProductProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getStaticPaths: GetStaticPaths = () => {
+  return {
+    paths: [],
+    fallback: 'blocking',
+  }
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug
 
   return {
     props: {
       slug,
     },
+    revalidate: 60 * 60 * 24 * 7, // days
   }
 }

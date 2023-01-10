@@ -1,11 +1,12 @@
+import { GetStaticProps } from 'next'
 import { Swiper, SwiperSlide } from 'swiper/react'
-
-import { HomeSneakerCard } from '../components/HomeSneakerCard'
-
-import 'swiper/css'
 import { Autoplay } from 'swiper'
+import { HomeSneakerCard } from '../components/HomeSneakerCard'
 import { Spinner } from '../../../components/Spinner'
 import { useGetSneakers } from '../../../hooks/useGetSneakers'
+import { client, ssrCache } from '../../../services/urql'
+import { GetSneakersDocument } from '../../../graphql/generated'
+import 'swiper/css'
 
 export function Trending() {
   const { sneakers } = useGetSneakers()
@@ -52,4 +53,13 @@ export function Trending() {
       </div>
     </section>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  await client.query(GetSneakersDocument, {}).toPromise()
+
+  return {
+    props: { urqlState: ssrCache.extractData() },
+    revalidate: 60 * 60 * 24 * 7, // days
+  }
 }

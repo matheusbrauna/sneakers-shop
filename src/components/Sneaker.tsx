@@ -2,8 +2,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Star } from 'phosphor-react'
 import { Sneaker } from '../contexts/CartContext'
-import { formatPrice } from '../functions/formatPrice'
-import { promotionPrice } from '../functions/promotionPrice'
+import { formatPrice } from '../utils/formatPrice'
+import { promotionPrice } from '../utils/promotionPrice'
 import { Button } from './Button'
 
 type SneakerProps = {

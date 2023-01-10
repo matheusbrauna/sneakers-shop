@@ -1,9 +1,11 @@
-import { NextPage } from 'next'
+import { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import { Spinner } from 'phosphor-react'
 import { useState } from 'react'
 import { Sneaker } from '../components/Sneaker'
+import { GetSneakersByIsTrendingDocument } from '../graphql/generated'
 import { useGetSneakersByIsTrending } from '../hooks'
+import { client, ssrCache } from '../services/urql'
 import {
   TabRoot,
   TabList,
@@ -46,4 +48,15 @@ export default function TrendingPage({}: TrendingProps) {
       </main>
     </>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  await client
+    .query(GetSneakersByIsTrendingDocument, { tab: 'Men' })
+    .toPromise()
+
+  return {
+    props: { urqlState: ssrCache.extractData() },
+    revalidate: 60 * 60 * 24 * 7, // days
+  }
 }

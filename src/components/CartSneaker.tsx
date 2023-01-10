@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Minus } from 'phosphor-react'
 import { Sneaker, useCart } from '../contexts/CartContext'
-import { formatPrice } from '../functions/formatPrice'
+import { formatPrice } from '../utils/formatPrice'
 
 interface CartSneakerProps {
   sneaker: Sneaker

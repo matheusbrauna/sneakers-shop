@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Sneaker } from '../../../contexts/CartContext'
-import { formatPrice } from '../../../functions/formatPrice'
+import { formatPrice } from '../../../utils/formatPrice'
 
 interface HomeSneakerCardProps {
   sneaker: Sneaker
