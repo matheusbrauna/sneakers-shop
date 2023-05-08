@@ -1,29 +1,30 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { Sneaker } from '../../../contexts/CartContext'
-import { formatPrice } from '../../../utils/formatPrice'
+import Link from "next/link";
+import { Sneaker } from "../../../contexts/CartContext";
+import { formatPrice } from "../../../utils/formatPrice";
+import { BlurImage } from "../../../components/BlurImage";
 
 interface HomeSneakerCardProps {
-  sneaker: Sneaker
+  sneaker: Sneaker;
 }
 
 export function HomeSneakerCard({ sneaker }: HomeSneakerCardProps) {
   const formattedPrice = formatPrice({
     price: sneaker.price,
-  })
+  });
 
   return (
     <Link
       href={`/products/${sneaker.slug}`}
       className="grid gap-5 keen-slider__slide place-content-center"
     >
-      <Image
-        src={sneaker.image.url}
-        alt={sneaker.name}
-        width={373}
-        height={373}
-        quality={100}
-      />
+      <div className="relative w-full h-[23.3125rem]">
+        <BlurImage
+          src={sneaker.image.url}
+          alt={sneaker.name}
+          priority
+          quality={100}
+        />
+      </div>
 
       <div className="flex justify-between">
         <div className="grid gap-2">
@@ -41,5 +42,5 @@ export function HomeSneakerCard({ sneaker }: HomeSneakerCardProps) {
         </p>
       </div>
     </Link>
-  )
+  );
 }

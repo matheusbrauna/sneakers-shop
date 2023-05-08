@@ -1,29 +1,24 @@
-import Image from 'next/image'
-import { Minus } from 'phosphor-react'
-import { Sneaker, useCart } from '../contexts/CartContext'
-import { formatPrice } from '../utils/formatPrice'
+import { Minus } from "phosphor-react";
+import { Sneaker, useCart } from "../contexts/CartContext";
+import { formatPrice } from "../utils/formatPrice";
+import { BlurImage } from "./BlurImage";
 
 interface CartSneakerProps {
-  sneaker: Sneaker
+  sneaker: Sneaker;
 }
 
 export function CartSneaker({ sneaker }: CartSneakerProps) {
-  const { removeItemFromCart } = useCart()
+  const { removeItemFromCart } = useCart();
 
   const formattedPrice = formatPrice({
     price: sneaker.price,
-  })
+  });
 
   return (
     <div key={sneaker.id} className="flex gap-2">
-      <Image
-        width={80}
-        height={80}
-        src={sneaker.image.url}
-        alt={sneaker.name}
-        quality={100}
-        placeholder="empty"
-      />
+      <div className="relative w-20 h-20">
+        <BlurImage src={sneaker.image.url} alt={sneaker.name} />
+      </div>
 
       <div className="flex items-start gap-5">
         <div className="flex flex-col">
@@ -43,5 +38,5 @@ export function CartSneaker({ sneaker }: CartSneakerProps) {
         </button>
       </div>
     </div>
-  )
+  );
 }

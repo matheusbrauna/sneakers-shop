@@ -1,26 +1,24 @@
-import { GetStaticProps, NextPage } from 'next'
-import Head from 'next/head'
-import { Spinner } from 'phosphor-react'
-import { useState } from 'react'
-import { Sneaker } from '../components/Sneaker'
-import { GetSneakersByIsFeaturedDocument } from '../graphql/generated'
-import { useGetSneakersByIsFeatured } from '../hooks'
-import { client, ssrCache } from '../services/urql'
+import { GetStaticProps } from "next";
+import Head from "next/head";
+import { Spinner } from "phosphor-react";
+import { useState } from "react";
+import { Sneaker } from "../components/Sneaker";
+import { GetSneakersByIsFeaturedDocument } from "../graphql/generated";
+import { useGetSneakersByIsFeatured } from "../hooks";
+import { client, ssrCache } from "../services/urql";
 import {
   TabRoot,
   TabList,
   TabTrigger,
   TabContent,
-} from './products/components/CategoryTabs'
+} from "./products/components/CategoryTabs";
 
-type FeaturedProps = NextPage
-
-export default function FeaturedPage({}: FeaturedProps) {
-  const [tab, setTab] = useState('Men')
+export default function FeaturedPage() {
+  const [tab, setTab] = useState("Men");
 
   const { sneakers } = useGetSneakersByIsFeatured({
     tab,
-  })
+  });
 
   return (
     <>
@@ -47,16 +45,16 @@ export default function FeaturedPage({}: FeaturedProps) {
         </TabRoot>
       </main>
     </>
-  )
+  );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
   await client
-    .query(GetSneakersByIsFeaturedDocument, { tab: 'Men' })
-    .toPromise()
+    .query(GetSneakersByIsFeaturedDocument, { tab: "Men" })
+    .toPromise();
 
   return {
     props: { urqlState: ssrCache.extractData() },
     revalidate: 60 * 60 * 24 * 7, // days
-  }
-}
+  };
+};

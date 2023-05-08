@@ -1,35 +1,35 @@
-import Image from 'next/image'
-import { Button } from '../../../components/Button'
-import { Sneaker, useCart } from '../../../contexts/CartContext'
-import { formatPrice } from '../../../utils/formatPrice'
-import { promotionPrice } from '../../../utils/promotionPrice'
+import { BlurImage } from "../../../components/BlurImage";
+import { Button } from "../../../components/Button";
+import { Sneaker, useCart } from "../../../contexts/CartContext";
+import { formatPrice } from "../../../utils/formatPrice";
+import { promotionPrice } from "../../../utils/promotionPrice";
 
 interface FullSneakerProps {
-  sneaker: Sneaker
+  sneaker: Sneaker;
 }
 
 export function FullSneaker({ sneaker }: FullSneakerProps) {
-  const { addItemToCart, checkIfItemAlreadyExists } = useCart()
+  const { addItemToCart, checkIfItemAlreadyExists } = useCart();
 
-  const itemAlreadyInCart = checkIfItemAlreadyExists(sneaker.id)
+  const itemAlreadyInCart = checkIfItemAlreadyExists(sneaker.id);
 
-  const formattedPrice = formatPrice({ price: sneaker.price })
+  const formattedPrice = formatPrice({ price: sneaker.price });
   const formattedPromotionPrice = promotionPrice({
     price: sneaker.price,
     discount: 30,
     format: true,
-  })
+  });
 
   return (
     <div className="flex flex-col items-center justify-center gap-16 lg:flex-row">
-      <Image
-        src={sneaker.image.url}
-        alt={sneaker.name}
-        quality={100}
-        width={443}
-        height={426}
-        placeholder="empty"
-      />
+      <div className="relative w-[443px] h-[426px]">
+        <BlurImage
+          src={sneaker.image.url}
+          alt={sneaker.name}
+          quality={100}
+          priority
+        />
+      </div>
 
       <div className="flex-1">
         <span className="block mb-2 text-xs font-bold uppercase sm:text-sm text-neutral-500">
@@ -59,11 +59,11 @@ export function FullSneaker({ sneaker }: FullSneakerProps) {
             onClick={() => addItemToCart(sneaker)}
           >
             {itemAlreadyInCart
-              ? 'Produto já está no carrinho'
-              : 'Adicionar ao carrinho'}
+              ? "Produto já está no carrinho"
+              : "Adicionar ao carrinho"}
           </Button>
         </div>
       </div>
     </div>
-  )
+  );
 }

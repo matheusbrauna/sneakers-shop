@@ -5,60 +5,62 @@ import {
   useContext,
   useCallback,
   useMemo,
-} from 'react'
+} from "react";
 
 export type Sneaker = {
-  id: string
-  name: string
-  description: string
-  price: number
-  slug: string
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  slug: string;
   image: {
-    url: string
-  }
+    url: string;
+  };
   brand?: {
-    name: string
-  }
+    name: string;
+  };
   category?: {
-    name: string
-  }
-}
+    name: string;
+  };
+};
 
 interface CartContextData {
-  cartItems: Sneaker[]
-  addItemToCart: (product: Sneaker) => void
-  removeItemFromCart: (productId: string) => void
-  checkIfItemAlreadyExists: (productId: string) => boolean
-  cartTotal: number
+  cartItems: Sneaker[];
+  addItemToCart: (product: Sneaker) => void;
+  removeItemFromCart: (productId: string) => void;
+  checkIfItemAlreadyExists: (productId: string) => boolean;
+  cartTotal: number;
 }
 
 interface CartProviderProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
-const CartContext = createContext({} as CartContextData)
+const CartContext = createContext({} as CartContextData);
 
 export function CartProvider({ children }: CartProviderProps) {
-  const [cartItems, setCartItems] = useState<Sneaker[]>([])
+  const [cartItems, setCartItems] = useState<Sneaker[]>([]);
 
   const cartTotal = useMemo(() => {
-    return cartItems.reduce((total, product) => total + product.price, 0)
-  }, [cartItems])
+    return cartItems.reduce((total, product) => total + product.price, 0);
+  }, [cartItems]);
 
   const addItemToCart = useCallback((product: Sneaker) => {
-    setCartItems((state) => [...state, product])
-  }, [])
+    setCartItems((state) => [...state, product]);
+  }, []);
 
   const removeItemFromCart = useCallback((productId: string) => {
-    setCartItems((state) => state.filter((product) => product.id !== productId))
-  }, [])
+    setCartItems((state) =>
+      state.filter((product) => product.id !== productId)
+    );
+  }, []);
 
   const checkIfItemAlreadyExists = useCallback(
     (productId: string) => {
-      return cartItems.some((product) => product.id === productId)
+      return cartItems.some((product) => product.id === productId);
     },
     [cartItems]
-  )
+  );
 
   return (
     <CartContext.Provider
@@ -72,9 +74,9 @@ export function CartProvider({ children }: CartProviderProps) {
     >
       {children}
     </CartContext.Provider>
-  )
+  );
 }
 
 export function useCart() {
-  return useContext(CartContext)
+  return useContext(CartContext);
 }

@@ -1,8 +1,8 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import Link from "next/link";
 
-import bg1 from '../../../assets/danilo-capece-NoVnXXmDNi0-unsplash.jpg'
-import { Button } from '../../../components/Button'
+import bg1 from "../../../assets/danilo-capece-NoVnXXmDNi0-unsplash.jpg";
+import { Button } from "../../../components/Button";
+import { BlurImage } from "../../../components/BlurImage";
 
 export function Banners() {
   return (
@@ -23,15 +23,15 @@ export function Banners() {
           </Link>
         </div>
 
-        <Image
-          src={bg1}
-          alt="Tênis Nike Jordan 1 Low"
-          width={756}
-          height={596}
-          className="object-cover object-center"
-          quality={100}
-        />
+        <div className="w-full h-[37.25rem] relative">
+          <BlurImage
+            src={bg1}
+            alt="Tênis Nike Jordan 1 Low"
+            priority
+            quality={100}
+          />
+        </div>
       </div>
     </section>
-  )
+  );
 }
