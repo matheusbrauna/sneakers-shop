@@ -2,14 +2,14 @@
 
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
-import { useSignUp } from '@clerk/nextjs'
+import { useSignIn } from '@clerk/nextjs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import type { z } from 'zod'
 
 import { catchClerkError } from '@/lib/utils'
-import { authSchema } from '@/lib/validations/auth'
+import { resetPasswordSchema } from '@/lib/validations/auth'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -23,19 +23,20 @@ import { Input } from '@/components/ui/input'
 import { Icons } from '@/components/icons'
 import { PasswordInput } from '@/components/password-input'
 
-type Inputs = z.infer<typeof authSchema>
+type Inputs = z.infer<typeof resetPasswordSchema>
 
-export function SignUpForm() {
+export function ResetPasswordStep2Form() {
   const router = useRouter()
-  const { isLoaded, signUp } = useSignUp()
+  const { isLoaded, signIn, setActive } = useSignIn()
   const [isPending, startTransition] = React.useTransition()
 
   // react-hook-form
   const form = useForm<Inputs>({
-    resolver: zodResolver(authSchema),
+    resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
-      email: '',
       password: '',
+      confirmPassword: '',
+      code: '',
     },
   })
 
@@ -44,20 +45,23 @@ export function SignUpForm() {
 
     startTransition(async () => {
       try {
-        await signUp.create({
-          emailAddress: data.email,
+        const attemptFirstFactor = await signIn.attemptFirstFactor({
+          strategy: 'reset_password_email_code',
+          code: data.code,
           password: data.password,
         })
 
-        // Send email verification code
-        await signUp.prepareEmailAddressVerification({
-          strategy: 'email_code',
-        })
-
-        router.push('/signup/verify-email')
-        toast.message('Check your email', {
-          description: 'We sent you a 6-digit verification code.',
-        })
+        if (attemptFirstFactor.status === 'needs_second_factor') {
+          // TODO: implement 2FA (requires clerk pro plan)
+        } else if (attemptFirstFactor.status === 'complete') {
+          await setActive({
+            session: attemptFirstFactor.createdSessionId,
+          })
+          router.push(`${window.location.origin}/`)
+          toast.success('Password reset successfully.')
+        } else {
+          console.error(attemptFirstFactor)
+        }
       } catch (err) {
         catchClerkError(err)
       }
@@ -73,12 +77,12 @@ export function SignUpForm() {
       >
         <FormField
           control={form.control}
-          name="email"
+          name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="rodneymullen180@gmail.com" {...field} />
+                <PasswordInput placeholder="*********" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -86,12 +90,32 @@ export function SignUpForm() {
         />
         <FormField
           control={form.control}
-          name="password"
+          name="confirmPassword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>Confirm Password</FormLabel>
               <FormControl>
-                <PasswordInput placeholder="**********" {...field} />
+                <PasswordInput placeholder="*********" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="code"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Code</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="169420"
+                  {...field}
+                  onChange={(e) => {
+                    e.target.value = e.target.value.trim()
+                    field.onChange(e)
+                  }}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -104,10 +128,8 @@ export function SignUpForm() {
               aria-hidden="true"
             />
           )}
-          Continuar
-          <span className="sr-only">
-            Continuar para a página de código de verificação
-          </span>
+          Reset password
+          <span className="sr-only">Reset password</span>
         </Button>
       </form>
     </Form>

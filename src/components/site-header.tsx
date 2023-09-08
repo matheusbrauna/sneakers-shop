@@ -119,8 +119,8 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                   size: 'sm',
                 })}
               >
-                Sign In
-                <span className="sr-only">Sign In</span>
+                Fazer login
+                <span className="sr-only">Fazer login</span>
               </Link>
             )}
           </nav>
