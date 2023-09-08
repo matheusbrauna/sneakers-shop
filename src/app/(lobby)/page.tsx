@@ -18,7 +18,7 @@ export default function IndexPage() {
         <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl lg:leading-[1.1]">
           Bem-vindo à Sneakers Shop
         </h1>
-        <Balancer className="text-muted-foreground max-w-[46rem] text-lg sm:text-xl">
+        <Balancer className="max-w-[46rem] text-lg text-muted-foreground sm:text-xl">
           Encontre os melhores tênis de skate de marcas independentes e lojas de
           todo o mundo.
         </Balancer>

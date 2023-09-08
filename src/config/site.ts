@@ -43,9 +43,8 @@ export const siteConfig = {
     },
   ],
   links: {
-    twitter: 'https://twitter.com/shadcn',
-    github: 'https://github.com/shadcn/ui',
-    docs: 'https://ui.shadcn.com',
+    github: 'https://github.com/matheusbrauna',
+    linkedin: 'https://www.linkedin.com/in/matheus-brauna',
   },
 }
 
