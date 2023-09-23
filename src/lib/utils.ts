@@ -12,13 +12,13 @@ export function cn(...inputs: ClassValue[]) {
 export function formatPrice(
   price: number | string,
   options: {
-    currency?: 'USD' | 'EUR' | 'GBP' | 'BDT'
+    currency?: 'BRL'
     notation?: Intl.NumberFormatOptions['notation']
   } = {},
 ) {
-  const { currency = 'USD', notation = 'compact' } = options
+  const { currency = 'BRL', notation = 'standard' } = options
 
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency,
     notation,
@@ -35,7 +35,7 @@ export function formatNumber(
 ) {
   const { decimals = 0, style = 'decimal', notation = 'standard' } = options
 
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('pt-BR', {
     style,
     notation,
     minimumFractionDigits: decimals,
@@ -44,7 +44,7 @@ export function formatNumber(
 }
 
 export function formatDate(date: Date | string | number) {
-  return new Intl.DateTimeFormat('en-US', {
+  return new Intl.DateTimeFormat('pt-BR', {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
