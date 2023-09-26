@@ -1,11 +1,13 @@
 import Link from 'next/link'
 
-import { buttonVariants } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Balancer } from 'react-wrap-balancer'
 import { cn } from '@/lib/utils'
 import { Icons } from '@/components/icons'
 import { Shell } from '@/components/shells/shell'
 import { Product, ProductCard } from '@/components/cards/product-card'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
+import Image from 'next/image'
 
 const products: Product[] = [
   {
@@ -119,6 +121,41 @@ export default function IndexPage() {
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
+        </div>
+      </section>
+
+      <section
+        id="trending"
+        aria-labelledby="trending-heading"
+        className="space-y-6 py-6 md:pt-10 lg:pt-24"
+      >
+        <div className="flex items-center">
+          <h2 className="flex-1 text-2xl font-medium sm:text-3xl">
+            Em destaque
+          </h2>
+          <Button variant="outline">Ver mais</Button>
+        </div>
+        <div className="grid min-h-screen grid-cols-1 gap-2 sm:grid-cols-2">
+          <AspectRatio ratio={16 / 9}>
+            <Image
+              src="/images/trending-img.jpg"
+              alt="A skateboarder doing a high drop"
+              fill
+              className="absolute inset-0 object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          </AspectRatio>
+          <AspectRatio ratio={16 / 9}>
+            <Image
+              src="/images/trending-img-2.avif"
+              alt="A skateboarder doing a high drop"
+              fill
+              className="absolute inset-0 object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          </AspectRatio>
         </div>
       </section>
     </Shell>
