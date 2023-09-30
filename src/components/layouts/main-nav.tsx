@@ -52,7 +52,7 @@ export function MainNav({ items }: MainNavProps) {
                       </a>
                     </NavigationMenuLink>
                   </li>
-                  <ListItem href="/docs" title="Todos os Produtos">
+                  <ListItem href="/products" title="Todos os Produtos">
                     Explore a diversidade da moda em um só lugar! Descubra uma
                     ampla seleção de sneakers que se encaixam perfeitamente em
                     qualquer estilo e ocasião.

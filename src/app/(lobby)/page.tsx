@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { Button, buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { Balancer } from 'react-wrap-balancer'
 import { cn } from '@/lib/utils'
 import { Icons } from '@/components/icons'
@@ -8,6 +8,7 @@ import { Shell } from '@/components/shells/shell'
 import { Product, ProductCard } from '@/components/cards/product-card'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import Image from 'next/image'
+import { Category, CategoryCard } from '@/components/cards/category-card'
 
 const products: Product[] = [
   {
@@ -80,6 +81,21 @@ const products: Product[] = [
   },
 ]
 
+const productCategories: Category[] = [
+  {
+    title: 'Encontre o tênis ideal para o seu tipo de corrida',
+    imageURL: '/images/auth-image.jpg',
+  },
+  {
+    title: 'Encontre o tênis ideal para o seu tipo de corrida',
+    imageURL: '/images/auth-image.jpg',
+  },
+  {
+    title: 'Encontre o tênis ideal para o seu tipo de corrida',
+    imageURL: '/images/auth-image.jpg',
+  },
+]
+
 export default function IndexPage() {
   return (
     <Shell className="gap-12">
@@ -133,7 +149,6 @@ export default function IndexPage() {
           <h2 className="flex-1 text-2xl font-medium sm:text-3xl">
             Em destaque
           </h2>
-          <Button variant="outline">Ver mais</Button>
         </div>
         <div className="grid min-h-screen grid-cols-1 gap-2 sm:grid-cols-2">
           <AspectRatio ratio={16 / 9}>
@@ -156,6 +171,41 @@ export default function IndexPage() {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </AspectRatio>
+        </div>
+        <div className="mx-auto flex w-full max-w-[64rem] flex-col items-center justify-center gap-4 pb-8 pt-6 text-center md:pb-12">
+          <p className="text-lg font-medium">Nike InfinityRN 4</p>
+          <h3 className="text-3xl font-bold uppercase leading-tight tracking-tighter md:text-5xl lg:text-6xl lg:leading-[1.1]">
+            Dê um abraço nos seus pés
+          </h3>
+          <Balancer className="max-w-[46rem] text-lg text-muted-foreground sm:text-xl">
+            Encontre os melhores tênis de skate de marcas independentes e lojas
+            de todo o mundo.
+          </Balancer>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href="/produtos"
+              className={cn(buttonVariants(), 'rounded-full')}
+            >
+              Comprar agora
+              <span className="sr-only">Ver InfinityRN 4</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+      <section
+        id="more"
+        aria-labelledby="more"
+        className="space-y-6 py-6 md:pt-10 lg:pt-24"
+      >
+        <div className="flex items-center">
+          <h2 className="flex-1 text-2xl font-medium sm:text-3xl">
+            Veja também
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+          {productCategories.map((category) => (
+            <CategoryCard key={category.title} category={category} />
+          ))}
         </div>
       </section>
     </Shell>

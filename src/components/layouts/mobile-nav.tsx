@@ -2,9 +2,6 @@
 
 import { useMemo, useState } from 'react'
 import { useSelectedLayoutSegment } from 'next/navigation'
-import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
-import { Button } from './ui/button'
-import { Icons } from './icons'
 import { siteConfig } from '@/config/site'
 import {
   Accordion,
@@ -16,6 +13,9 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { cn } from '@/lib/utils'
 import { MainNavItem, SidebarNavItem } from '@/types/nav'
 import Link from 'next/link'
+import { Icons } from '../icons'
+import { SheetTrigger, SheetContent, Sheet } from '../ui/sheet'
+import { Button } from '../ui/button'
 
 interface MobileNavProps {
   mainNavItems?: MainNavItem[]

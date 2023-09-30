@@ -15,9 +15,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from './ui/dropdown-menu'
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
-import { Icons } from './icons'
+} from '@/components/ui/dropdown-menu'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Icons } from '@/components/icons'
 import { ThemeToggle } from './theme-toggle'
 
 interface SiteHeaderProps {
