@@ -9,6 +9,7 @@ export default authMiddleware({
     '/signin(.*)',
     '/signup(.*)',
     '/sso-callback(.*)',
+    '/brands(.*)',
     '/categories(.*)',
     '/product(.*)',
     '/products(.*)',

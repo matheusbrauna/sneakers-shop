@@ -1,11 +1,9 @@
 import { SidebarNavItem } from '@/types/nav'
 
 const links = {
-  twitter: 'https://twitter.com/sadmann17',
-  github: 'https://github.com/sadmann7/skateshop',
-  githubAccount: 'https://github.com/sadmann7',
-  discord: 'https://discord.com/users/sadmann7',
-  calDotCom: 'https://cal.com/sadmann7',
+  github: 'https://github.com/matheusbrauna/sneakers-shop',
+  githubAccount: 'https://github.com/matheusbrauna',
+  linkedin: 'https://www.linkedin.com/in/matheus-brauna',
 }
 
 export const siteConfig = {
@@ -15,37 +13,37 @@ export const siteConfig = {
   navMenu: [
     {
       title: 'Nike',
-      href: '#',
+      href: '/brands/nike',
       description:
         'A Nike é líder mundial em roupas e calçados esportivos. Conhecida por sua inovação e design icônico, a Nike oferece produtos de alta qualidade para atletas e entusiastas da moda esportiva.',
     },
     {
       title: 'Adidas',
-      href: '#',
+      href: '/brands/adidas',
       description:
         'A Adidas é uma das marcas mais reconhecidas no mundo da moda e esportes. Seus sneakers combinam estilo e desempenho, tornando-os ideais tanto para atividades esportivas quanto para o dia a dia.',
     },
     {
       title: 'Puma',
-      href: '#',
+      href: '/brands/puma',
       description:
         'A Puma é conhecida por sua ousadia e inovação. Seus sneakers apresentam designs exclusivos que incorporam moda e esportividade, atendendo às necessidades de pessoas com estilo próprio.',
     },
     {
       title: 'Converse',
-      href: '#',
+      href: '/brands/converse',
       description:
         'Os icônicos tênis Converse, também conhecidos como "Chuck Taylors", têm sido símbolos de autenticidade e estilo desde a década de 1920. Estes sneakers atemporais são perfeitos para expressar sua individualidade.',
     },
     {
       title: 'Vans',
-      href: '#',
+      href: '/brands/vans',
       description:
         'Os tênis Vans são um marco no mundo do skate e da cultura urbana. Com seu visual casual e versatilidade, eles são uma escolha popular entre os jovens que buscam autenticidade e estilo descolado.',
     },
     {
       title: 'New Balance',
-      href: '#',
+      href: '/brands/new-balance',
       description:
         'A New Balance é conhecida por seu compromisso com o conforto e a qualidade. Seus sneakers são ideais para quem busca um equilíbrio entre moda e funcionalidade, especialmente para esportes e estilo de vida ativo.',
     },
@@ -53,59 +51,30 @@ export const siteConfig = {
   links: {
     github: 'https://github.com/matheusbrauna',
     linkedin: 'https://www.linkedin.com/in/matheus-brauna',
+    portfolio: 'https://matheusbrauna.dev',
   },
   footerNav: [
     {
-      title: 'Credits',
+      title: 'Ajuda',
       items: [
         {
-          title: 'OneStopShop',
-          href: 'https://onestopshop.jackblatch.com',
-          external: true,
-        },
-        {
-          title: 'Acme Corp',
-          href: 'https://acme-corp.jumr.dev',
-          external: true,
-        },
-        {
-          title: 'craft.mxkaske.dev',
-          href: 'https://craft.mxkaske.dev',
-          external: true,
-        },
-        {
-          title: 'Taxonomy',
-          href: 'https://tx.shadcn.com/',
-          external: true,
-        },
-        {
-          title: 'shadcn/ui',
-          href: 'https://ui.shadcn.com',
-          external: true,
-        },
-      ],
-    },
-    {
-      title: 'Help',
-      items: [
-        {
-          title: 'About',
-          href: '/about',
+          title: 'Sobre',
+          href: '/sobre',
           external: false,
         },
         {
-          title: 'Contact',
-          href: '/contact',
+          title: 'Contato',
+          href: '/contato',
           external: false,
         },
         {
-          title: 'Terms',
-          href: '/terms',
+          title: 'Termos',
+          href: '/termos',
           external: false,
         },
         {
-          title: 'Privacy',
-          href: '/privacy',
+          title: 'Privacidade',
+          href: '/privacidade',
           external: false,
         },
       ],
@@ -114,48 +83,13 @@ export const siteConfig = {
       title: 'Social',
       items: [
         {
-          title: 'Twitter',
-          href: links.twitter,
-          external: true,
-        },
-        {
           title: 'GitHub',
           href: links.githubAccount,
           external: true,
         },
         {
-          title: 'Discord',
-          href: links.discord,
-          external: true,
-        },
-        {
-          title: 'cal.com',
-          href: links.calDotCom,
-          external: true,
-        },
-      ],
-    },
-    {
-      title: 'Lofi',
-      items: [
-        {
-          title: 'beats to study to',
-          href: 'https://www.youtube.com/watch?v=jfKfPfyJRdk',
-          external: true,
-        },
-        {
-          title: 'beats to chill to',
-          href: 'https://www.youtube.com/watch?v=rUxyKA_-grg',
-          external: true,
-        },
-        {
-          title: 'a fresh start',
-          href: 'https://www.youtube.com/watch?v=rwionZbOryo',
-          external: true,
-        },
-        {
-          title: 'coffee to go',
-          href: 'https://www.youtube.com/watch?v=2gliGzb2_1I',
+          title: 'LinkedIn',
+          href: links.linkedin,
           external: true,
         },
       ],
