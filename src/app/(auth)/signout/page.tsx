@@ -9,7 +9,6 @@ import {
 import { Shell } from '@/components/shells/shell'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL as string),
   title: 'Sign out',
   description: 'Sign out of your account',
 }

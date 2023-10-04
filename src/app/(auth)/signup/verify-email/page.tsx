@@ -11,7 +11,6 @@ import { VerifyEmailForm } from '@/components/forms/verify-email-form'
 import { Shell } from '@/components/shells/shell'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL as string),
   title: 'Verify Email',
   description: 'Verify your email address to continue with your sign up',
 }

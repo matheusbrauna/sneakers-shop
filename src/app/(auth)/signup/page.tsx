@@ -16,7 +16,6 @@ import { SignUpForm } from '@/components/forms/signup-form'
 import { Shell } from '@/components/shells/shell'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL as string),
   title: 'Sign Up',
   description: 'Sign up for an account',
 }
