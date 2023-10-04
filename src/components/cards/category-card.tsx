@@ -1,10 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { cn } from '@/lib/utils'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { Button, buttonVariants } from '@/components/ui/button'
-import { Icons } from '../icons'
+import { Button } from '@/components/ui/button'
 import Balancer from 'react-wrap-balancer'
 
 export interface Category {
