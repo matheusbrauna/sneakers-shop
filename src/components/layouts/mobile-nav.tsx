@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { useSelectedLayoutSegment } from 'next/navigation'
 import { siteConfig } from '@/config/site'
 import {
@@ -11,36 +11,14 @@ import {
 } from '@/components/ui/accordion'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { cn } from '@/lib/utils'
-import { MainNavItem, SidebarNavItem } from '@/types/nav'
 import Link from 'next/link'
 import { Icons } from '../icons'
 import { SheetTrigger, SheetContent, Sheet } from '../ui/sheet'
 import { Button } from '../ui/button'
 
-interface MobileNavProps {
-  mainNavItems?: MainNavItem[]
-  sidebarNavItems: SidebarNavItem[]
-}
-
-export function MobileNav({ sidebarNavItems, mainNavItems }: MobileNavProps) {
+export function MobileNav() {
   const segment = useSelectedLayoutSegment()
   const [isOpen, setIsOpen] = useState(false)
-
-  const navItems = useMemo(() => {
-    const items = mainNavItems ?? []
-    const myAccountItem = {
-      title: 'My Account',
-      items: sidebarNavItems,
-    }
-    const myAccountIndex = items.findIndex(
-      (item) => item.title === 'My Account',
-    )
-    if (myAccountIndex !== -1) {
-      items.splice(myAccountIndex, 1)
-    }
-    items.splice(1, 0, myAccountItem)
-    return items
-  }, [mainNavItems, sidebarNavItems])
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -66,44 +44,120 @@ export function MobileNav({ sidebarNavItems, mainNavItems }: MobileNavProps) {
           </Link>
         </div>
         <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
-          <div className="pl-1 pr-7">
-            <Accordion
-              type="multiple"
-              defaultValue={navItems.map((item) => item.title)}
-              className="w-full"
-            >
-              {navItems?.map((item, index) => (
-                <AccordionItem value={item.title} key={index}>
-                  <AccordionTrigger className="text-sm capitalize">
-                    {item.title}
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div className="flex flex-col space-y-2">
-                      {item.items?.map((subItem, index) =>
-                        subItem.href ? (
-                          <MobileLink
-                            key={index}
-                            href={String(subItem.href)}
-                            segment={String(segment)}
-                            setIsOpen={setIsOpen}
-                            disabled={subItem.disabled}
-                          >
-                            {subItem.title}
-                          </MobileLink>
-                        ) : (
-                          <div
-                            key={index}
-                            className="text-foreground/70 transition-colors"
-                          >
-                            {item.title}
-                          </div>
-                        ),
-                      )}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
+          <div className="divide-y pl-1 pr-7">
+            <Accordion type="multiple" className="w-full">
+              <AccordionItem value="item-1" className="border-b-0">
+                <AccordionTrigger className="text-sm capitalize">
+                  Início
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="flex flex-col space-y-2">
+                    <MobileLink
+                      href="/products"
+                      segment={String(segment)}
+                      setIsOpen={setIsOpen}
+                    >
+                      Todos os produtos
+                    </MobileLink>
+
+                    <MobileLink
+                      href="/feature"
+                      segment={String(segment)}
+                      setIsOpen={setIsOpen}
+                    >
+                      Lançamentos
+                    </MobileLink>
+
+                    <MobileLink
+                      href="/trending"
+                      segment={String(segment)}
+                      setIsOpen={setIsOpen}
+                    >
+                      Em destaque
+                    </MobileLink>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
             </Accordion>
+            <Accordion type="multiple" className="w-full">
+              <AccordionItem value="item-1" className="border-b-0">
+                <AccordionTrigger className="text-sm capitalize">
+                  Marcas
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="flex flex-col space-y-2">
+                    <MobileLink
+                      href="/brands/nike"
+                      segment={String(segment)}
+                      setIsOpen={setIsOpen}
+                    >
+                      Nike
+                    </MobileLink>
+
+                    <MobileLink
+                      href="/brands/adidas"
+                      segment={String(segment)}
+                      setIsOpen={setIsOpen}
+                    >
+                      Adidas
+                    </MobileLink>
+
+                    <MobileLink
+                      href="/brands/puma"
+                      segment={String(segment)}
+                      setIsOpen={setIsOpen}
+                    >
+                      Puma
+                    </MobileLink>
+
+                    <MobileLink
+                      href="/brands/converse"
+                      segment={String(segment)}
+                      setIsOpen={setIsOpen}
+                    >
+                      Converse
+                    </MobileLink>
+
+                    <MobileLink
+                      href="/brands/vans"
+                      segment={String(segment)}
+                      setIsOpen={setIsOpen}
+                    >
+                      Vans
+                    </MobileLink>
+
+                    <MobileLink
+                      href="/brands/new-balance"
+                      segment={String(segment)}
+                      setIsOpen={setIsOpen}
+                    >
+                      New Balance
+                    </MobileLink>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+            <Link
+              href="/genres/homem"
+              className="block py-4 font-medium transition-all hover:underline"
+              onClick={() => setIsOpen(false)}
+            >
+              Homem
+            </Link>
+            <Link
+              href="/genres/mulher"
+              className="block py-4 font-medium transition-all hover:underline"
+              onClick={() => setIsOpen(false)}
+            >
+              Mulher
+            </Link>
+            <Link
+              href="/genres/infantil"
+              className="block py-4 font-medium transition-all hover:underline"
+              onClick={() => setIsOpen(false)}
+            >
+              Infantil
+            </Link>
           </div>
         </ScrollArea>
       </SheetContent>

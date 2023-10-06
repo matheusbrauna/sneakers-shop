@@ -54,6 +54,7 @@ import {
   X,
   type LucideIcon,
   type LucideProps,
+  Home,
 } from 'lucide-react'
 
 type IconProps = React.HTMLAttributes<SVGElement>
@@ -75,6 +76,7 @@ export const Icons = {
   arrowUp: ArrowUp,
   arrowDown: ArrowDown,
   menu: Menu,
+  home: Home,
   verticalThreeDots: MoreVertical,
   horizontalThreeDots: MoreHorizontal,
   verticalSliders: Sliders,

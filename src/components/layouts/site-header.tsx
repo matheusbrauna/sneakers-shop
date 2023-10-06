@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { dashboardConfig, siteConfig } from '@/config/site'
+import { siteConfig } from '@/config/site'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { MainNav } from './main-nav'
 import { MobileNav } from './mobile-nav'
@@ -34,10 +34,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
     <header className="sticky top-0 z-50 w-full border-b bg-background">
       <div className="container flex h-16 items-center">
         <MainNav items={siteConfig.navMenu} />
-        <MobileNav
-          mainNavItems={siteConfig.navMenu}
-          sidebarNavItems={dashboardConfig.sidebarNav}
-        />
+        <MobileNav />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-2">
             {user ? (

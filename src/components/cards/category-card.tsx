@@ -3,7 +3,6 @@ import Link from 'next/link'
 
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
-import Balancer from 'react-wrap-balancer'
 
 export interface Category {
   title: string
@@ -29,9 +28,9 @@ export async function CategoryCard({ category }: CategoryCardProps) {
         />
       </AspectRatio>
       <div className="absolute inset-4 z-20 flex flex-col">
-        <Balancer className="mt-auto text-lg text-zinc-200">
+        <p className="mt-auto w-full text-sm leading-7 text-zinc-200 sm:text-base [&:not(:first-child)]:mt-6">
           {category.title}
-        </Balancer>
+        </p>
         <Button variant="secondary" className="mt-2 self-start rounded-full">
           Saiba mais
         </Button>

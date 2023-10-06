@@ -104,27 +104,21 @@ export interface DashboardConfig {
 export const dashboardConfig: DashboardConfig = {
   sidebarNav: [
     {
-      title: 'Account',
-      href: '/dashboard/account',
-      icon: 'user',
+      title: 'Todos os produtos',
+      href: '/products',
+      icon: 'product',
       items: [],
     },
     {
-      title: 'Stores',
-      href: '/dashboard/stores',
+      title: 'Lançamentos',
+      href: '/feature',
       icon: 'store',
       items: [],
     },
     {
-      title: 'Billing',
-      href: '/dashboard/billing',
+      title: 'Em destaque',
+      href: '/trending',
       icon: 'billing',
-      items: [],
-    },
-    {
-      title: 'Purchases',
-      href: '/dashboard/purchases',
-      icon: 'dollarSign',
       items: [],
     },
   ],

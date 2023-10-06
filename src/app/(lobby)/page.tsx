@@ -202,7 +202,7 @@ export default function IndexPage() {
             Veja também
           </h2>
         </div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {productCategories.map((category) => (
             <CategoryCard key={category.title} category={category} />
           ))}
