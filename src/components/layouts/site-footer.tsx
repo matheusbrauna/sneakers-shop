@@ -56,6 +56,8 @@ export function SiteFooter() {
               Criado com 💙 por{' '}
               <Link
                 href={siteConfig.links.portfolio}
+                target="_blank"
+                rel="noreferrer"
                 className="font-bold hover:underline"
               >
                 Matheus Braúna

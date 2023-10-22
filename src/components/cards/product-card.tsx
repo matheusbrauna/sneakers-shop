@@ -19,24 +19,33 @@ import {
 import { Icons } from '@/components/icons'
 import { cn, formatPrice } from '@/lib/utils'
 import { Star } from 'lucide-react'
+import { StoredFile } from '@/types'
 
-export interface Product {
+export interface ISneaker {
   id: string
   name: string
   description: string
-  images: Array<{
-    name: string
-    url: string
-  }>
-  category: string
   price: number
-  brand: string
-  rating: number
-  inventory: number
+  quantity: number
+  slug: string
+  brand: {
+    id: string
+    name: string
+  }
+  category: {
+    name: string
+  }
+  ratings: {
+    stars: number
+  }
+  coverImg: {
+    url: string
+  }
+  images: StoredFile[]
 }
 
 interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  product: Product
+  product: ISneaker
   variant?: 'default' | 'switchable'
   isAddedToCart?: boolean
   onSwitch?: () => Promise<void>
@@ -53,7 +62,7 @@ export function ProductCard({
   const [isPending, startTransition] = React.useTransition()
 
   const rating: number[] = Array.from({
-    length: product.rating,
+    length: product.ratings?.stars ?? 5,
   })
 
   return (
@@ -61,15 +70,13 @@ export function ProductCard({
       className={cn('h-full overflow-hidden rounded-sm', className)}
       {...props}
     >
-      <Link href={`/product/${product.id}`}>
+      <Link href={`/product/${product.slug}`}>
         <CardHeader className="border-b p-0">
           <AspectRatio ratio={4 / 3}>
-            {product?.images?.length ? (
+            {product?.coverImg?.url ? (
               <Image
-                src={
-                  product.images[0]?.url ?? '/images/product-placeholder.webp'
-                }
-                alt={product.images[0]?.name ?? product.name}
+                src={product.coverImg.url ?? '/images/product-placeholder.webp'}
+                alt={product.name}
                 className="object-cover"
                 sizes="(min-width: 64rem) 20vw, (min-width: 48rem) 25vw, (min-width: 40rem) 33vw, (min-width: 29.6875rem) 50vw, 100vw"
                 fill
@@ -92,12 +99,14 @@ export function ProductCard({
         </CardHeader>
         <span className="sr-only">{product.name}</span>
       </Link>
-      <Link href={`/product/${product.id}`} tabIndex={-1}>
+      <Link href={`/product/${product.slug}`} tabIndex={-1}>
         <CardContent className="grid gap-2.5 p-4">
           <span className="line-clamp-2 text-sm text-muted-foreground">
-            Nike
+            {product.brand.name}
           </span>
-          <CardTitle className="line-clamp-1">{product.name}</CardTitle>
+          <CardTitle className="line-clamp-1 text-xl" title={product.name}>
+            {product.name}
+          </CardTitle>
           <div className="flex gap-1">
             {rating.map((star) => (
               <Star
