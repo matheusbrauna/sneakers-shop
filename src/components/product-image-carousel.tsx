@@ -110,7 +110,7 @@ export function ProductImageCarousel({
                 key={index}
                 aria-roledescription="slide"
                 src={image.url}
-                alt={image.name}
+                alt={image.url}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover"
@@ -150,7 +150,7 @@ export function ProductImageCarousel({
               <div className="absolute inset-0 z-10 bg-zinc-950/20 group-hover:bg-zinc-950/40" />
               <Image
                 src={image.url}
-                alt={image.name}
+                alt={image.url}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 fill
               />

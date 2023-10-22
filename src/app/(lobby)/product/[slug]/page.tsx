@@ -14,8 +14,8 @@ import { Shell } from '@/components/shells/shell'
 import { Breadcrumbs } from '@/components/pagers/breadcumbs'
 import { ProductImageCarousel } from '@/components/product-image-carousel'
 import { AddToCartForm } from '@/components/forms/add-to-cart-form'
-import { Star } from 'lucide-react'
-import colors from 'tailwindcss/colors'
+import { RatingsStars } from '@/components/rating-stars'
+import { StoredFile } from '@/types'
 
 const getSneaker = async (slug: string) => {
   const query = `#graphql
@@ -80,7 +80,7 @@ const getOtherSneakers = async (brandId: string) => {
     }
   `
 
-  return fetchHygraphQuery<{ othersSneakers: ISneaker[] }>(query)
+  return fetchHygraphQuery<{ sneakers: ISneaker[] }>(query)
 }
 
 interface ProductPageProps {
@@ -93,13 +93,15 @@ export default async function ProductPage({
   params: { slug },
 }: ProductPageProps) {
   const { sneaker } = await getSneaker(slug)
-  const { othersSneakers } = await getOtherSneakers(sneaker?.brand?.id)
+  const { sneakers: othersSneakers } = await getOtherSneakers(
+    sneaker?.brand?.id,
+  )
 
-  const rating: number[] = Array.from({
-    length: sneaker?.ratings?.stars ?? 5,
-  })
-
-  console.log(othersSneakers)
+  const coverImgFallback: StoredFile[] = [
+    {
+      url: sneaker?.coverImg?.url,
+    },
+  ]
 
   return (
     <Shell>
@@ -122,7 +124,9 @@ export default async function ProductPage({
       <div className="flex flex-col gap-8 md:flex-row md:gap-16">
         <ProductImageCarousel
           className="w-full md:w-1/2"
-          images={sneaker.images ?? []}
+          images={
+            sneaker?.images?.length > 0 ? sneaker.images : coverImgFallback
+          }
           options={{
             loop: true,
           }}
@@ -141,14 +145,7 @@ export default async function ProductPage({
               {sneaker.brand.name}
             </Link>
             <div className="flex gap-1">
-              {rating.map((star) => (
-                <Star
-                  key={star}
-                  size={16}
-                  className="text-yellow-500"
-                  fill={colors.yellow[500]}
-                />
-              ))}
+              <RatingsStars product={sneaker} />
             </div>
           </div>
           <Separator className="my-1.5" />
@@ -156,7 +153,7 @@ export default async function ProductPage({
           <Separator className="mt-5" />
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="description">
-              <AccordionTrigger>Description</AccordionTrigger>
+              <AccordionTrigger>Descrição</AccordionTrigger>
               <AccordionContent>
                 {sneaker.description ??
                   'No description is available for this sneaker.'}
@@ -172,11 +169,11 @@ export default async function ProductPage({
           </h2>
           <div className="overflow-x-auto pb-2 pt-6">
             <div className="flex w-fit gap-4">
-              {othersSneakers.map((product) => (
+              {othersSneakers?.map((product) => (
                 <ProductCard
                   key={sneaker.id}
                   product={product}
-                  className="min-w-[260px]"
+                  className="min-w-[260px] flex-1"
                 />
               ))}
             </div>

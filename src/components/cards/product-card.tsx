@@ -4,8 +4,6 @@ import * as React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import colors from 'tailwindcss/colors'
-
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
 import {
@@ -18,8 +16,8 @@ import {
 } from '@/components/ui/card'
 import { Icons } from '@/components/icons'
 import { cn, formatPrice } from '@/lib/utils'
-import { Star } from 'lucide-react'
 import { StoredFile } from '@/types'
+import { RatingsStars } from '../rating-stars'
 
 export interface ISneaker {
   id: string
@@ -37,7 +35,7 @@ export interface ISneaker {
   }
   ratings: {
     stars: number
-  }
+  }[]
   coverImg: {
     url: string
   }
@@ -60,10 +58,6 @@ export function ProductCard({
   ...props
 }: ProductCardProps) {
   const [isPending, startTransition] = React.useTransition()
-
-  const rating: number[] = Array.from({
-    length: product.ratings?.stars ?? 5,
-  })
 
   return (
     <Card
@@ -107,16 +101,7 @@ export function ProductCard({
           <CardTitle className="line-clamp-1 text-xl" title={product.name}>
             {product.name}
           </CardTitle>
-          <div className="flex gap-1">
-            {rating.map((star) => (
-              <Star
-                key={star}
-                size={16}
-                className="text-yellow-500"
-                fill={colors.yellow[500]}
-              />
-            ))}
-          </div>
+          <div className="flex gap-1">{<RatingsStars product={product} />}</div>
           <div className="flex items-center gap-1">
             <CardDescription className="line-clamp-2 text-xs text-muted-foreground line-through">
               {formatPrice(product.price + 200)}

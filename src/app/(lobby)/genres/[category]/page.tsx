@@ -57,6 +57,7 @@ const getCategories = async () => {
       categories {
         id
         name
+        title
         description
         coverImg {
           url
