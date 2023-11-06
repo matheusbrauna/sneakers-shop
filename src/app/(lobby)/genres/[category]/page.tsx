@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 const getSneakersByCategory = async (category: string) => {
   const query = `#graphql
     query GetSneakersByCategory() {
-      sneakers(where: {category: {name: "${category}"}}) {
+      sneakers(where: {category: {slug: "${category}"}}) {
         id
         name
         price
@@ -76,9 +76,7 @@ interface GenrePageParams {
 export default async function GenrePage({
   params: { category },
 }: GenrePageParams) {
-  const { sneakers } = await getSneakersByCategory(
-    category.charAt(0).toUpperCase() + category.slice(1),
-  )
+  const { sneakers } = await getSneakersByCategory(category)
   const { categories } = await getCategories()
   const genre = categories.find(
     (item) => item.name.toLocaleUpperCase() === category.toLocaleUpperCase(),

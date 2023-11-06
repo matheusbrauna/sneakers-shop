@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 const getSneakersByBrand = async (brand: string) => {
   const query = `#graphql
     query GetSneakersByBrand() {
-      sneakers(where: {brand: {name: "${brand}"}}) {
+      sneakers(where: {brand: {slug: "${brand}"}}) {
         id
         name
         price
@@ -50,9 +50,7 @@ export default async function BrandsPage({
 }: {
   params: { brand: string }
 }) {
-  const { sneakers } = await getSneakersByBrand(
-    brand.charAt(0).toUpperCase() + brand.slice(1),
-  )
+  const { sneakers } = await getSneakersByBrand(brand)
 
   return (
     <Shell>

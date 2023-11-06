@@ -12,8 +12,8 @@ import { CategoryCard, ICategory } from '@/components/cards/category-card'
 
 const getSneakers = async (): Promise<{ sneakers: ISneaker[] }> => {
   const query = `#graphql
-    query MyQuery {
-      sneakers {
+    query GetSneakers {
+      sneakers(where: {isFeature: true}) {
         id
         name
         price
