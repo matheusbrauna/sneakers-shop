@@ -33,6 +33,7 @@ const getSneakersByCategory = async (category: string) => {
           name
         }
         category {
+          slug
           name
         }
         coverImg {
@@ -57,6 +58,7 @@ const getCategories = async () => {
       categories {
         id
         name
+        slug
         title
         description
         coverImg {
@@ -78,9 +80,7 @@ export default async function GenrePage({
 }: GenrePageParams) {
   const { sneakers } = await getSneakersByCategory(category)
   const { categories } = await getCategories()
-  const genre = categories.find(
-    (item) => item.name.toLocaleUpperCase() === category.toLocaleUpperCase(),
-  )
+  const genre = categories.find((item) => item.slug === category)
 
   return (
     <Shell className="gap-12">

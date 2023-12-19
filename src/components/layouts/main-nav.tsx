@@ -91,21 +91,21 @@ export function MainNav({ items }: MainNavProps) {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/genres/homem" legacyBehavior passHref>
+              <Link href="/categories/homem" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Homem
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/genres/mulher" legacyBehavior passHref>
+              <Link href="/categories/mulher" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Mulher
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/genres/infantil" legacyBehavior passHref>
+              <Link href="/categories/infantil" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Infantil
                 </NavigationMenuLink>

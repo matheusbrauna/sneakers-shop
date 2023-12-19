@@ -31,6 +31,7 @@ export interface ISneaker {
     name: string
   }
   category: {
+    slug: string
     name: string
   }
   ratings: {

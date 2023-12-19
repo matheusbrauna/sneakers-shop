@@ -8,6 +8,7 @@ import { StoredFile } from '@/types'
 export interface ICategory {
   id: string
   name: string
+  slug: string
   description: string
   title: string
   coverImg: StoredFile

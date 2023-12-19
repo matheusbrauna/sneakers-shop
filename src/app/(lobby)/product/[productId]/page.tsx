@@ -17,10 +17,10 @@ import { AddToCartForm } from '@/components/forms/add-to-cart-form'
 import { RatingsStars } from '@/components/rating-stars'
 import { StoredFile } from '@/types'
 
-const getSneaker = async (slug: string) => {
+const getSneaker = async (productId: string) => {
   const query = `#graphql
     query GetSneaker() {
-      sneaker(where: {slug: "${slug}"}) {
+      sneaker(where: {slug: "${productId}"}) {
         id
         name
         description
@@ -32,6 +32,7 @@ const getSneaker = async (slug: string) => {
           name
         }
         category {
+          slug
           name
         }
         coverImg {
@@ -65,6 +66,7 @@ const getOtherSneakers = async (brandId: string) => {
           name
         }
         category {
+          slug
           name
         }
         coverImg {
@@ -85,14 +87,14 @@ const getOtherSneakers = async (brandId: string) => {
 
 interface ProductPageProps {
   params: {
-    slug: string
+    productId: string
   }
 }
 
 export default async function ProductPage({
-  params: { slug },
+  params: { productId },
 }: ProductPageProps) {
-  const { sneaker } = await getSneaker(slug)
+  const { sneaker } = await getSneaker(productId)
   const { sneakers: othersSneakers } = await getOtherSneakers(
     sneaker?.brand?.id,
   )
@@ -113,7 +115,7 @@ export default async function ProductPage({
           },
           {
             title: toTitleCase(sneaker.category.name),
-            href: `/products?category=${sneaker.category}`,
+            href: `/products?category=${sneaker.category.slug}`,
           },
           {
             title: sneaker.name,
@@ -149,7 +151,7 @@ export default async function ProductPage({
             </div>
           </div>
           <Separator className="my-1.5" />
-          <AddToCartForm productId={slug} />
+          <AddToCartForm productId={productId} />
           <Separator className="mt-5" />
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="description">

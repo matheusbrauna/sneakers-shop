@@ -24,6 +24,7 @@ const getSneakersByBrand = async (brand: string) => {
         quantity
         slug
         brand {
+          slug
           name
         }
         category {
