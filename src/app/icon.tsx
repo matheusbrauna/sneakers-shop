@@ -16,7 +16,7 @@ export default function Icon() {
     (
       // ImageResponse JSX element
       // eslint-disable-next-line react/no-unknown-property
-      <div tw="flex items-center justify-center gap-1 w-full h-full bg-black text-white text-[24px] leading-8">
+      <div tw="flex items-center justify-center w-full h-full bg-black text-white text-[24px] leading-8">
         SS
       </div>
     ),

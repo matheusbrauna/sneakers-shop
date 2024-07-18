@@ -1,5 +1,5 @@
 import { siteConfig } from '@/config/site'
-import './globals.css'
+import '@/styles/globals.css'
 import type { Metadata, Viewport } from 'next'
 import { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
@@ -20,11 +20,6 @@ export const metadata: Metadata = {
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
-  },
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -34,11 +29,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <head />
         <body
           className={cn(
-            'min-h-screen bg-background font-sans antialiased scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground',
+            'min-h-screen bg-background font-sans antialiased',
             fontSans.variable,
           )}
         >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
             {children}
           </ThemeProvider>
         </body>

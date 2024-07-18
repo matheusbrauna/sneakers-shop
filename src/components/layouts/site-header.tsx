@@ -31,7 +31,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
   const email = getUserEmail(user)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background">
+    <header className="sticky top-0 z-50 w-full bg-background">
       <div className="container flex h-16 items-center">
         <MainNav items={siteConfig.navMenu} />
         <MobileNav />
