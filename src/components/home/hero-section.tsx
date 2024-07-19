@@ -8,7 +8,7 @@ import { ArrowDown } from 'lucide-react'
 export function HeroSection() {
   return (
     <section className="relative min-h-[calc(100vh_-_64px)] pt-32">
-      <div className="container">
+      <div className="container space-y-4">
         <div className="flex items-center justify-center">
           <div
             className={cn(
@@ -21,10 +21,10 @@ export function HeroSection() {
             </AnimatedShinyText>
           </div>
         </div>
-        <h1 className="my-4 text-balance text-center text-8xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl lg:leading-[1.1]">
+        <h1 className="text-center text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1]">
           Bem-vindo à Sneakers Shop
         </h1>
-        <p className="mx-auto mb-8 max-w-3xl text-center text-xl tracking-tight text-muted-foreground">
+        <p className="mx-auto max-w-3xl text-center text-base tracking-tight text-muted-foreground md:text-xl">
           Encontre os melhores tênis de marcas independentes e lojas de todo o
           mundo, encontre os melhores tênis de marcas independentes e lojas de
           todo o mundo encontre os melhores tênis de marcas independentes e
