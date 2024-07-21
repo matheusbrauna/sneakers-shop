@@ -1,6 +1,5 @@
 'use client'
 
-import * as React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -17,8 +16,8 @@ import {
 import { Icons } from '@/components/icons'
 import { cn, formatPrice } from '@/lib/utils'
 import { StoredFile } from '@/types'
-import { RatingsStars } from '../rating-stars'
-import BlurFade from '../ui/blur-fade'
+import { BlurFade } from '@/components/ui/blur-fade'
+import { useTransition, type HTMLAttributes } from 'react'
 
 export interface ISneaker {
   id: string
@@ -44,7 +43,7 @@ export interface ISneaker {
   images: StoredFile[]
 }
 
-interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ProductCardProps extends HTMLAttributes<HTMLDivElement> {
   product: ISneaker
   variant?: 'default' | 'switchable'
   isAddedToCart?: boolean
@@ -57,16 +56,12 @@ export function ProductCard({
   isAddedToCart = false,
   onSwitch,
   className,
-  ...props
 }: ProductCardProps) {
-  const [isPending, startTransition] = React.useTransition()
+  const [isPending, startTransition] = useTransition()
 
   return (
-    <BlurFade delay={0.25 * 0.05} inView>
-      <Card
-        className={cn('h-full overflow-hidden rounded-sm', className)}
-        {...props}
-      >
+    <BlurFade delay={0.25 * 0.05} inView className={cn(className)}>
+      <Card className="overflow-hidden">
         <Link href={`/product/${product.slug}`}>
           <CardHeader className="border-b p-0">
             <AspectRatio ratio={4 / 3}>
@@ -76,7 +71,7 @@ export function ProductCard({
                     product.coverImg.url ?? '/images/product-placeholder.webp'
                   }
                   alt={product.name}
-                  className="object-cover"
+                  className="absolute inset-0 object-cover object-center"
                   sizes="(min-width: 64rem) 20vw, (min-width: 48rem) 25vw, (min-width: 40rem) 33vw, (min-width: 29.6875rem) 50vw, 100vw"
                   fill
                   loading="lazy"
@@ -97,8 +92,6 @@ export function ProductCard({
             </AspectRatio>
           </CardHeader>
           <span className="sr-only">{product.name}</span>
-        </Link>
-        <Link href={`/product/${product.slug}`} tabIndex={-1}>
           <CardContent className="grid gap-2.5 p-4">
             <span className="line-clamp-2 text-sm text-muted-foreground">
               {product.brand.name}
@@ -106,9 +99,6 @@ export function ProductCard({
             <CardTitle className="line-clamp-1 text-xl" title={product.name}>
               {product.name}
             </CardTitle>
-            <div className="flex gap-1">
-              {<RatingsStars product={product} />}
-            </div>
             <div className="flex items-center gap-1">
               <CardDescription className="line-clamp-2 text-xs text-muted-foreground line-through">
                 {formatPrice(product.price + 200)}
