@@ -51,7 +51,7 @@ export function SiteFooter() {
               <span className="sr-only">Home</span>
             </Link>
           </div>
-          <div className="text-sm leading-loose text-muted-foreground">
+          <div className="text-xs leading-loose text-muted-foreground sm:text-sm">
             <span>
               Criado com 💙 por{' '}
               <Link

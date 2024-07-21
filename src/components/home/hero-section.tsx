@@ -41,6 +41,7 @@ export function HeroSection() {
         <span className="text-xs text-muted-foreground">Role para baixo</span>
         <ArrowDown className="size-4 animate-bounce text-muted-foreground" />
       </div>
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_20%,hsl(var(--primary)))]"></div>
     </section>
   )
 }
