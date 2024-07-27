@@ -1,0 +1,10 @@
+query GetCategories {
+  categories {
+    id
+    name
+    title
+    coverImg {
+      url
+    }
+  }
+}

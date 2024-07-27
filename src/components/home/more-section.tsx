@@ -1,25 +1,14 @@
-import { fetchHygraphQuery } from '@/lib/utils'
-import { CategoryCard, type ICategory } from '../cards/category-card'
-
-const getCategories = async (): Promise<{ categories: ICategory[] }> => {
-  const query = `#graphql
-    query GetCategories {
-      categories {
-        id
-        name
-        title
-        coverImg {
-          url
-        }
-      }
-    }
-  `
-
-  return fetchHygraphQuery(query)
-}
+import { QueryClient } from '@tanstack/react-query'
+import { CategoryCard } from '@/components/cards/category-card'
+import { useGetCategoriesQuery, type GetCategoriesQuery } from '@/__generated__'
+import { graphqlClient } from '@/lib/gql-client'
 
 export async function MoreSection() {
-  const { categories } = await getCategories()
+  const queryClient = new QueryClient()
+  const { categories } = await queryClient.fetchQuery<GetCategoriesQuery>({
+    queryKey: useGetCategoriesQuery.getKey(),
+    queryFn: useGetCategoriesQuery.fetcher(graphqlClient),
+  })
 
   return (
     <section id="more" aria-labelledby="more" className="py-24 lg:py-32">

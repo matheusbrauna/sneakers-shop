@@ -1,39 +1,14 @@
-import { ProductCard, type ISneaker } from '@/components/cards/product-card'
-import { fetchHygraphQuery } from '@/lib/utils'
-
-const getSneakers = async (): Promise<{ sneakers: ISneaker[] }> => {
-  const query = `#graphql
-    query GetSneakers {
-      sneakers(where: {isFeature: true}) {
-        id
-        name
-        price
-        quantity
-        slug
-        brand {
-          name
-        }
-        category {
-          name
-        }
-        coverImg {
-          url
-        }
-        images {
-          url
-        }
-        ratings {
-          stars
-        }
-      }
-    }
-  `
-
-  return fetchHygraphQuery(query)
-}
+import { useGetSneakersQuery, type GetSneakersQuery } from '@/__generated__'
+import { ProductCard } from '@/components/cards/product-card'
+import { graphqlClient } from '@/lib/gql-client'
+import { QueryClient } from '@tanstack/react-query'
 
 export async function FeatureSection() {
-  const { sneakers } = await getSneakers()
+  const queryClient = new QueryClient()
+  const { sneakers } = await queryClient.fetchQuery<GetSneakersQuery>({
+    queryKey: useGetSneakersQuery.getKey(),
+    queryFn: useGetSneakersQuery.fetcher(graphqlClient),
+  })
 
   return (
     <section

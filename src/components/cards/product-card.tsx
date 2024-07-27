@@ -15,32 +15,30 @@ import {
 } from '@/components/ui/card'
 import { Icons } from '@/components/icons'
 import { cn, formatPrice } from '@/lib/utils'
-import { StoredFile } from '@/types'
 import { BlurFade } from '@/components/ui/blur-fade'
 import { useTransition, type HTMLAttributes } from 'react'
 
 export interface ISneaker {
   id: string
   name: string
-  description: string
   price: number
   quantity: number
-  slug: string
-  brand: {
-    id: string
+  slug?: string | null
+  brand?: {
     name: string
-  }
-  category: {
-    slug: string
+  } | null
+  category?: {
     name: string
-  }
-  ratings: {
-    stars: number
-  }[]
+  } | null
   coverImg: {
     url: string
   }
-  images: StoredFile[]
+  images: Array<{
+    url: string
+  }>
+  ratings: Array<{
+    stars?: number | null
+  }>
 }
 
 interface ProductCardProps extends HTMLAttributes<HTMLDivElement> {
@@ -94,7 +92,7 @@ export function ProductCard({
           <span className="sr-only">{product.name}</span>
           <CardContent className="grid gap-2.5 p-4">
             <span className="line-clamp-2 text-sm text-muted-foreground">
-              {product.brand.name}
+              {product.brand?.name}
             </span>
             <CardTitle className="line-clamp-1 text-xl" title={product.name}>
               {product.name}

@@ -3,15 +3,14 @@ import Link from 'next/link'
 
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
-import { StoredFile } from '@/types'
 
 export interface ICategory {
   id: string
   name: string
-  slug: string
-  description: string
   title: string
-  coverImg: StoredFile
+  coverImg: {
+    url: string
+  }
 }
 
 interface CategoryCardProps {

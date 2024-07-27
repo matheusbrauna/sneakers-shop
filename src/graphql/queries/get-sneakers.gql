@@ -1,0 +1,24 @@
+query GetSneakers {
+  sneakers {
+    id
+    name
+    price
+    quantity
+    slug
+    brand {
+      name
+    }
+    category {
+      name
+    }
+    coverImg {
+      url
+    }
+    images {
+      url
+    }
+    ratings {
+      stars
+    }
+  }
+}

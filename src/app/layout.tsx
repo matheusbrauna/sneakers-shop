@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import { fontSans } from '@/lib/fonts'
 import { ThemeProvider } from '@/components/theme-provider'
 import { ClerkProvider } from '@clerk/nextjs'
+import QueryProvider from '@/providers/query-provider'
 
 export const viewport: Viewport = {
   themeColor: [
@@ -39,7 +40,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <QueryProvider>{children}</QueryProvider>
           </ThemeProvider>
         </body>
       </html>
