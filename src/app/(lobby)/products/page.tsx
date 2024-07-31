@@ -6,48 +6,23 @@ import {
   PageHeaderHeading,
 } from '@/components/page-header'
 import { Shell } from '@/components/shells/shell'
-import { ISneaker, ProductCard } from '@/components/cards/product-card'
+import { ProductCard } from '@/components/cards/product-card'
 
-import { fetchHygraphQuery } from '@/lib/utils'
+import { useGetSneakersQuery, type GetSneakersQuery } from '@/__generated__'
+import { graphqlClient } from '@/lib/gql-client'
+import { QueryClient } from '@tanstack/react-query'
 
 export const metadata: Metadata = {
   title: 'Produtos',
   description: 'Buy products from our stores',
 }
 
-const getSneakers = async (): Promise<{ sneakers: ISneaker[] }> => {
-  const query = `#graphql
-    query MyQuery {
-      sneakers {
-        id
-        name
-        price
-        quantity
-        slug
-        brand {
-          name
-        }
-        category {
-          name
-        }
-        coverImg {
-          url
-        }
-        images {
-          url
-        }
-        ratings {
-          stars
-        }
-      }
-    }
-  `
-
-  return fetchHygraphQuery(query)
-}
-
 export default async function ProductsPage() {
-  const { sneakers } = await getSneakers()
+  const queryClient = new QueryClient()
+  const { sneakers } = await queryClient.fetchQuery<GetSneakersQuery>({
+    queryKey: useGetSneakersQuery.getKey(),
+    queryFn: useGetSneakersQuery.fetcher(graphqlClient),
+  })
 
   return (
     <Shell>

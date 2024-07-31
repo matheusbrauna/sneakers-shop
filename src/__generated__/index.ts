@@ -4396,10 +4396,24 @@ export type GetCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetCategoriesQuery = { categories: Array<{ id: string, name: string, title: string, coverImg: { url: string } }> };
 
+export type GetOtherSneakersQueryVariables = Exact<{
+  brandId?: InputMaybe<Scalars['ID']['input']>;
+}>;
+
+
+export type GetOtherSneakersQuery = { sneakers: Array<{ id: string, name: string, description?: string | null, price: number, quantity: number, slug?: string | null, brand?: { id: string, name: string } | null, category?: { slug?: string | null, name: string } | null, coverImg: { url: string }, images: Array<{ url: string }>, ratings: Array<{ stars?: number | null }> }> };
+
+export type GetSneakerQueryVariables = Exact<{
+  productId?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GetSneakerQuery = { sneaker?: { id: string, name: string, description?: string | null, price: number, quantity: number, slug?: string | null, brand?: { id: string, name: string } | null, category?: { slug?: string | null, name: string } | null, coverImg: { url: string }, images: Array<{ url: string }>, ratings: Array<{ stars?: number | null }> } | null };
+
 export type GetSneakersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSneakersQuery = { sneakers: Array<{ id: string, name: string, price: number, quantity: number, slug?: string | null, brand?: { name: string } | null, category?: { name: string } | null, coverImg: { url: string }, images: Array<{ url: string }>, ratings: Array<{ stars?: number | null }> }> };
+export type GetSneakersQuery = { sneakers: Array<{ id: string, name: string, price: number, quantity: number, slug?: string | null, brand?: { id: string, name: string } | null, category?: { name: string } | null, coverImg: { url: string }, images: Array<{ url: string }>, ratings: Array<{ stars?: number | null }> }> };
 
 
 
@@ -4457,6 +4471,148 @@ useInfiniteGetCategoriesQuery.getKey = (variables?: GetCategoriesQueryVariables)
 
 useGetCategoriesQuery.fetcher = (client: GraphQLClient, variables?: GetCategoriesQueryVariables, headers?: RequestInit['headers']) => fetcher<GetCategoriesQuery, GetCategoriesQueryVariables>(client, GetCategoriesDocument, variables, headers);
 
+export const GetOtherSneakersDocument = /*#__PURE__*/ `
+    query GetOtherSneakers($brandId: ID) {
+  sneakers(where: {brand: {id: $brandId}}) {
+    id
+    name
+    description
+    price
+    quantity
+    slug
+    brand {
+      id
+      name
+    }
+    category {
+      slug
+      name
+    }
+    coverImg {
+      url
+    }
+    images {
+      url
+    }
+    ratings {
+      stars
+    }
+  }
+}
+    `;
+
+export const useGetOtherSneakersQuery = <
+      TData = GetOtherSneakersQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetOtherSneakersQueryVariables,
+      options?: UseQueryOptions<GetOtherSneakersQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) => {
+    
+    return useQuery<GetOtherSneakersQuery, TError, TData>(
+      variables === undefined ? ['GetOtherSneakers'] : ['GetOtherSneakers', variables],
+      fetcher<GetOtherSneakersQuery, GetOtherSneakersQueryVariables>(client, GetOtherSneakersDocument, variables, headers),
+      options
+    )};
+
+useGetOtherSneakersQuery.document = GetOtherSneakersDocument;
+
+useGetOtherSneakersQuery.getKey = (variables?: GetOtherSneakersQueryVariables) => variables === undefined ? ['GetOtherSneakers'] : ['GetOtherSneakers', variables];
+
+export const useInfiniteGetOtherSneakersQuery = <
+      TData = GetOtherSneakersQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetOtherSneakersQueryVariables,
+      options?: UseInfiniteQueryOptions<GetOtherSneakersQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) => {
+    
+    return useInfiniteQuery<GetOtherSneakersQuery, TError, TData>(
+      variables === undefined ? ['GetOtherSneakers.infinite'] : ['GetOtherSneakers.infinite', variables],
+      (metaData) => fetcher<GetOtherSneakersQuery, GetOtherSneakersQueryVariables>(client, GetOtherSneakersDocument, {...variables, ...(metaData.pageParam ?? {})}, headers)(),
+      options
+    )};
+
+useInfiniteGetOtherSneakersQuery.getKey = (variables?: GetOtherSneakersQueryVariables) => variables === undefined ? ['GetOtherSneakers.infinite'] : ['GetOtherSneakers.infinite', variables];
+
+
+useGetOtherSneakersQuery.fetcher = (client: GraphQLClient, variables?: GetOtherSneakersQueryVariables, headers?: RequestInit['headers']) => fetcher<GetOtherSneakersQuery, GetOtherSneakersQueryVariables>(client, GetOtherSneakersDocument, variables, headers);
+
+export const GetSneakerDocument = /*#__PURE__*/ `
+    query GetSneaker($productId: String) {
+  sneaker(where: {slug: $productId}) {
+    id
+    name
+    description
+    price
+    quantity
+    slug
+    brand {
+      id
+      name
+    }
+    category {
+      slug
+      name
+    }
+    coverImg {
+      url
+    }
+    images {
+      url
+    }
+    ratings {
+      stars
+    }
+  }
+}
+    `;
+
+export const useGetSneakerQuery = <
+      TData = GetSneakerQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetSneakerQueryVariables,
+      options?: UseQueryOptions<GetSneakerQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) => {
+    
+    return useQuery<GetSneakerQuery, TError, TData>(
+      variables === undefined ? ['GetSneaker'] : ['GetSneaker', variables],
+      fetcher<GetSneakerQuery, GetSneakerQueryVariables>(client, GetSneakerDocument, variables, headers),
+      options
+    )};
+
+useGetSneakerQuery.document = GetSneakerDocument;
+
+useGetSneakerQuery.getKey = (variables?: GetSneakerQueryVariables) => variables === undefined ? ['GetSneaker'] : ['GetSneaker', variables];
+
+export const useInfiniteGetSneakerQuery = <
+      TData = GetSneakerQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetSneakerQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSneakerQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) => {
+    
+    return useInfiniteQuery<GetSneakerQuery, TError, TData>(
+      variables === undefined ? ['GetSneaker.infinite'] : ['GetSneaker.infinite', variables],
+      (metaData) => fetcher<GetSneakerQuery, GetSneakerQueryVariables>(client, GetSneakerDocument, {...variables, ...(metaData.pageParam ?? {})}, headers)(),
+      options
+    )};
+
+useInfiniteGetSneakerQuery.getKey = (variables?: GetSneakerQueryVariables) => variables === undefined ? ['GetSneaker.infinite'] : ['GetSneaker.infinite', variables];
+
+
+useGetSneakerQuery.fetcher = (client: GraphQLClient, variables?: GetSneakerQueryVariables, headers?: RequestInit['headers']) => fetcher<GetSneakerQuery, GetSneakerQueryVariables>(client, GetSneakerDocument, variables, headers);
+
 export const GetSneakersDocument = /*#__PURE__*/ `
     query GetSneakers {
   sneakers {
@@ -4466,6 +4622,7 @@ export const GetSneakersDocument = /*#__PURE__*/ `
     quantity
     slug
     brand {
+      id
       name
     }
     category {
