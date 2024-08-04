@@ -6,52 +6,36 @@ import {
   PageHeaderHeading,
 } from '@/components/page-header'
 import { Shell } from '@/components/shells/shell'
-import { ISneaker, ProductCard } from '@/components/cards/product-card'
-import { fetchHygraphQuery } from '@/lib/utils'
+import { QueryClient } from '@tanstack/react-query'
+import {
+  useGetSneakersByBrandQuery,
+  type GetSneakersByBrandQuery,
+} from '@/__generated__'
+import { graphqlClient } from '@/lib/gql-client'
+import { ProductCard } from '@/components/cards/product-card'
+import { notFound } from 'next/navigation'
 
 export const metadata: Metadata = {
   title: 'Produtos',
   description: 'Buy products from our stores',
 }
 
-const getSneakersByBrand = async (brand: string) => {
-  const query = `#graphql
-    query GetSneakersByBrand() {
-      sneakers(where: {brand: {slug: "${brand}"}}) {
-        id
-        name
-        price
-        quantity
-        slug
-        brand {
-          slug
-          name
-        }
-        category {
-          name
-        }
-        coverImg {
-          url
-        }
-        images {
-          url
-        }
-        ratings {
-          stars
-        }
-      }
-    }
-  `
-
-  return fetchHygraphQuery<{ sneakers: ISneaker[] }>(query)
-}
-
 export default async function BrandsPage({
-  params: { brand },
+  params,
 }: {
   params: { brand: string }
 }) {
-  const { sneakers } = await getSneakersByBrand(brand)
+  const queryClient = new QueryClient()
+  const { sneakers } = await queryClient.fetchQuery<GetSneakersByBrandQuery>({
+    queryKey: useGetSneakersByBrandQuery.getKey(),
+    queryFn: useGetSneakersByBrandQuery.fetcher(graphqlClient, {
+      brand: params.brand,
+    }),
+  })
+
+  if (!sneakers) {
+    notFound()
+  }
 
   return (
     <Shell>
@@ -60,15 +44,15 @@ export default async function BrandsPage({
         aria-labelledby="products-page-header-heading"
       >
         <PageHeaderHeading size="sm" className="capitalize">
-          {brand}
+          {params.brand}
         </PageHeaderHeading>
         <PageHeaderDescription size="sm">
           Compre os produtos da marca{' '}
-          <strong className="capitalize">{brand}</strong> em nossa loja
+          <strong className="capitalize">{params.brand}</strong> em nossa loja
         </PageHeaderDescription>
       </PageHeader>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {sneakers?.map((product) => (
+        {sneakers.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>

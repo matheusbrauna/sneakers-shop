@@ -1,0 +1,25 @@
+query GetSneakersByBrand($brand: String) {
+  sneakers(where: {brand: {slug: $brand}}) {
+    id
+    name
+    price
+    quantity
+    slug
+    brand {
+      slug
+      name
+    }
+    category {
+      name
+    }
+    coverImg {
+      url
+    }
+    images {
+      url
+    }
+    ratings {
+      stars
+    }
+  }
+}

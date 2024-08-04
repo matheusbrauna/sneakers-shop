@@ -1,7 +1,9 @@
 query GetCategories {
   categories {
     id
+    slug
     name
+    description
     title
     coverImg {
       url

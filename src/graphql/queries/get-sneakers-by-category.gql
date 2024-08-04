@@ -1,0 +1,25 @@
+query GetSneakersByCategory($category: String) {
+  sneakers(where: {category: {slug: $category}}) {
+    id
+    name
+    price
+    quantity
+    slug
+    brand {
+      name
+    }
+    category {
+      slug
+      name
+    }
+    coverImg {
+      url
+    }
+    images {
+      url
+    }
+    ratings {
+      stars
+    }
+  }
+}

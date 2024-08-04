@@ -31,7 +31,7 @@ export function HeroSection() {
           lojas de todo o mundo.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <Link href="/produtos" className={cn(buttonVariants())}>
+          <Link href="/products" className={cn(buttonVariants())}>
             Comprar agora
             <span className="sr-only">Comprar agora</span>
           </Link>

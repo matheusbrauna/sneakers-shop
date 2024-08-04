@@ -6,81 +6,46 @@ import {
   PageHeaderHeading,
 } from '@/components/page-header'
 import { Shell } from '@/components/shells/shell'
-import { ISneaker, ProductCard } from '@/components/cards/product-card'
+import { ProductCard } from '@/components/cards/product-card'
 import { buttonVariants } from '@/components/ui/button'
-import { cn, fetchHygraphQuery } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import Balancer from 'react-wrap-balancer'
 import Link from 'next/link'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import Image from 'next/image'
-import { ICategory } from '@/components/cards/category-card'
+import { QueryClient } from '@tanstack/react-query'
+import {
+  useGetCategoriesQuery,
+  useGetSneakersByCategoryQuery,
+  type GetCategoriesQuery,
+  type GetSneakersByCategoryQuery,
+} from '@/__generated__'
+import { graphqlClient } from '@/lib/gql-client'
 
 export const metadata: Metadata = {
   title: 'Produtos',
   description: 'Buy products from our stores',
 }
 
-const getSneakersByCategory = async (category: string) => {
-  const query = `#graphql
-    query GetSneakersByCategory() {
-      sneakers(where: {category: {slug: "${category}"}}) {
-        id
-        name
-        price
-        quantity
-        slug
-        brand {
-          name
-        }
-        category {
-          slug
-          name
-        }
-        coverImg {
-          url
-        }
-        images {
-          url
-        }
-        ratings {
-          stars
-        }
-      }
-    }
-  `
-
-  return fetchHygraphQuery<{ sneakers: ISneaker[] }>(query)
-}
-
-const getCategories = async () => {
-  const query = `#graphql
-    query GetCategories {
-      categories {
-        id
-        name
-        slug
-        title
-        description
-        coverImg {
-          url
-        }
-      }
-    }
-  `
-
-  return fetchHygraphQuery<{ categories: ICategory[] }>(query)
-}
-
 interface GenrePageParams {
   params: { category: string }
 }
 
-export default async function GenrePage({
-  params: { category },
-}: GenrePageParams) {
-  const { sneakers } = await getSneakersByCategory(category)
-  const { categories } = await getCategories()
-  const genre = categories.find((item) => item.slug === category)
+export default async function GenrePage({ params }: GenrePageParams) {
+  const queryClient = new QueryClient()
+  const { sneakers } = await queryClient.fetchQuery<GetSneakersByCategoryQuery>(
+    {
+      queryKey: useGetSneakersByCategoryQuery.getKey(),
+      queryFn: useGetSneakersByCategoryQuery.fetcher(graphqlClient, {
+        category: params.category,
+      }),
+    },
+  )
+  const { categories } = await queryClient.fetchQuery<GetCategoriesQuery>({
+    queryKey: useGetCategoriesQuery.getKey(),
+    queryFn: useGetCategoriesQuery.fetcher(graphqlClient),
+  })
+  const genre = categories.find((item) => item.slug === params.category)
 
   return (
     <Shell className="gap-12">
@@ -121,11 +86,11 @@ export default async function GenrePage({
         aria-labelledby="products-page-header-heading"
       >
         <PageHeaderHeading size="sm" className="capitalize">
-          {category}
+          {params.category}
         </PageHeaderHeading>
         <PageHeaderDescription size="sm">
           Veja todos os nossos produtos disponíveis na categoria{' '}
-          <strong>{category}</strong>
+          <strong>{params.category}</strong>
         </PageHeaderDescription>
       </PageHeader>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
